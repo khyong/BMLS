@@ -1,4 +1,4 @@
-# Balancing Mixed Labels: Mixup meets Neural Collapse in Imbalanced Learning
+# Does Mixed Label Imbalance Matter to Minority Collapse under Mixup?
 
 This directory is the official implementation of Balancing Mixed Labels: Mixup meets Neural Collapse in Imbalanced Learning
 
