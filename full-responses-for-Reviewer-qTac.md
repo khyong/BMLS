@@ -1,9 +1,3 @@
-
-We thank the reviewer for the thorough and constructive review. We respond to the review comments as follows. As there were numerous comments regarding the presentation, we have also prepared an external [URL](https://anonymous.4open.science/r/BMLS-18977) for the revised paper. Please note that visual materials (line graphs) for the additional experimental results are also available at the provided URL for your reference.
-
-[URL](https://anonymous.4open.science/r/BMLS-18977): https://anonymous.4open.science/r/BMLS-18977
-
-
 >W1 & Q1. Strong assumptions on dimensionality
 
 (*The strong assumption guarantees the theoretical robustness*) The conditions $p \geq K^2+K$ in Lemma 4.1 and Proposition 4.3 and $p \geq 2K^2$ in Theorem 5.1 are imposed to ensure the existence of the left-hand side terms in Equation 5 within the SDP, and thus bear no direct relation to the onset of minority collapse. In fact, in Theorem 4.2, this constraint is relaxed to $p \geq K$. Therefore, our key proposition that mixed label imbalance plays a critical role in minority collapse under Mixup in imbalanced learning remains valid even under practical condition
@@ -61,7 +55,10 @@ We appreciate the reviewer's insightful comment. To furnish more direct empirica
 As evidenced by the results, NC2 and NC3, excluding NC1, exhibit lower values under the proposed method, suggesting that the proposed method more effectively preserves the simplex ETF structure. The higher NC1 value suggests that our proposed method produces a stronger augmentation effect. This aligns with the observation that higher NC1 values are associated with greater representational diversity and improved expressiveness in OOD settings [A4].
 
 [A1] Fisher et al., Pushing Boundaries: Mixup's Influence on Neural Collapse, ICLR'2024
+
 [A2] Paypan et al., Prevalence of neural collapse during the terminal phase of deep learning training, PNAS'2020
+
 [A3] https://github.com/rhubarbwu/neural-collapse
+
 [A4] Harun et al., Controlling Neural Collapse Enhances Out-of-Distribution Detection and Transfer Learning, ICML'2025
 
