@@ -1,0 +1,3020 @@
+Superclass labels loaded from: labels/cifar100_superclass_labels.json
+Loaded superclass labels for cifar100: 25 superclasses
+[ 9  0  5 21 21 10  7  7 20 13 13  5 22 14  7 15 17 16  7 15 10  2  6 11
+  7 10  0  1 13  1 19 15 18 12 21  5  8 16 23 17 17 20  2  2  1  0  5 24
+ 20 12  8  9 24  9  3 21 24  9  4 24 12 17  3 23 23  8 23 18 22  4  3 11
+ 19  1  8  8 16  0  1  7  8 14  3  9 17  4  6  6  2  4 14 18  3  1 10 19
+ 24 21  5  0]
+07/26/2026 22:40:57 - WARNING - __main__ -   Process rank: -1, device: cuda:0, n_gpu: 1, distributed training: False
+07/26/2026 22:40:57 - INFO - __main__ -   {'gpu_id': 0, 'num_workers': 4, 'dataset': 'cifar100', 'num_labeled': 4000, 'arch': 'wideresnet', 'total_steps': 250000, 'eval_step': 500, 'start_epoch': 0, 'batch_size': 64, 'lr': 0.03, 'warmup': 0, 'wdecay': 0.0005, 'nesterov': True, 'use_ema': True, 'ema_decay': 0.999, 'mu': 1, 'T': 1, 'threshold': 0.95, 'out': '/home/s3_u1/hoyong/research/in-progress/BMLS-SCAD/out/comparison/cifar100/bmlsms/seed35', 'data_root': '/home/s3_u1/hoyong/datasets', 'resume': '', 'seed': 35, 'local_rank': -1, 'no_progress': False, 'num_max': 150, 'num_max_u': 300, 'imb_ratio_label': 100, 'imb_ratio_unlabel': 100, 'flag_reverse_LT': 0, 'ema_mu': 0.99, 'tau1': 2, 'tau12': 2, 'tau2': 2, 'ema_u': 0.99, 'est_epoch': 5, 'img_size': 32, 'flag': 1, 'superclass_method': 'bmlsms', 'bmlsms_lambda': 1.0, 'bmlsms_alpha': 1.0, 'bmlsms_batch_size': 0, 'superclass': 25, 'world_size': 1, 'n_gpu': 1, 'device': device(type='cuda', index=0)}
+Files already downloaded and verified
+[150, 143, 136, 130, 124, 118, 113, 108, 103, 98, 94, 89, 85, 81, 78, 74, 71, 68, 64, 61, 59, 56, 53, 51, 49, 46, 44, 42, 40, 38, 37, 35, 33, 32, 30, 29, 28, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 16, 15, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 8, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1]
+[300, 286, 273, 260, 249, 237, 226, 216, 206, 197, 188, 179, 171, 163, 156, 149, 142, 136, 129, 123, 118, 112, 107, 102, 98, 93, 89, 85, 81, 77, 74, 70, 67, 64, 61, 58, 56, 53, 51, 48, 46, 44, 42, 40, 38, 36, 35, 33, 32, 30, 29, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 16, 15, 14, 13, 13, 12, 12, 11, 11, 10, 10, 9, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3]
+07/26/2026 22:41:05 - INFO - models.wideresnet -   Model: WideResNet 28x2
+07/26/2026 22:41:05 - INFO - __main__ -   Total params: 1.50M
+07/26/2026 22:41:05 - INFO - __main__ -   ***** Running training *****
+07/26/2026 22:41:05 - INFO - __main__ -     Task = cifar100@4000
+07/26/2026 22:41:05 - INFO - __main__ -     Num Epochs = 500
+07/26/2026 22:41:05 - INFO - __main__ -     Batch size per GPU = 64
+07/26/2026 22:41:05 - INFO - __main__ -     Total train batch size = 64
+07/26/2026 22:41:05 - INFO - __main__ -     Total optimization steps = 250000
+current epoch:  1
+07/26/2026 22:42:31 - INFO - __main__ -   top-1 acc: 1.89
+07/26/2026 22:42:31 - INFO - __main__ -   top-5 acc: 7.47
+07/26/2026 22:42:31 - INFO - __main__ -   Best top-1 acc: 1.89
+07/26/2026 22:42:31 - INFO - __main__ -   Mean top-1 acc: 1.03
+
+current epoch:  2
+07/26/2026 22:44:00 - INFO - __main__ -   top-1 acc: 2.56
+07/26/2026 22:44:00 - INFO - __main__ -   top-5 acc: 8.67
+07/26/2026 22:44:00 - INFO - __main__ -   Best top-1 acc: 2.56
+07/26/2026 22:44:00 - INFO - __main__ -   Mean top-1 acc: 1.30
+
+current epoch:  3
+07/26/2026 22:45:26 - INFO - __main__ -   top-1 acc: 3.59
+07/26/2026 22:45:26 - INFO - __main__ -   top-5 acc: 13.98
+07/26/2026 22:45:26 - INFO - __main__ -   Best top-1 acc: 3.59
+07/26/2026 22:45:26 - INFO - __main__ -   Mean top-1 acc: 1.58
+
+current epoch:  4
+07/26/2026 22:47:06 - INFO - __main__ -   top-1 acc: 10.62
+07/26/2026 22:47:06 - INFO - __main__ -   top-5 acc: 29.63
+07/26/2026 22:47:06 - INFO - __main__ -   Best top-1 acc: 10.62
+07/26/2026 22:47:06 - INFO - __main__ -   Mean top-1 acc: 2.73
+
+current epoch:  5
+07/26/2026 22:48:46 - INFO - __main__ -   top-1 acc: 19.10
+07/26/2026 22:48:46 - INFO - __main__ -   top-5 acc: 42.13
+07/26/2026 22:48:46 - INFO - __main__ -   Best top-1 acc: 19.10
+07/26/2026 22:48:46 - INFO - __main__ -   Mean top-1 acc: 4.44
+
+current epoch:  6
+07/26/2026 22:50:28 - INFO - __main__ -   top-1 acc: 23.77
+07/26/2026 22:50:28 - INFO - __main__ -   top-5 acc: 49.44
+07/26/2026 22:50:28 - INFO - __main__ -   Best top-1 acc: 23.77
+07/26/2026 22:50:28 - INFO - __main__ -   Mean top-1 acc: 6.60
+
+current epoch:  7
+07/26/2026 22:52:10 - INFO - __main__ -   top-1 acc: 25.79
+07/26/2026 22:52:10 - INFO - __main__ -   top-5 acc: 57.04
+07/26/2026 22:52:10 - INFO - __main__ -   Best top-1 acc: 25.79
+07/26/2026 22:52:10 - INFO - __main__ -   Mean top-1 acc: 9.25
+
+current epoch:  8
+07/26/2026 22:53:52 - INFO - __main__ -   top-1 acc: 28.91
+07/26/2026 22:53:52 - INFO - __main__ -   top-5 acc: 59.93
+07/26/2026 22:53:52 - INFO - __main__ -   Best top-1 acc: 28.91
+07/26/2026 22:53:52 - INFO - __main__ -   Mean top-1 acc: 11.70
+
+current epoch:  9
+07/26/2026 22:55:34 - INFO - __main__ -   top-1 acc: 31.17
+07/26/2026 22:55:34 - INFO - __main__ -   top-5 acc: 62.34
+07/26/2026 22:55:35 - INFO - __main__ -   Best top-1 acc: 31.17
+07/26/2026 22:55:35 - INFO - __main__ -   Mean top-1 acc: 13.87
+
+current epoch:  10
+07/26/2026 22:57:18 - INFO - __main__ -   top-1 acc: 32.59
+07/26/2026 22:57:18 - INFO - __main__ -   top-5 acc: 63.24
+07/26/2026 22:57:18 - INFO - __main__ -   Best top-1 acc: 32.59
+07/26/2026 22:57:18 - INFO - __main__ -   Mean top-1 acc: 15.74
+
+current epoch:  11
+07/26/2026 22:59:11 - INFO - __main__ -   top-1 acc: 33.18
+07/26/2026 22:59:11 - INFO - __main__ -   top-5 acc: 63.95
+07/26/2026 22:59:11 - INFO - __main__ -   Best top-1 acc: 33.18
+07/26/2026 22:59:11 - INFO - __main__ -   Mean top-1 acc: 17.32
+
+current epoch:  12
+07/26/2026 23:01:06 - INFO - __main__ -   top-1 acc: 34.12
+07/26/2026 23:01:06 - INFO - __main__ -   top-5 acc: 64.59
+07/26/2026 23:01:06 - INFO - __main__ -   Best top-1 acc: 34.12
+07/26/2026 23:01:06 - INFO - __main__ -   Mean top-1 acc: 18.72
+
+current epoch:  13
+07/26/2026 23:02:57 - INFO - __main__ -   top-1 acc: 35.11
+07/26/2026 23:02:57 - INFO - __main__ -   top-5 acc: 65.15
+07/26/2026 23:02:57 - INFO - __main__ -   Best top-1 acc: 35.11
+07/26/2026 23:02:57 - INFO - __main__ -   Mean top-1 acc: 19.98
+
+current epoch:  14
+07/26/2026 23:04:52 - INFO - __main__ -   top-1 acc: 35.64
+07/26/2026 23:04:52 - INFO - __main__ -   top-5 acc: 65.19
+07/26/2026 23:04:52 - INFO - __main__ -   Best top-1 acc: 35.64
+07/26/2026 23:04:52 - INFO - __main__ -   Mean top-1 acc: 21.10
+
+current epoch:  15
+07/26/2026 23:06:47 - INFO - __main__ -   top-1 acc: 36.06
+07/26/2026 23:06:47 - INFO - __main__ -   top-5 acc: 65.91
+07/26/2026 23:06:48 - INFO - __main__ -   Best top-1 acc: 36.06
+07/26/2026 23:06:48 - INFO - __main__ -   Mean top-1 acc: 22.10
+
+current epoch:  16
+07/26/2026 23:08:43 - INFO - __main__ -   top-1 acc: 36.42
+07/26/2026 23:08:43 - INFO - __main__ -   top-5 acc: 66.40
+07/26/2026 23:08:43 - INFO - __main__ -   Best top-1 acc: 36.42
+07/26/2026 23:08:43 - INFO - __main__ -   Mean top-1 acc: 22.99
+
+current epoch:  17
+07/26/2026 23:10:37 - INFO - __main__ -   top-1 acc: 36.13
+07/26/2026 23:10:37 - INFO - __main__ -   top-5 acc: 66.45
+07/26/2026 23:10:38 - INFO - __main__ -   Best top-1 acc: 36.42
+07/26/2026 23:10:38 - INFO - __main__ -   Mean top-1 acc: 23.77
+
+current epoch:  18
+07/26/2026 23:12:32 - INFO - __main__ -   top-1 acc: 36.83
+07/26/2026 23:12:32 - INFO - __main__ -   top-5 acc: 66.79
+07/26/2026 23:12:32 - INFO - __main__ -   Best top-1 acc: 36.83
+07/26/2026 23:12:32 - INFO - __main__ -   Mean top-1 acc: 24.49
+
+current epoch:  19
+07/26/2026 23:14:28 - INFO - __main__ -   top-1 acc: 37.49
+07/26/2026 23:14:28 - INFO - __main__ -   top-5 acc: 67.43
+07/26/2026 23:14:29 - INFO - __main__ -   Best top-1 acc: 37.49
+07/26/2026 23:14:29 - INFO - __main__ -   Mean top-1 acc: 25.18
+
+current epoch:  20
+07/26/2026 23:16:28 - INFO - __main__ -   top-1 acc: 37.80
+07/26/2026 23:16:28 - INFO - __main__ -   top-5 acc: 68.26
+07/26/2026 23:16:28 - INFO - __main__ -   Best top-1 acc: 37.80
+07/26/2026 23:16:28 - INFO - __main__ -   Mean top-1 acc: 25.81
+
+current epoch:  21
+07/26/2026 23:18:22 - INFO - __main__ -   top-1 acc: 38.13
+07/26/2026 23:18:22 - INFO - __main__ -   top-5 acc: 68.11
+07/26/2026 23:18:23 - INFO - __main__ -   Best top-1 acc: 38.13
+07/26/2026 23:18:23 - INFO - __main__ -   Mean top-1 acc: 27.66
+
+current epoch:  22
+07/26/2026 23:20:23 - INFO - __main__ -   top-1 acc: 38.73
+07/26/2026 23:20:23 - INFO - __main__ -   top-5 acc: 68.06
+07/26/2026 23:20:23 - INFO - __main__ -   Best top-1 acc: 38.73
+07/26/2026 23:20:23 - INFO - __main__ -   Mean top-1 acc: 29.52
+
+current epoch:  23
+07/26/2026 23:22:17 - INFO - __main__ -   top-1 acc: 38.57
+07/26/2026 23:22:17 - INFO - __main__ -   top-5 acc: 68.15
+07/26/2026 23:22:17 - INFO - __main__ -   Best top-1 acc: 38.73
+07/26/2026 23:22:17 - INFO - __main__ -   Mean top-1 acc: 31.34
+
+current epoch:  24
+07/26/2026 23:24:10 - INFO - __main__ -   top-1 acc: 39.15
+07/26/2026 23:24:10 - INFO - __main__ -   top-5 acc: 68.32
+07/26/2026 23:24:10 - INFO - __main__ -   Best top-1 acc: 39.15
+07/26/2026 23:24:10 - INFO - __main__ -   Mean top-1 acc: 32.99
+
+current epoch:  25
+07/26/2026 23:26:03 - INFO - __main__ -   top-1 acc: 39.67
+07/26/2026 23:26:03 - INFO - __main__ -   top-5 acc: 68.55
+07/26/2026 23:26:04 - INFO - __main__ -   Best top-1 acc: 39.67
+07/26/2026 23:26:04 - INFO - __main__ -   Mean top-1 acc: 34.41
+
+current epoch:  26
+07/26/2026 23:27:58 - INFO - __main__ -   top-1 acc: 39.85
+07/26/2026 23:27:58 - INFO - __main__ -   top-5 acc: 68.59
+07/26/2026 23:27:58 - INFO - __main__ -   Best top-1 acc: 39.85
+07/26/2026 23:27:58 - INFO - __main__ -   Mean top-1 acc: 35.54
+
+current epoch:  27
+07/26/2026 23:29:53 - INFO - __main__ -   top-1 acc: 39.85
+07/26/2026 23:29:53 - INFO - __main__ -   top-5 acc: 68.27
+07/26/2026 23:29:53 - INFO - __main__ -   Best top-1 acc: 39.85
+07/26/2026 23:29:53 - INFO - __main__ -   Mean top-1 acc: 36.27
+
+current epoch:  28
+07/26/2026 23:31:45 - INFO - __main__ -   top-1 acc: 39.98
+07/26/2026 23:31:45 - INFO - __main__ -   top-5 acc: 68.33
+07/26/2026 23:31:45 - INFO - __main__ -   Best top-1 acc: 39.98
+07/26/2026 23:31:45 - INFO - __main__ -   Mean top-1 acc: 36.82
+
+current epoch:  29
+07/26/2026 23:33:42 - INFO - __main__ -   top-1 acc: 40.79
+07/26/2026 23:33:42 - INFO - __main__ -   top-5 acc: 68.77
+07/26/2026 23:33:42 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:33:42 - INFO - __main__ -   Mean top-1 acc: 37.30
+
+current epoch:  30
+07/26/2026 23:35:35 - INFO - __main__ -   top-1 acc: 40.30
+07/26/2026 23:35:35 - INFO - __main__ -   top-5 acc: 69.27
+07/26/2026 23:35:35 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:35:35 - INFO - __main__ -   Mean top-1 acc: 37.69
+
+current epoch:  31
+07/26/2026 23:37:31 - INFO - __main__ -   top-1 acc: 40.21
+07/26/2026 23:37:31 - INFO - __main__ -   top-5 acc: 69.05
+07/26/2026 23:37:31 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:37:31 - INFO - __main__ -   Mean top-1 acc: 38.04
+
+current epoch:  32
+07/26/2026 23:39:22 - INFO - __main__ -   top-1 acc: 40.17
+07/26/2026 23:39:22 - INFO - __main__ -   top-5 acc: 69.29
+07/26/2026 23:39:22 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:39:22 - INFO - __main__ -   Mean top-1 acc: 38.34
+
+current epoch:  33
+07/26/2026 23:41:16 - INFO - __main__ -   top-1 acc: 40.28
+07/26/2026 23:41:16 - INFO - __main__ -   top-5 acc: 69.39
+07/26/2026 23:41:16 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:41:16 - INFO - __main__ -   Mean top-1 acc: 38.60
+
+current epoch:  34
+07/26/2026 23:43:07 - INFO - __main__ -   top-1 acc: 40.66
+07/26/2026 23:43:07 - INFO - __main__ -   top-5 acc: 69.25
+07/26/2026 23:43:07 - INFO - __main__ -   Best top-1 acc: 40.79
+07/26/2026 23:43:07 - INFO - __main__ -   Mean top-1 acc: 38.85
+
+current epoch:  35
+07/26/2026 23:44:57 - INFO - __main__ -   top-1 acc: 41.14
+07/26/2026 23:44:57 - INFO - __main__ -   top-5 acc: 69.32
+07/26/2026 23:44:58 - INFO - __main__ -   Best top-1 acc: 41.14
+07/26/2026 23:44:58 - INFO - __main__ -   Mean top-1 acc: 39.11
+
+current epoch:  36
+07/26/2026 23:46:51 - INFO - __main__ -   top-1 acc: 40.91
+07/26/2026 23:46:51 - INFO - __main__ -   top-5 acc: 69.38
+07/26/2026 23:46:51 - INFO - __main__ -   Best top-1 acc: 41.14
+07/26/2026 23:46:51 - INFO - __main__ -   Mean top-1 acc: 39.33
+
+current epoch:  37
+07/26/2026 23:48:48 - INFO - __main__ -   top-1 acc: 40.77
+07/26/2026 23:48:48 - INFO - __main__ -   top-5 acc: 69.23
+07/26/2026 23:48:48 - INFO - __main__ -   Best top-1 acc: 41.14
+07/26/2026 23:48:48 - INFO - __main__ -   Mean top-1 acc: 39.56
+
+current epoch:  38
+07/26/2026 23:50:38 - INFO - __main__ -   top-1 acc: 40.79
+07/26/2026 23:50:38 - INFO - __main__ -   top-5 acc: 69.17
+07/26/2026 23:50:38 - INFO - __main__ -   Best top-1 acc: 41.14
+07/26/2026 23:50:38 - INFO - __main__ -   Mean top-1 acc: 39.76
+
+current epoch:  39
+07/26/2026 23:52:34 - INFO - __main__ -   top-1 acc: 41.02
+07/26/2026 23:52:34 - INFO - __main__ -   top-5 acc: 69.47
+07/26/2026 23:52:34 - INFO - __main__ -   Best top-1 acc: 41.14
+07/26/2026 23:52:34 - INFO - __main__ -   Mean top-1 acc: 39.94
+
+current epoch:  40
+07/26/2026 23:54:27 - INFO - __main__ -   top-1 acc: 41.42
+07/26/2026 23:54:27 - INFO - __main__ -   top-5 acc: 69.79
+07/26/2026 23:54:27 - INFO - __main__ -   Best top-1 acc: 41.42
+07/26/2026 23:54:27 - INFO - __main__ -   Mean top-1 acc: 40.12
+
+current epoch:  41
+07/26/2026 23:56:18 - INFO - __main__ -   top-1 acc: 41.34
+07/26/2026 23:56:18 - INFO - __main__ -   top-5 acc: 69.59
+07/26/2026 23:56:18 - INFO - __main__ -   Best top-1 acc: 41.42
+07/26/2026 23:56:18 - INFO - __main__ -   Mean top-1 acc: 40.28
+
+current epoch:  42
+07/26/2026 23:58:09 - INFO - __main__ -   top-1 acc: 41.66
+07/26/2026 23:58:09 - INFO - __main__ -   top-5 acc: 69.86
+07/26/2026 23:58:10 - INFO - __main__ -   Best top-1 acc: 41.66
+07/26/2026 23:58:10 - INFO - __main__ -   Mean top-1 acc: 40.43
+
+current epoch:  43
+07/27/2026 00:00:02 - INFO - __main__ -   top-1 acc: 41.86
+07/27/2026 00:00:02 - INFO - __main__ -   top-5 acc: 70.29
+07/27/2026 00:00:02 - INFO - __main__ -   Best top-1 acc: 41.86
+07/27/2026 00:00:02 - INFO - __main__ -   Mean top-1 acc: 40.59
+
+current epoch:  44
+07/27/2026 00:01:55 - INFO - __main__ -   top-1 acc: 41.97
+07/27/2026 00:01:55 - INFO - __main__ -   top-5 acc: 70.16
+07/27/2026 00:01:56 - INFO - __main__ -   Best top-1 acc: 41.97
+07/27/2026 00:01:56 - INFO - __main__ -   Mean top-1 acc: 40.73
+
+current epoch:  45
+07/27/2026 00:03:47 - INFO - __main__ -   top-1 acc: 42.01
+07/27/2026 00:03:47 - INFO - __main__ -   top-5 acc: 70.34
+07/27/2026 00:03:47 - INFO - __main__ -   Best top-1 acc: 42.01
+07/27/2026 00:03:47 - INFO - __main__ -   Mean top-1 acc: 40.85
+
+current epoch:  46
+07/27/2026 00:05:37 - INFO - __main__ -   top-1 acc: 42.17
+07/27/2026 00:05:37 - INFO - __main__ -   top-5 acc: 70.52
+07/27/2026 00:05:37 - INFO - __main__ -   Best top-1 acc: 42.17
+07/27/2026 00:05:37 - INFO - __main__ -   Mean top-1 acc: 40.96
+
+current epoch:  47
+07/27/2026 00:07:27 - INFO - __main__ -   top-1 acc: 42.36
+07/27/2026 00:07:27 - INFO - __main__ -   top-5 acc: 70.47
+07/27/2026 00:07:27 - INFO - __main__ -   Best top-1 acc: 42.36
+07/27/2026 00:07:27 - INFO - __main__ -   Mean top-1 acc: 41.09
+
+current epoch:  48
+07/27/2026 00:09:18 - INFO - __main__ -   top-1 acc: 42.48
+07/27/2026 00:09:18 - INFO - __main__ -   top-5 acc: 70.80
+07/27/2026 00:09:18 - INFO - __main__ -   Best top-1 acc: 42.48
+07/27/2026 00:09:18 - INFO - __main__ -   Mean top-1 acc: 41.22
+
+current epoch:  49
+07/27/2026 00:11:10 - INFO - __main__ -   top-1 acc: 42.21
+07/27/2026 00:11:10 - INFO - __main__ -   top-5 acc: 70.79
+07/27/2026 00:11:10 - INFO - __main__ -   Best top-1 acc: 42.48
+07/27/2026 00:11:10 - INFO - __main__ -   Mean top-1 acc: 41.29
+
+current epoch:  50
+07/27/2026 00:12:58 - INFO - __main__ -   top-1 acc: 42.20
+07/27/2026 00:12:58 - INFO - __main__ -   top-5 acc: 70.73
+07/27/2026 00:12:58 - INFO - __main__ -   Best top-1 acc: 42.48
+07/27/2026 00:12:58 - INFO - __main__ -   Mean top-1 acc: 41.38
+
+current epoch:  51
+07/27/2026 00:14:47 - INFO - __main__ -   top-1 acc: 42.33
+07/27/2026 00:14:47 - INFO - __main__ -   top-5 acc: 70.94
+07/27/2026 00:14:47 - INFO - __main__ -   Best top-1 acc: 42.48
+07/27/2026 00:14:47 - INFO - __main__ -   Mean top-1 acc: 41.49
+
+current epoch:  52
+07/27/2026 00:16:37 - INFO - __main__ -   top-1 acc: 42.41
+07/27/2026 00:16:37 - INFO - __main__ -   top-5 acc: 71.01
+07/27/2026 00:16:37 - INFO - __main__ -   Best top-1 acc: 42.48
+07/27/2026 00:16:37 - INFO - __main__ -   Mean top-1 acc: 41.60
+
+current epoch:  53
+07/27/2026 00:18:25 - INFO - __main__ -   top-1 acc: 42.69
+07/27/2026 00:18:25 - INFO - __main__ -   top-5 acc: 71.22
+07/27/2026 00:18:25 - INFO - __main__ -   Best top-1 acc: 42.69
+07/27/2026 00:18:25 - INFO - __main__ -   Mean top-1 acc: 41.72
+
+current epoch:  54
+07/27/2026 00:20:19 - INFO - __main__ -   top-1 acc: 42.76
+07/27/2026 00:20:19 - INFO - __main__ -   top-5 acc: 70.89
+07/27/2026 00:20:19 - INFO - __main__ -   Best top-1 acc: 42.76
+07/27/2026 00:20:19 - INFO - __main__ -   Mean top-1 acc: 41.83
+
+current epoch:  55
+07/27/2026 00:22:13 - INFO - __main__ -   top-1 acc: 42.38
+07/27/2026 00:22:13 - INFO - __main__ -   top-5 acc: 70.70
+07/27/2026 00:22:13 - INFO - __main__ -   Best top-1 acc: 42.76
+07/27/2026 00:22:13 - INFO - __main__ -   Mean top-1 acc: 41.89
+
+current epoch:  56
+07/27/2026 00:24:05 - INFO - __main__ -   top-1 acc: 42.52
+07/27/2026 00:24:05 - INFO - __main__ -   top-5 acc: 70.48
+07/27/2026 00:24:05 - INFO - __main__ -   Best top-1 acc: 42.76
+07/27/2026 00:24:05 - INFO - __main__ -   Mean top-1 acc: 41.97
+
+current epoch:  57
+07/27/2026 00:25:51 - INFO - __main__ -   top-1 acc: 42.65
+07/27/2026 00:25:51 - INFO - __main__ -   top-5 acc: 70.60
+07/27/2026 00:25:51 - INFO - __main__ -   Best top-1 acc: 42.76
+07/27/2026 00:25:51 - INFO - __main__ -   Mean top-1 acc: 42.06
+
+current epoch:  58
+07/27/2026 00:27:35 - INFO - __main__ -   top-1 acc: 42.88
+07/27/2026 00:27:35 - INFO - __main__ -   top-5 acc: 70.91
+07/27/2026 00:27:36 - INFO - __main__ -   Best top-1 acc: 42.88
+07/27/2026 00:27:36 - INFO - __main__ -   Mean top-1 acc: 42.17
+
+current epoch:  59
+07/27/2026 00:29:26 - INFO - __main__ -   top-1 acc: 43.13
+07/27/2026 00:29:26 - INFO - __main__ -   top-5 acc: 71.32
+07/27/2026 00:29:26 - INFO - __main__ -   Best top-1 acc: 43.13
+07/27/2026 00:29:26 - INFO - __main__ -   Mean top-1 acc: 42.27
+
+current epoch:  60
+07/27/2026 00:31:21 - INFO - __main__ -   top-1 acc: 43.54
+07/27/2026 00:31:21 - INFO - __main__ -   top-5 acc: 71.29
+07/27/2026 00:31:21 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:31:21 - INFO - __main__ -   Mean top-1 acc: 42.38
+
+current epoch:  61
+07/27/2026 00:33:11 - INFO - __main__ -   top-1 acc: 43.16
+07/27/2026 00:33:11 - INFO - __main__ -   top-5 acc: 71.18
+07/27/2026 00:33:11 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:33:11 - INFO - __main__ -   Mean top-1 acc: 42.47
+
+current epoch:  62
+07/27/2026 00:34:56 - INFO - __main__ -   top-1 acc: 42.80
+07/27/2026 00:34:56 - INFO - __main__ -   top-5 acc: 70.96
+07/27/2026 00:34:57 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:34:57 - INFO - __main__ -   Mean top-1 acc: 42.53
+
+current epoch:  63
+07/27/2026 00:36:45 - INFO - __main__ -   top-1 acc: 42.66
+07/27/2026 00:36:45 - INFO - __main__ -   top-5 acc: 70.76
+07/27/2026 00:36:45 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:36:45 - INFO - __main__ -   Mean top-1 acc: 42.57
+
+current epoch:  64
+07/27/2026 00:38:34 - INFO - __main__ -   top-1 acc: 42.75
+07/27/2026 00:38:34 - INFO - __main__ -   top-5 acc: 70.88
+07/27/2026 00:38:35 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:38:35 - INFO - __main__ -   Mean top-1 acc: 42.60
+
+current epoch:  65
+07/27/2026 00:40:29 - INFO - __main__ -   top-1 acc: 43.04
+07/27/2026 00:40:29 - INFO - __main__ -   top-5 acc: 70.79
+07/27/2026 00:40:29 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:40:29 - INFO - __main__ -   Mean top-1 acc: 42.66
+
+current epoch:  66
+07/27/2026 00:42:17 - INFO - __main__ -   top-1 acc: 42.93
+07/27/2026 00:42:17 - INFO - __main__ -   top-5 acc: 70.90
+07/27/2026 00:42:17 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:42:17 - INFO - __main__ -   Mean top-1 acc: 42.69
+
+current epoch:  67
+07/27/2026 00:44:08 - INFO - __main__ -   top-1 acc: 42.71
+07/27/2026 00:44:08 - INFO - __main__ -   top-5 acc: 71.04
+07/27/2026 00:44:08 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:44:08 - INFO - __main__ -   Mean top-1 acc: 42.71
+
+current epoch:  68
+07/27/2026 00:46:02 - INFO - __main__ -   top-1 acc: 43.23
+07/27/2026 00:46:02 - INFO - __main__ -   top-5 acc: 71.24
+07/27/2026 00:46:03 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:46:03 - INFO - __main__ -   Mean top-1 acc: 42.75
+
+current epoch:  69
+07/27/2026 00:47:53 - INFO - __main__ -   top-1 acc: 43.18
+07/27/2026 00:47:53 - INFO - __main__ -   top-5 acc: 71.61
+07/27/2026 00:47:53 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:47:53 - INFO - __main__ -   Mean top-1 acc: 42.80
+
+current epoch:  70
+07/27/2026 00:49:49 - INFO - __main__ -   top-1 acc: 42.88
+07/27/2026 00:49:49 - INFO - __main__ -   top-5 acc: 71.73
+07/27/2026 00:49:49 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:49:49 - INFO - __main__ -   Mean top-1 acc: 42.83
+
+current epoch:  71
+07/27/2026 00:51:41 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 00:51:41 - INFO - __main__ -   top-5 acc: 71.88
+07/27/2026 00:51:41 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:51:41 - INFO - __main__ -   Mean top-1 acc: 42.88
+
+current epoch:  72
+07/27/2026 00:53:35 - INFO - __main__ -   top-1 acc: 43.28
+07/27/2026 00:53:35 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 00:53:35 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:53:35 - INFO - __main__ -   Mean top-1 acc: 42.92
+
+current epoch:  73
+07/27/2026 00:55:23 - INFO - __main__ -   top-1 acc: 43.02
+07/27/2026 00:55:23 - INFO - __main__ -   top-5 acc: 71.17
+07/27/2026 00:55:23 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:55:23 - INFO - __main__ -   Mean top-1 acc: 42.94
+
+current epoch:  74
+07/27/2026 00:57:14 - INFO - __main__ -   top-1 acc: 43.05
+07/27/2026 00:57:14 - INFO - __main__ -   top-5 acc: 71.28
+07/27/2026 00:57:14 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:57:14 - INFO - __main__ -   Mean top-1 acc: 42.96
+
+current epoch:  75
+07/27/2026 00:59:11 - INFO - __main__ -   top-1 acc: 43.28
+07/27/2026 00:59:11 - INFO - __main__ -   top-5 acc: 71.55
+07/27/2026 00:59:12 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 00:59:12 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  76
+07/27/2026 01:01:03 - INFO - __main__ -   top-1 acc: 43.37
+07/27/2026 01:01:03 - INFO - __main__ -   top-5 acc: 71.59
+07/27/2026 01:01:03 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 01:01:03 - INFO - __main__ -   Mean top-1 acc: 43.04
+
+current epoch:  77
+07/27/2026 01:02:55 - INFO - __main__ -   top-1 acc: 43.43
+07/27/2026 01:02:55 - INFO - __main__ -   top-5 acc: 71.45
+07/27/2026 01:02:55 - INFO - __main__ -   Best top-1 acc: 43.54
+07/27/2026 01:02:55 - INFO - __main__ -   Mean top-1 acc: 43.08
+
+current epoch:  78
+07/27/2026 01:04:48 - INFO - __main__ -   top-1 acc: 43.59
+07/27/2026 01:04:48 - INFO - __main__ -   top-5 acc: 71.05
+07/27/2026 01:04:48 - INFO - __main__ -   Best top-1 acc: 43.59
+07/27/2026 01:04:48 - INFO - __main__ -   Mean top-1 acc: 43.12
+
+current epoch:  79
+07/27/2026 01:06:45 - INFO - __main__ -   top-1 acc: 43.69
+07/27/2026 01:06:45 - INFO - __main__ -   top-5 acc: 71.35
+07/27/2026 01:06:45 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:06:45 - INFO - __main__ -   Mean top-1 acc: 43.15
+
+current epoch:  80
+07/27/2026 01:08:39 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 01:08:39 - INFO - __main__ -   top-5 acc: 71.14
+07/27/2026 01:08:39 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:08:39 - INFO - __main__ -   Mean top-1 acc: 43.14
+
+current epoch:  81
+07/27/2026 01:10:28 - INFO - __main__ -   top-1 acc: 43.25
+07/27/2026 01:10:28 - INFO - __main__ -   top-5 acc: 70.97
+07/27/2026 01:10:28 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:10:28 - INFO - __main__ -   Mean top-1 acc: 43.14
+
+current epoch:  82
+07/27/2026 01:12:21 - INFO - __main__ -   top-1 acc: 43.42
+07/27/2026 01:12:21 - INFO - __main__ -   top-5 acc: 71.07
+07/27/2026 01:12:22 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:12:22 - INFO - __main__ -   Mean top-1 acc: 43.17
+
+current epoch:  83
+07/27/2026 01:14:10 - INFO - __main__ -   top-1 acc: 43.44
+07/27/2026 01:14:10 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 01:14:10 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:14:10 - INFO - __main__ -   Mean top-1 acc: 43.21
+
+current epoch:  84
+07/27/2026 01:16:04 - INFO - __main__ -   top-1 acc: 43.43
+07/27/2026 01:16:04 - INFO - __main__ -   top-5 acc: 71.25
+07/27/2026 01:16:04 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:16:04 - INFO - __main__ -   Mean top-1 acc: 43.24
+
+current epoch:  85
+07/27/2026 01:17:54 - INFO - __main__ -   top-1 acc: 43.08
+07/27/2026 01:17:54 - INFO - __main__ -   top-5 acc: 71.08
+07/27/2026 01:17:55 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:17:55 - INFO - __main__ -   Mean top-1 acc: 43.25
+
+current epoch:  86
+07/27/2026 01:19:42 - INFO - __main__ -   top-1 acc: 43.32
+07/27/2026 01:19:42 - INFO - __main__ -   top-5 acc: 71.31
+07/27/2026 01:19:43 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:19:43 - INFO - __main__ -   Mean top-1 acc: 43.27
+
+current epoch:  87
+07/27/2026 01:21:33 - INFO - __main__ -   top-1 acc: 43.59
+07/27/2026 01:21:33 - INFO - __main__ -   top-5 acc: 71.14
+07/27/2026 01:21:33 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:21:33 - INFO - __main__ -   Mean top-1 acc: 43.31
+
+current epoch:  88
+07/27/2026 01:23:19 - INFO - __main__ -   top-1 acc: 43.39
+07/27/2026 01:23:19 - INFO - __main__ -   top-5 acc: 71.49
+07/27/2026 01:23:19 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:23:19 - INFO - __main__ -   Mean top-1 acc: 43.32
+
+current epoch:  89
+07/27/2026 01:25:03 - INFO - __main__ -   top-1 acc: 43.15
+07/27/2026 01:25:03 - INFO - __main__ -   top-5 acc: 71.52
+07/27/2026 01:25:03 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:25:03 - INFO - __main__ -   Mean top-1 acc: 43.32
+
+current epoch:  90
+07/27/2026 01:26:52 - INFO - __main__ -   top-1 acc: 43.15
+07/27/2026 01:26:52 - INFO - __main__ -   top-5 acc: 71.49
+07/27/2026 01:26:53 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:26:53 - INFO - __main__ -   Mean top-1 acc: 43.33
+
+current epoch:  91
+07/27/2026 01:28:42 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 01:28:42 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 01:28:42 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:28:42 - INFO - __main__ -   Mean top-1 acc: 43.34
+
+current epoch:  92
+07/27/2026 01:30:31 - INFO - __main__ -   top-1 acc: 43.47
+07/27/2026 01:30:31 - INFO - __main__ -   top-5 acc: 71.75
+07/27/2026 01:30:31 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:30:31 - INFO - __main__ -   Mean top-1 acc: 43.35
+
+current epoch:  93
+07/27/2026 01:32:15 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 01:32:15 - INFO - __main__ -   top-5 acc: 71.65
+07/27/2026 01:32:15 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:32:15 - INFO - __main__ -   Mean top-1 acc: 43.37
+
+current epoch:  94
+07/27/2026 01:33:59 - INFO - __main__ -   top-1 acc: 43.37
+07/27/2026 01:33:59 - INFO - __main__ -   top-5 acc: 71.73
+07/27/2026 01:33:59 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:33:59 - INFO - __main__ -   Mean top-1 acc: 43.38
+
+current epoch:  95
+07/27/2026 01:35:48 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 01:35:48 - INFO - __main__ -   top-5 acc: 71.67
+07/27/2026 01:35:48 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:35:48 - INFO - __main__ -   Mean top-1 acc: 43.40
+
+current epoch:  96
+07/27/2026 01:37:36 - INFO - __main__ -   top-1 acc: 43.53
+07/27/2026 01:37:36 - INFO - __main__ -   top-5 acc: 71.71
+07/27/2026 01:37:36 - INFO - __main__ -   Best top-1 acc: 43.69
+07/27/2026 01:37:36 - INFO - __main__ -   Mean top-1 acc: 43.40
+
+current epoch:  97
+07/27/2026 01:39:30 - INFO - __main__ -   top-1 acc: 43.80
+07/27/2026 01:39:30 - INFO - __main__ -   top-5 acc: 71.50
+07/27/2026 01:39:30 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:39:30 - INFO - __main__ -   Mean top-1 acc: 43.42
+
+current epoch:  98
+07/27/2026 01:41:26 - INFO - __main__ -   top-1 acc: 43.80
+07/27/2026 01:41:26 - INFO - __main__ -   top-5 acc: 71.34
+07/27/2026 01:41:27 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:41:27 - INFO - __main__ -   Mean top-1 acc: 43.43
+
+current epoch:  99
+07/27/2026 01:43:21 - INFO - __main__ -   top-1 acc: 43.46
+07/27/2026 01:43:21 - INFO - __main__ -   top-5 acc: 71.45
+07/27/2026 01:43:21 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:43:21 - INFO - __main__ -   Mean top-1 acc: 43.42
+
+current epoch:  100
+07/27/2026 01:45:13 - INFO - __main__ -   top-1 acc: 43.36
+07/27/2026 01:45:13 - INFO - __main__ -   top-5 acc: 71.53
+07/27/2026 01:45:13 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:45:13 - INFO - __main__ -   Mean top-1 acc: 43.42
+
+current epoch:  101
+07/27/2026 01:47:01 - INFO - __main__ -   top-1 acc: 43.57
+07/27/2026 01:47:01 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 01:47:01 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:47:01 - INFO - __main__ -   Mean top-1 acc: 43.44
+
+current epoch:  102
+07/27/2026 01:48:50 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 01:48:50 - INFO - __main__ -   top-5 acc: 71.63
+07/27/2026 01:48:50 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:48:50 - INFO - __main__ -   Mean top-1 acc: 43.45
+
+current epoch:  103
+07/27/2026 01:50:43 - INFO - __main__ -   top-1 acc: 43.75
+07/27/2026 01:50:43 - INFO - __main__ -   top-5 acc: 71.69
+07/27/2026 01:50:43 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:50:43 - INFO - __main__ -   Mean top-1 acc: 43.46
+
+current epoch:  104
+07/27/2026 01:52:33 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 01:52:33 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 01:52:33 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:52:33 - INFO - __main__ -   Mean top-1 acc: 43.47
+
+current epoch:  105
+07/27/2026 01:54:25 - INFO - __main__ -   top-1 acc: 43.40
+07/27/2026 01:54:25 - INFO - __main__ -   top-5 acc: 71.55
+07/27/2026 01:54:25 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:54:25 - INFO - __main__ -   Mean top-1 acc: 43.48
+
+current epoch:  106
+07/27/2026 01:56:15 - INFO - __main__ -   top-1 acc: 43.59
+07/27/2026 01:56:15 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 01:56:15 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:56:15 - INFO - __main__ -   Mean top-1 acc: 43.50
+
+current epoch:  107
+07/27/2026 01:58:01 - INFO - __main__ -   top-1 acc: 43.44
+07/27/2026 01:58:01 - INFO - __main__ -   top-5 acc: 71.87
+07/27/2026 01:58:01 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:58:01 - INFO - __main__ -   Mean top-1 acc: 43.49
+
+current epoch:  108
+07/27/2026 01:59:51 - INFO - __main__ -   top-1 acc: 43.57
+07/27/2026 01:59:51 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 01:59:51 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 01:59:51 - INFO - __main__ -   Mean top-1 acc: 43.50
+
+current epoch:  109
+07/27/2026 02:01:36 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 02:01:36 - INFO - __main__ -   top-5 acc: 71.60
+07/27/2026 02:01:36 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:01:36 - INFO - __main__ -   Mean top-1 acc: 43.52
+
+current epoch:  110
+07/27/2026 02:03:25 - INFO - __main__ -   top-1 acc: 43.40
+07/27/2026 02:03:25 - INFO - __main__ -   top-5 acc: 71.55
+07/27/2026 02:03:25 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:03:25 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  111
+07/27/2026 02:05:11 - INFO - __main__ -   top-1 acc: 43.59
+07/27/2026 02:05:11 - INFO - __main__ -   top-5 acc: 71.45
+07/27/2026 02:05:11 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:05:11 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  112
+07/27/2026 02:06:52 - INFO - __main__ -   top-1 acc: 43.48
+07/27/2026 02:06:52 - INFO - __main__ -   top-5 acc: 71.37
+07/27/2026 02:06:52 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:06:52 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  113
+07/27/2026 02:08:38 - INFO - __main__ -   top-1 acc: 43.48
+07/27/2026 02:08:38 - INFO - __main__ -   top-5 acc: 71.27
+07/27/2026 02:08:39 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:08:39 - INFO - __main__ -   Mean top-1 acc: 43.54
+
+current epoch:  114
+07/27/2026 02:10:25 - INFO - __main__ -   top-1 acc: 43.56
+07/27/2026 02:10:25 - INFO - __main__ -   top-5 acc: 71.56
+07/27/2026 02:10:25 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:10:25 - INFO - __main__ -   Mean top-1 acc: 43.55
+
+current epoch:  115
+07/27/2026 02:12:08 - INFO - __main__ -   top-1 acc: 43.43
+07/27/2026 02:12:08 - INFO - __main__ -   top-5 acc: 71.65
+07/27/2026 02:12:08 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:12:08 - INFO - __main__ -   Mean top-1 acc: 43.54
+
+current epoch:  116
+07/27/2026 02:13:55 - INFO - __main__ -   top-1 acc: 43.41
+07/27/2026 02:13:55 - INFO - __main__ -   top-5 acc: 71.65
+07/27/2026 02:13:55 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:13:55 - INFO - __main__ -   Mean top-1 acc: 43.54
+
+current epoch:  117
+07/27/2026 02:15:38 - INFO - __main__ -   top-1 acc: 43.55
+07/27/2026 02:15:38 - INFO - __main__ -   top-5 acc: 71.85
+07/27/2026 02:15:38 - INFO - __main__ -   Best top-1 acc: 43.80
+07/27/2026 02:15:38 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  118
+07/27/2026 02:17:22 - INFO - __main__ -   top-1 acc: 43.98
+07/27/2026 02:17:22 - INFO - __main__ -   top-5 acc: 71.94
+07/27/2026 02:17:23 - INFO - __main__ -   Best top-1 acc: 43.98
+07/27/2026 02:17:23 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  119
+07/27/2026 02:19:11 - INFO - __main__ -   top-1 acc: 43.89
+07/27/2026 02:19:11 - INFO - __main__ -   top-5 acc: 72.03
+07/27/2026 02:19:12 - INFO - __main__ -   Best top-1 acc: 43.98
+07/27/2026 02:19:12 - INFO - __main__ -   Mean top-1 acc: 43.56
+
+current epoch:  120
+07/27/2026 02:21:01 - INFO - __main__ -   top-1 acc: 44.15
+07/27/2026 02:21:01 - INFO - __main__ -   top-5 acc: 72.18
+07/27/2026 02:21:01 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:21:01 - INFO - __main__ -   Mean top-1 acc: 43.60
+
+current epoch:  121
+07/27/2026 02:22:49 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 02:22:49 - INFO - __main__ -   top-5 acc: 71.89
+07/27/2026 02:22:49 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:22:49 - INFO - __main__ -   Mean top-1 acc: 43.61
+
+current epoch:  122
+07/27/2026 02:24:35 - INFO - __main__ -   top-1 acc: 43.60
+07/27/2026 02:24:35 - INFO - __main__ -   top-5 acc: 71.61
+07/27/2026 02:24:35 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:24:35 - INFO - __main__ -   Mean top-1 acc: 43.61
+
+current epoch:  123
+07/27/2026 02:26:24 - INFO - __main__ -   top-1 acc: 43.67
+07/27/2026 02:26:24 - INFO - __main__ -   top-5 acc: 71.13
+07/27/2026 02:26:25 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:26:25 - INFO - __main__ -   Mean top-1 acc: 43.61
+
+current epoch:  124
+07/27/2026 02:28:12 - INFO - __main__ -   top-1 acc: 43.66
+07/27/2026 02:28:12 - INFO - __main__ -   top-5 acc: 71.47
+07/27/2026 02:28:12 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:28:12 - INFO - __main__ -   Mean top-1 acc: 43.62
+
+current epoch:  125
+07/27/2026 02:29:54 - INFO - __main__ -   top-1 acc: 43.87
+07/27/2026 02:29:54 - INFO - __main__ -   top-5 acc: 71.15
+07/27/2026 02:29:54 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:29:54 - INFO - __main__ -   Mean top-1 acc: 43.64
+
+current epoch:  126
+07/27/2026 02:31:35 - INFO - __main__ -   top-1 acc: 43.98
+07/27/2026 02:31:35 - INFO - __main__ -   top-5 acc: 71.53
+07/27/2026 02:31:36 - INFO - __main__ -   Best top-1 acc: 44.15
+07/27/2026 02:31:36 - INFO - __main__ -   Mean top-1 acc: 43.66
+
+current epoch:  127
+07/27/2026 02:33:21 - INFO - __main__ -   top-1 acc: 44.16
+07/27/2026 02:33:21 - INFO - __main__ -   top-5 acc: 71.81
+07/27/2026 02:33:21 - INFO - __main__ -   Best top-1 acc: 44.16
+07/27/2026 02:33:21 - INFO - __main__ -   Mean top-1 acc: 43.69
+
+current epoch:  128
+07/27/2026 02:35:08 - INFO - __main__ -   top-1 acc: 44.28
+07/27/2026 02:35:08 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 02:35:08 - INFO - __main__ -   Best top-1 acc: 44.28
+07/27/2026 02:35:08 - INFO - __main__ -   Mean top-1 acc: 43.73
+
+current epoch:  129
+07/27/2026 02:36:55 - INFO - __main__ -   top-1 acc: 43.77
+07/27/2026 02:36:55 - INFO - __main__ -   top-5 acc: 71.04
+07/27/2026 02:36:55 - INFO - __main__ -   Best top-1 acc: 44.28
+07/27/2026 02:36:55 - INFO - __main__ -   Mean top-1 acc: 43.74
+
+current epoch:  130
+07/27/2026 02:38:42 - INFO - __main__ -   top-1 acc: 43.82
+07/27/2026 02:38:42 - INFO - __main__ -   top-5 acc: 71.06
+07/27/2026 02:38:42 - INFO - __main__ -   Best top-1 acc: 44.28
+07/27/2026 02:38:42 - INFO - __main__ -   Mean top-1 acc: 43.76
+
+current epoch:  131
+07/27/2026 02:40:29 - INFO - __main__ -   top-1 acc: 44.12
+07/27/2026 02:40:29 - INFO - __main__ -   top-5 acc: 71.50
+07/27/2026 02:40:29 - INFO - __main__ -   Best top-1 acc: 44.28
+07/27/2026 02:40:29 - INFO - __main__ -   Mean top-1 acc: 43.79
+
+current epoch:  132
+07/27/2026 02:42:15 - INFO - __main__ -   top-1 acc: 43.99
+07/27/2026 02:42:15 - INFO - __main__ -   top-5 acc: 71.50
+07/27/2026 02:42:15 - INFO - __main__ -   Best top-1 acc: 44.28
+07/27/2026 02:42:15 - INFO - __main__ -   Mean top-1 acc: 43.81
+
+current epoch:  133
+07/27/2026 02:43:58 - INFO - __main__ -   top-1 acc: 44.30
+07/27/2026 02:43:58 - INFO - __main__ -   top-5 acc: 71.91
+07/27/2026 02:43:58 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:43:58 - INFO - __main__ -   Mean top-1 acc: 43.85
+
+current epoch:  134
+07/27/2026 02:45:49 - INFO - __main__ -   top-1 acc: 44.22
+07/27/2026 02:45:49 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 02:45:49 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:45:49 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  135
+07/27/2026 02:47:37 - INFO - __main__ -   top-1 acc: 44.01
+07/27/2026 02:47:37 - INFO - __main__ -   top-5 acc: 71.47
+07/27/2026 02:47:37 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:47:37 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  136
+07/27/2026 02:49:30 - INFO - __main__ -   top-1 acc: 43.93
+07/27/2026 02:49:30 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 02:49:31 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:49:31 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  137
+07/27/2026 02:51:22 - INFO - __main__ -   top-1 acc: 43.57
+07/27/2026 02:51:22 - INFO - __main__ -   top-5 acc: 71.87
+07/27/2026 02:51:22 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:51:22 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  138
+07/27/2026 02:53:11 - INFO - __main__ -   top-1 acc: 43.94
+07/27/2026 02:53:11 - INFO - __main__ -   top-5 acc: 71.59
+07/27/2026 02:53:12 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:53:12 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  139
+07/27/2026 02:55:05 - INFO - __main__ -   top-1 acc: 43.68
+07/27/2026 02:55:05 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 02:55:06 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:55:06 - INFO - __main__ -   Mean top-1 acc: 43.93
+
+current epoch:  140
+07/27/2026 02:56:55 - INFO - __main__ -   top-1 acc: 43.61
+07/27/2026 02:56:55 - INFO - __main__ -   top-5 acc: 71.11
+07/27/2026 02:56:55 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:56:55 - INFO - __main__ -   Mean top-1 acc: 43.90
+
+current epoch:  141
+07/27/2026 02:58:47 - INFO - __main__ -   top-1 acc: 43.67
+07/27/2026 02:58:47 - INFO - __main__ -   top-5 acc: 71.15
+07/27/2026 02:58:47 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 02:58:47 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  142
+07/27/2026 03:00:34 - INFO - __main__ -   top-1 acc: 43.59
+07/27/2026 03:00:34 - INFO - __main__ -   top-5 acc: 71.26
+07/27/2026 03:00:34 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:00:34 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  143
+07/27/2026 03:02:17 - INFO - __main__ -   top-1 acc: 43.84
+07/27/2026 03:02:17 - INFO - __main__ -   top-5 acc: 71.39
+07/27/2026 03:02:17 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:02:17 - INFO - __main__ -   Mean top-1 acc: 43.90
+
+current epoch:  144
+07/27/2026 03:04:02 - INFO - __main__ -   top-1 acc: 44.08
+07/27/2026 03:04:02 - INFO - __main__ -   top-5 acc: 71.36
+07/27/2026 03:04:02 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:04:02 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  145
+07/27/2026 03:05:47 - INFO - __main__ -   top-1 acc: 43.96
+07/27/2026 03:05:47 - INFO - __main__ -   top-5 acc: 71.57
+07/27/2026 03:05:47 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:05:47 - INFO - __main__ -   Mean top-1 acc: 43.93
+
+current epoch:  146
+07/27/2026 03:07:37 - INFO - __main__ -   top-1 acc: 44.21
+07/27/2026 03:07:37 - INFO - __main__ -   top-5 acc: 71.94
+07/27/2026 03:07:37 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:07:37 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  147
+07/27/2026 03:09:28 - INFO - __main__ -   top-1 acc: 44.24
+07/27/2026 03:09:28 - INFO - __main__ -   top-5 acc: 71.84
+07/27/2026 03:09:28 - INFO - __main__ -   Best top-1 acc: 44.30
+07/27/2026 03:09:28 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  148
+07/27/2026 03:11:16 - INFO - __main__ -   top-1 acc: 44.32
+07/27/2026 03:11:16 - INFO - __main__ -   top-5 acc: 71.73
+07/27/2026 03:11:16 - INFO - __main__ -   Best top-1 acc: 44.32
+07/27/2026 03:11:16 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  149
+07/27/2026 03:13:04 - INFO - __main__ -   top-1 acc: 44.32
+07/27/2026 03:13:04 - INFO - __main__ -   top-5 acc: 71.59
+07/27/2026 03:13:04 - INFO - __main__ -   Best top-1 acc: 44.32
+07/27/2026 03:13:04 - INFO - __main__ -   Mean top-1 acc: 43.97
+
+current epoch:  150
+07/27/2026 03:14:53 - INFO - __main__ -   top-1 acc: 44.44
+07/27/2026 03:14:53 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 03:14:53 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:14:53 - INFO - __main__ -   Mean top-1 acc: 44.00
+
+current epoch:  151
+07/27/2026 03:16:41 - INFO - __main__ -   top-1 acc: 44.17
+07/27/2026 03:16:41 - INFO - __main__ -   top-5 acc: 71.19
+07/27/2026 03:16:42 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:16:42 - INFO - __main__ -   Mean top-1 acc: 44.00
+
+current epoch:  152
+07/27/2026 03:18:32 - INFO - __main__ -   top-1 acc: 43.80
+07/27/2026 03:18:32 - INFO - __main__ -   top-5 acc: 71.03
+07/27/2026 03:18:32 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:18:32 - INFO - __main__ -   Mean top-1 acc: 43.99
+
+current epoch:  153
+07/27/2026 03:20:17 - INFO - __main__ -   top-1 acc: 44.03
+07/27/2026 03:20:17 - INFO - __main__ -   top-5 acc: 71.41
+07/27/2026 03:20:17 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:20:17 - INFO - __main__ -   Mean top-1 acc: 43.98
+
+current epoch:  154
+07/27/2026 03:22:02 - INFO - __main__ -   top-1 acc: 44.26
+07/27/2026 03:22:02 - INFO - __main__ -   top-5 acc: 71.58
+07/27/2026 03:22:02 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:22:02 - INFO - __main__ -   Mean top-1 acc: 43.98
+
+current epoch:  155
+07/27/2026 03:23:50 - INFO - __main__ -   top-1 acc: 44.04
+07/27/2026 03:23:50 - INFO - __main__ -   top-5 acc: 71.48
+07/27/2026 03:23:50 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:23:50 - INFO - __main__ -   Mean top-1 acc: 43.98
+
+current epoch:  156
+07/27/2026 03:25:38 - INFO - __main__ -   top-1 acc: 44.40
+07/27/2026 03:25:38 - INFO - __main__ -   top-5 acc: 71.67
+07/27/2026 03:25:38 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:25:38 - INFO - __main__ -   Mean top-1 acc: 44.01
+
+current epoch:  157
+07/27/2026 03:27:29 - INFO - __main__ -   top-1 acc: 44.21
+07/27/2026 03:27:29 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 03:27:29 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:27:29 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  158
+07/27/2026 03:29:18 - INFO - __main__ -   top-1 acc: 44.17
+07/27/2026 03:29:18 - INFO - __main__ -   top-5 acc: 71.70
+07/27/2026 03:29:18 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:29:18 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  159
+07/27/2026 03:31:09 - INFO - __main__ -   top-1 acc: 44.24
+07/27/2026 03:31:09 - INFO - __main__ -   top-5 acc: 71.43
+07/27/2026 03:31:10 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:31:10 - INFO - __main__ -   Mean top-1 acc: 44.08
+
+current epoch:  160
+07/27/2026 03:33:02 - INFO - __main__ -   top-1 acc: 44.21
+07/27/2026 03:33:02 - INFO - __main__ -   top-5 acc: 71.28
+07/27/2026 03:33:02 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:33:02 - INFO - __main__ -   Mean top-1 acc: 44.11
+
+current epoch:  161
+07/27/2026 03:34:54 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 03:34:54 - INFO - __main__ -   top-5 acc: 71.42
+07/27/2026 03:34:54 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:34:54 - INFO - __main__ -   Mean top-1 acc: 44.12
+
+current epoch:  162
+07/27/2026 03:36:46 - INFO - __main__ -   top-1 acc: 43.73
+07/27/2026 03:36:46 - INFO - __main__ -   top-5 acc: 71.74
+07/27/2026 03:36:46 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:36:46 - INFO - __main__ -   Mean top-1 acc: 44.13
+
+current epoch:  163
+07/27/2026 03:38:37 - INFO - __main__ -   top-1 acc: 43.80
+07/27/2026 03:38:37 - INFO - __main__ -   top-5 acc: 71.76
+07/27/2026 03:38:38 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:38:38 - INFO - __main__ -   Mean top-1 acc: 44.13
+
+current epoch:  164
+07/27/2026 03:40:26 - INFO - __main__ -   top-1 acc: 43.99
+07/27/2026 03:40:26 - INFO - __main__ -   top-5 acc: 71.14
+07/27/2026 03:40:26 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:40:26 - INFO - __main__ -   Mean top-1 acc: 44.12
+
+current epoch:  165
+07/27/2026 03:42:15 - INFO - __main__ -   top-1 acc: 43.67
+07/27/2026 03:42:15 - INFO - __main__ -   top-5 acc: 71.37
+07/27/2026 03:42:16 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:42:16 - INFO - __main__ -   Mean top-1 acc: 44.11
+
+current epoch:  166
+07/27/2026 03:44:05 - INFO - __main__ -   top-1 acc: 43.96
+07/27/2026 03:44:05 - INFO - __main__ -   top-5 acc: 71.78
+07/27/2026 03:44:06 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:44:06 - INFO - __main__ -   Mean top-1 acc: 44.09
+
+current epoch:  167
+07/27/2026 03:45:58 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 03:45:58 - INFO - __main__ -   top-5 acc: 72.00
+07/27/2026 03:45:58 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:45:58 - INFO - __main__ -   Mean top-1 acc: 44.08
+
+current epoch:  168
+07/27/2026 03:47:48 - INFO - __main__ -   top-1 acc: 43.77
+07/27/2026 03:47:48 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 03:47:48 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:47:48 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  169
+07/27/2026 03:49:37 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 03:49:37 - INFO - __main__ -   top-5 acc: 71.74
+07/27/2026 03:49:38 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:49:38 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  170
+07/27/2026 03:51:27 - INFO - __main__ -   top-1 acc: 44.17
+07/27/2026 03:51:27 - INFO - __main__ -   top-5 acc: 72.18
+07/27/2026 03:51:27 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:51:27 - INFO - __main__ -   Mean top-1 acc: 44.02
+
+current epoch:  171
+07/27/2026 03:53:17 - INFO - __main__ -   top-1 acc: 44.27
+07/27/2026 03:53:17 - INFO - __main__ -   top-5 acc: 71.95
+07/27/2026 03:53:17 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:53:17 - INFO - __main__ -   Mean top-1 acc: 44.02
+
+current epoch:  172
+07/27/2026 03:55:06 - INFO - __main__ -   top-1 acc: 44.00
+07/27/2026 03:55:06 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 03:55:07 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:55:07 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  173
+07/27/2026 03:56:57 - INFO - __main__ -   top-1 acc: 44.25
+07/27/2026 03:56:57 - INFO - __main__ -   top-5 acc: 71.72
+07/27/2026 03:56:57 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:56:57 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  174
+07/27/2026 03:58:50 - INFO - __main__ -   top-1 acc: 44.12
+07/27/2026 03:58:50 - INFO - __main__ -   top-5 acc: 71.53
+07/27/2026 03:58:50 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 03:58:50 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  175
+07/27/2026 04:00:42 - INFO - __main__ -   top-1 acc: 44.06
+07/27/2026 04:00:42 - INFO - __main__ -   top-5 acc: 71.68
+07/27/2026 04:00:42 - INFO - __main__ -   Best top-1 acc: 44.44
+07/27/2026 04:00:42 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  176
+07/27/2026 04:02:33 - INFO - __main__ -   top-1 acc: 44.45
+07/27/2026 04:02:33 - INFO - __main__ -   top-5 acc: 71.78
+07/27/2026 04:02:33 - INFO - __main__ -   Best top-1 acc: 44.45
+07/27/2026 04:02:33 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  177
+07/27/2026 04:04:26 - INFO - __main__ -   top-1 acc: 44.39
+07/27/2026 04:04:26 - INFO - __main__ -   top-5 acc: 71.43
+07/27/2026 04:04:26 - INFO - __main__ -   Best top-1 acc: 44.45
+07/27/2026 04:04:26 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  178
+07/27/2026 04:06:12 - INFO - __main__ -   top-1 acc: 44.11
+07/27/2026 04:06:12 - INFO - __main__ -   top-5 acc: 71.22
+07/27/2026 04:06:13 - INFO - __main__ -   Best top-1 acc: 44.45
+07/27/2026 04:06:13 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  179
+07/27/2026 04:08:06 - INFO - __main__ -   top-1 acc: 44.33
+07/27/2026 04:08:06 - INFO - __main__ -   top-5 acc: 71.49
+07/27/2026 04:08:06 - INFO - __main__ -   Best top-1 acc: 44.45
+07/27/2026 04:08:06 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  180
+07/27/2026 04:09:58 - INFO - __main__ -   top-1 acc: 44.51
+07/27/2026 04:09:58 - INFO - __main__ -   top-5 acc: 71.48
+07/27/2026 04:09:58 - INFO - __main__ -   Best top-1 acc: 44.51
+07/27/2026 04:09:58 - INFO - __main__ -   Mean top-1 acc: 44.06
+
+current epoch:  181
+07/27/2026 04:11:48 - INFO - __main__ -   top-1 acc: 44.53
+07/27/2026 04:11:48 - INFO - __main__ -   top-5 acc: 71.52
+07/27/2026 04:11:48 - INFO - __main__ -   Best top-1 acc: 44.53
+07/27/2026 04:11:48 - INFO - __main__ -   Mean top-1 acc: 44.10
+
+current epoch:  182
+07/27/2026 04:13:40 - INFO - __main__ -   top-1 acc: 44.34
+07/27/2026 04:13:40 - INFO - __main__ -   top-5 acc: 71.67
+07/27/2026 04:13:40 - INFO - __main__ -   Best top-1 acc: 44.53
+07/27/2026 04:13:40 - INFO - __main__ -   Mean top-1 acc: 44.13
+
+current epoch:  183
+07/27/2026 04:15:29 - INFO - __main__ -   top-1 acc: 43.86
+07/27/2026 04:15:29 - INFO - __main__ -   top-5 acc: 71.47
+07/27/2026 04:15:29 - INFO - __main__ -   Best top-1 acc: 44.53
+07/27/2026 04:15:29 - INFO - __main__ -   Mean top-1 acc: 44.13
+
+current epoch:  184
+07/27/2026 04:17:19 - INFO - __main__ -   top-1 acc: 44.63
+07/27/2026 04:17:19 - INFO - __main__ -   top-5 acc: 71.90
+07/27/2026 04:17:19 - INFO - __main__ -   Best top-1 acc: 44.63
+07/27/2026 04:17:19 - INFO - __main__ -   Mean top-1 acc: 44.16
+
+current epoch:  185
+07/27/2026 04:19:11 - INFO - __main__ -   top-1 acc: 44.60
+07/27/2026 04:19:11 - INFO - __main__ -   top-5 acc: 72.03
+07/27/2026 04:19:11 - INFO - __main__ -   Best top-1 acc: 44.63
+07/27/2026 04:19:11 - INFO - __main__ -   Mean top-1 acc: 44.21
+
+current epoch:  186
+07/27/2026 04:21:03 - INFO - __main__ -   top-1 acc: 44.48
+07/27/2026 04:21:03 - INFO - __main__ -   top-5 acc: 71.86
+07/27/2026 04:21:04 - INFO - __main__ -   Best top-1 acc: 44.63
+07/27/2026 04:21:04 - INFO - __main__ -   Mean top-1 acc: 44.23
+
+current epoch:  187
+07/27/2026 04:22:58 - INFO - __main__ -   top-1 acc: 44.66
+07/27/2026 04:22:58 - INFO - __main__ -   top-5 acc: 71.82
+07/27/2026 04:22:58 - INFO - __main__ -   Best top-1 acc: 44.66
+07/27/2026 04:22:58 - INFO - __main__ -   Mean top-1 acc: 44.27
+
+current epoch:  188
+07/27/2026 04:24:48 - INFO - __main__ -   top-1 acc: 44.77
+07/27/2026 04:24:48 - INFO - __main__ -   top-5 acc: 71.74
+07/27/2026 04:24:48 - INFO - __main__ -   Best top-1 acc: 44.77
+07/27/2026 04:24:48 - INFO - __main__ -   Mean top-1 acc: 44.32
+
+current epoch:  189
+07/27/2026 04:26:39 - INFO - __main__ -   top-1 acc: 44.73
+07/27/2026 04:26:39 - INFO - __main__ -   top-5 acc: 71.96
+07/27/2026 04:26:39 - INFO - __main__ -   Best top-1 acc: 44.77
+07/27/2026 04:26:39 - INFO - __main__ -   Mean top-1 acc: 44.36
+
+current epoch:  190
+07/27/2026 04:28:31 - INFO - __main__ -   top-1 acc: 44.96
+07/27/2026 04:28:31 - INFO - __main__ -   top-5 acc: 71.83
+07/27/2026 04:28:31 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:28:31 - INFO - __main__ -   Mean top-1 acc: 44.40
+
+current epoch:  191
+07/27/2026 04:30:21 - INFO - __main__ -   top-1 acc: 44.50
+07/27/2026 04:30:21 - INFO - __main__ -   top-5 acc: 71.92
+07/27/2026 04:30:21 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:30:21 - INFO - __main__ -   Mean top-1 acc: 44.41
+
+current epoch:  192
+07/27/2026 04:32:12 - INFO - __main__ -   top-1 acc: 44.39
+07/27/2026 04:32:12 - INFO - __main__ -   top-5 acc: 71.86
+07/27/2026 04:32:12 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:32:12 - INFO - __main__ -   Mean top-1 acc: 44.43
+
+current epoch:  193
+07/27/2026 04:34:00 - INFO - __main__ -   top-1 acc: 44.48
+07/27/2026 04:34:00 - INFO - __main__ -   top-5 acc: 71.97
+07/27/2026 04:34:00 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:34:00 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  194
+07/27/2026 04:35:48 - INFO - __main__ -   top-1 acc: 44.50
+07/27/2026 04:35:48 - INFO - __main__ -   top-5 acc: 72.02
+07/27/2026 04:35:48 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:35:48 - INFO - __main__ -   Mean top-1 acc: 44.46
+
+current epoch:  195
+07/27/2026 04:37:40 - INFO - __main__ -   top-1 acc: 44.40
+07/27/2026 04:37:40 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 04:37:40 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:37:40 - INFO - __main__ -   Mean top-1 acc: 44.48
+
+current epoch:  196
+07/27/2026 04:39:29 - INFO - __main__ -   top-1 acc: 44.04
+07/27/2026 04:39:29 - INFO - __main__ -   top-5 acc: 71.46
+07/27/2026 04:39:29 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:39:29 - INFO - __main__ -   Mean top-1 acc: 44.46
+
+current epoch:  197
+07/27/2026 04:41:21 - INFO - __main__ -   top-1 acc: 44.20
+07/27/2026 04:41:21 - INFO - __main__ -   top-5 acc: 71.72
+07/27/2026 04:41:21 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:41:21 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  198
+07/27/2026 04:43:07 - INFO - __main__ -   top-1 acc: 44.06
+07/27/2026 04:43:07 - INFO - __main__ -   top-5 acc: 71.55
+07/27/2026 04:43:07 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:43:07 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  199
+07/27/2026 04:44:59 - INFO - __main__ -   top-1 acc: 44.37
+07/27/2026 04:44:59 - INFO - __main__ -   top-5 acc: 71.75
+07/27/2026 04:44:59 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:44:59 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  200
+07/27/2026 04:46:48 - INFO - __main__ -   top-1 acc: 44.36
+07/27/2026 04:46:48 - INFO - __main__ -   top-5 acc: 71.57
+07/27/2026 04:46:48 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:46:48 - INFO - __main__ -   Mean top-1 acc: 44.44
+
+current epoch:  201
+07/27/2026 04:48:41 - INFO - __main__ -   top-1 acc: 44.31
+07/27/2026 04:48:41 - INFO - __main__ -   top-5 acc: 71.18
+07/27/2026 04:48:41 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:48:41 - INFO - __main__ -   Mean top-1 acc: 44.43
+
+current epoch:  202
+07/27/2026 04:50:32 - INFO - __main__ -   top-1 acc: 44.49
+07/27/2026 04:50:32 - INFO - __main__ -   top-5 acc: 71.54
+07/27/2026 04:50:32 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:50:32 - INFO - __main__ -   Mean top-1 acc: 44.44
+
+current epoch:  203
+07/27/2026 04:52:22 - INFO - __main__ -   top-1 acc: 44.49
+07/27/2026 04:52:22 - INFO - __main__ -   top-5 acc: 71.98
+07/27/2026 04:52:22 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:52:22 - INFO - __main__ -   Mean top-1 acc: 44.47
+
+current epoch:  204
+07/27/2026 04:54:12 - INFO - __main__ -   top-1 acc: 44.60
+07/27/2026 04:54:12 - INFO - __main__ -   top-5 acc: 71.90
+07/27/2026 04:54:13 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:54:13 - INFO - __main__ -   Mean top-1 acc: 44.47
+
+current epoch:  205
+07/27/2026 04:56:04 - INFO - __main__ -   top-1 acc: 44.30
+07/27/2026 04:56:04 - INFO - __main__ -   top-5 acc: 72.01
+07/27/2026 04:56:04 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:56:04 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  206
+07/27/2026 04:57:56 - INFO - __main__ -   top-1 acc: 44.01
+07/27/2026 04:57:56 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 04:57:56 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:57:56 - INFO - __main__ -   Mean top-1 acc: 44.43
+
+current epoch:  207
+07/27/2026 04:59:50 - INFO - __main__ -   top-1 acc: 44.07
+07/27/2026 04:59:50 - INFO - __main__ -   top-5 acc: 71.60
+07/27/2026 04:59:50 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 04:59:50 - INFO - __main__ -   Mean top-1 acc: 44.40
+
+current epoch:  208
+07/27/2026 05:01:38 - INFO - __main__ -   top-1 acc: 44.26
+07/27/2026 05:01:38 - INFO - __main__ -   top-5 acc: 71.64
+07/27/2026 05:01:39 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:01:39 - INFO - __main__ -   Mean top-1 acc: 44.38
+
+current epoch:  209
+07/27/2026 05:03:31 - INFO - __main__ -   top-1 acc: 44.13
+07/27/2026 05:03:31 - INFO - __main__ -   top-5 acc: 71.36
+07/27/2026 05:03:31 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:03:31 - INFO - __main__ -   Mean top-1 acc: 44.35
+
+current epoch:  210
+07/27/2026 05:05:21 - INFO - __main__ -   top-1 acc: 44.07
+07/27/2026 05:05:21 - INFO - __main__ -   top-5 acc: 71.62
+07/27/2026 05:05:21 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:05:21 - INFO - __main__ -   Mean top-1 acc: 44.30
+
+current epoch:  211
+07/27/2026 05:07:12 - INFO - __main__ -   top-1 acc: 44.13
+07/27/2026 05:07:12 - INFO - __main__ -   top-5 acc: 71.78
+07/27/2026 05:07:13 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:07:13 - INFO - __main__ -   Mean top-1 acc: 44.28
+
+current epoch:  212
+07/27/2026 05:09:05 - INFO - __main__ -   top-1 acc: 44.08
+07/27/2026 05:09:05 - INFO - __main__ -   top-5 acc: 71.77
+07/27/2026 05:09:05 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:09:05 - INFO - __main__ -   Mean top-1 acc: 44.27
+
+current epoch:  213
+07/27/2026 05:10:58 - INFO - __main__ -   top-1 acc: 44.43
+07/27/2026 05:10:58 - INFO - __main__ -   top-5 acc: 71.84
+07/27/2026 05:10:58 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:10:58 - INFO - __main__ -   Mean top-1 acc: 44.27
+
+current epoch:  214
+07/27/2026 05:12:50 - INFO - __main__ -   top-1 acc: 44.20
+07/27/2026 05:12:50 - INFO - __main__ -   top-5 acc: 71.69
+07/27/2026 05:12:50 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:12:50 - INFO - __main__ -   Mean top-1 acc: 44.25
+
+current epoch:  215
+07/27/2026 05:14:38 - INFO - __main__ -   top-1 acc: 44.23
+07/27/2026 05:14:38 - INFO - __main__ -   top-5 acc: 71.76
+07/27/2026 05:14:38 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:14:38 - INFO - __main__ -   Mean top-1 acc: 44.24
+
+current epoch:  216
+07/27/2026 05:16:32 - INFO - __main__ -   top-1 acc: 44.48
+07/27/2026 05:16:32 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 05:16:33 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:16:33 - INFO - __main__ -   Mean top-1 acc: 44.26
+
+current epoch:  217
+07/27/2026 05:18:23 - INFO - __main__ -   top-1 acc: 44.10
+07/27/2026 05:18:23 - INFO - __main__ -   top-5 acc: 71.80
+07/27/2026 05:18:23 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:18:23 - INFO - __main__ -   Mean top-1 acc: 44.26
+
+current epoch:  218
+07/27/2026 05:20:12 - INFO - __main__ -   top-1 acc: 44.08
+07/27/2026 05:20:12 - INFO - __main__ -   top-5 acc: 71.82
+07/27/2026 05:20:12 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:20:13 - INFO - __main__ -   Mean top-1 acc: 44.26
+
+current epoch:  219
+07/27/2026 05:22:02 - INFO - __main__ -   top-1 acc: 43.97
+07/27/2026 05:22:02 - INFO - __main__ -   top-5 acc: 71.55
+07/27/2026 05:22:03 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:22:03 - INFO - __main__ -   Mean top-1 acc: 44.24
+
+current epoch:  220
+07/27/2026 05:23:53 - INFO - __main__ -   top-1 acc: 44.06
+07/27/2026 05:23:53 - INFO - __main__ -   top-5 acc: 71.71
+07/27/2026 05:23:53 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:23:53 - INFO - __main__ -   Mean top-1 acc: 44.22
+
+current epoch:  221
+07/27/2026 05:25:46 - INFO - __main__ -   top-1 acc: 44.39
+07/27/2026 05:25:46 - INFO - __main__ -   top-5 acc: 72.25
+07/27/2026 05:25:47 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:25:47 - INFO - __main__ -   Mean top-1 acc: 44.23
+
+current epoch:  222
+07/27/2026 05:27:38 - INFO - __main__ -   top-1 acc: 44.20
+07/27/2026 05:27:38 - INFO - __main__ -   top-5 acc: 72.13
+07/27/2026 05:27:38 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:27:38 - INFO - __main__ -   Mean top-1 acc: 44.21
+
+current epoch:  223
+07/27/2026 05:29:30 - INFO - __main__ -   top-1 acc: 44.18
+07/27/2026 05:29:30 - INFO - __main__ -   top-5 acc: 72.05
+07/27/2026 05:29:30 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:29:30 - INFO - __main__ -   Mean top-1 acc: 44.20
+
+current epoch:  224
+07/27/2026 05:31:20 - INFO - __main__ -   top-1 acc: 43.98
+07/27/2026 05:31:20 - INFO - __main__ -   top-5 acc: 71.96
+07/27/2026 05:31:20 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:31:20 - INFO - __main__ -   Mean top-1 acc: 44.17
+
+current epoch:  225
+07/27/2026 05:33:11 - INFO - __main__ -   top-1 acc: 44.38
+07/27/2026 05:33:11 - INFO - __main__ -   top-5 acc: 72.25
+07/27/2026 05:33:12 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:33:12 - INFO - __main__ -   Mean top-1 acc: 44.17
+
+current epoch:  226
+07/27/2026 05:35:06 - INFO - __main__ -   top-1 acc: 44.58
+07/27/2026 05:35:06 - INFO - __main__ -   top-5 acc: 71.93
+07/27/2026 05:35:07 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:35:07 - INFO - __main__ -   Mean top-1 acc: 44.20
+
+current epoch:  227
+07/27/2026 05:36:57 - INFO - __main__ -   top-1 acc: 44.67
+07/27/2026 05:36:57 - INFO - __main__ -   top-5 acc: 71.62
+07/27/2026 05:36:58 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:36:58 - INFO - __main__ -   Mean top-1 acc: 44.23
+
+current epoch:  228
+07/27/2026 05:38:48 - INFO - __main__ -   top-1 acc: 44.66
+07/27/2026 05:38:48 - INFO - __main__ -   top-5 acc: 71.95
+07/27/2026 05:38:48 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:38:48 - INFO - __main__ -   Mean top-1 acc: 44.25
+
+current epoch:  229
+07/27/2026 05:40:40 - INFO - __main__ -   top-1 acc: 44.52
+07/27/2026 05:40:40 - INFO - __main__ -   top-5 acc: 71.99
+07/27/2026 05:40:41 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:40:41 - INFO - __main__ -   Mean top-1 acc: 44.27
+
+current epoch:  230
+07/27/2026 05:42:30 - INFO - __main__ -   top-1 acc: 44.48
+07/27/2026 05:42:30 - INFO - __main__ -   top-5 acc: 71.81
+07/27/2026 05:42:30 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:42:30 - INFO - __main__ -   Mean top-1 acc: 44.29
+
+current epoch:  231
+07/27/2026 05:44:21 - INFO - __main__ -   top-1 acc: 44.32
+07/27/2026 05:44:21 - INFO - __main__ -   top-5 acc: 71.98
+07/27/2026 05:44:21 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:44:21 - INFO - __main__ -   Mean top-1 acc: 44.30
+
+current epoch:  232
+07/27/2026 05:46:13 - INFO - __main__ -   top-1 acc: 44.31
+07/27/2026 05:46:13 - INFO - __main__ -   top-5 acc: 71.92
+07/27/2026 05:46:13 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:46:13 - INFO - __main__ -   Mean top-1 acc: 44.31
+
+current epoch:  233
+07/27/2026 05:48:05 - INFO - __main__ -   top-1 acc: 44.42
+07/27/2026 05:48:05 - INFO - __main__ -   top-5 acc: 71.95
+07/27/2026 05:48:05 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:48:05 - INFO - __main__ -   Mean top-1 acc: 44.31
+
+current epoch:  234
+07/27/2026 05:49:54 - INFO - __main__ -   top-1 acc: 44.29
+07/27/2026 05:49:54 - INFO - __main__ -   top-5 acc: 71.85
+07/27/2026 05:49:54 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:49:54 - INFO - __main__ -   Mean top-1 acc: 44.32
+
+current epoch:  235
+07/27/2026 05:51:44 - INFO - __main__ -   top-1 acc: 44.47
+07/27/2026 05:51:44 - INFO - __main__ -   top-5 acc: 71.94
+07/27/2026 05:51:44 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:51:44 - INFO - __main__ -   Mean top-1 acc: 44.33
+
+current epoch:  236
+07/27/2026 05:53:37 - INFO - __main__ -   top-1 acc: 44.55
+07/27/2026 05:53:37 - INFO - __main__ -   top-5 acc: 71.54
+07/27/2026 05:53:37 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:53:37 - INFO - __main__ -   Mean top-1 acc: 44.33
+
+current epoch:  237
+07/27/2026 05:55:28 - INFO - __main__ -   top-1 acc: 44.51
+07/27/2026 05:55:28 - INFO - __main__ -   top-5 acc: 71.47
+07/27/2026 05:55:28 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:55:28 - INFO - __main__ -   Mean top-1 acc: 44.35
+
+current epoch:  238
+07/27/2026 05:57:21 - INFO - __main__ -   top-1 acc: 44.54
+07/27/2026 05:57:21 - INFO - __main__ -   top-5 acc: 71.40
+07/27/2026 05:57:21 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:57:21 - INFO - __main__ -   Mean top-1 acc: 44.37
+
+current epoch:  239
+07/27/2026 05:59:11 - INFO - __main__ -   top-1 acc: 44.73
+07/27/2026 05:59:11 - INFO - __main__ -   top-5 acc: 71.34
+07/27/2026 05:59:11 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 05:59:11 - INFO - __main__ -   Mean top-1 acc: 44.41
+
+current epoch:  240
+07/27/2026 06:01:05 - INFO - __main__ -   top-1 acc: 44.57
+07/27/2026 06:01:05 - INFO - __main__ -   top-5 acc: 71.33
+07/27/2026 06:01:05 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 06:01:05 - INFO - __main__ -   Mean top-1 acc: 44.44
+
+current epoch:  241
+07/27/2026 06:02:54 - INFO - __main__ -   top-1 acc: 44.73
+07/27/2026 06:02:54 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 06:02:54 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 06:02:54 - INFO - __main__ -   Mean top-1 acc: 44.45
+
+current epoch:  242
+07/27/2026 06:04:40 - INFO - __main__ -   top-1 acc: 44.64
+07/27/2026 06:04:40 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 06:04:40 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 06:04:40 - INFO - __main__ -   Mean top-1 acc: 44.48
+
+current epoch:  243
+07/27/2026 06:06:30 - INFO - __main__ -   top-1 acc: 44.76
+07/27/2026 06:06:30 - INFO - __main__ -   top-5 acc: 71.70
+07/27/2026 06:06:30 - INFO - __main__ -   Best top-1 acc: 44.96
+07/27/2026 06:06:30 - INFO - __main__ -   Mean top-1 acc: 44.51
+
+current epoch:  244
+07/27/2026 06:08:20 - INFO - __main__ -   top-1 acc: 44.97
+07/27/2026 06:08:20 - INFO - __main__ -   top-5 acc: 71.53
+07/27/2026 06:08:20 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:08:20 - INFO - __main__ -   Mean top-1 acc: 44.55
+
+current epoch:  245
+07/27/2026 06:10:09 - INFO - __main__ -   top-1 acc: 44.54
+07/27/2026 06:10:09 - INFO - __main__ -   top-5 acc: 71.57
+07/27/2026 06:10:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:10:09 - INFO - __main__ -   Mean top-1 acc: 44.56
+
+current epoch:  246
+07/27/2026 06:11:58 - INFO - __main__ -   top-1 acc: 44.60
+07/27/2026 06:11:58 - INFO - __main__ -   top-5 acc: 71.91
+07/27/2026 06:11:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:11:58 - INFO - __main__ -   Mean top-1 acc: 44.56
+
+current epoch:  247
+07/27/2026 06:13:48 - INFO - __main__ -   top-1 acc: 44.45
+07/27/2026 06:13:48 - INFO - __main__ -   top-5 acc: 71.46
+07/27/2026 06:13:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:13:49 - INFO - __main__ -   Mean top-1 acc: 44.55
+
+current epoch:  248
+07/27/2026 06:15:40 - INFO - __main__ -   top-1 acc: 44.51
+07/27/2026 06:15:40 - INFO - __main__ -   top-5 acc: 71.76
+07/27/2026 06:15:40 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:15:40 - INFO - __main__ -   Mean top-1 acc: 44.55
+
+current epoch:  249
+07/27/2026 06:17:29 - INFO - __main__ -   top-1 acc: 44.64
+07/27/2026 06:17:29 - INFO - __main__ -   top-5 acc: 71.67
+07/27/2026 06:17:29 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:17:29 - INFO - __main__ -   Mean top-1 acc: 44.55
+
+current epoch:  250
+07/27/2026 06:19:18 - INFO - __main__ -   top-1 acc: 44.65
+07/27/2026 06:19:18 - INFO - __main__ -   top-5 acc: 71.56
+07/27/2026 06:19:19 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:19:19 - INFO - __main__ -   Mean top-1 acc: 44.56
+
+current epoch:  251
+07/27/2026 06:21:09 - INFO - __main__ -   top-1 acc: 44.45
+07/27/2026 06:21:09 - INFO - __main__ -   top-5 acc: 71.79
+07/27/2026 06:21:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:21:09 - INFO - __main__ -   Mean top-1 acc: 44.57
+
+current epoch:  252
+07/27/2026 06:23:00 - INFO - __main__ -   top-1 acc: 44.33
+07/27/2026 06:23:00 - INFO - __main__ -   top-5 acc: 71.51
+07/27/2026 06:23:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:23:00 - INFO - __main__ -   Mean top-1 acc: 44.57
+
+current epoch:  253
+07/27/2026 06:24:49 - INFO - __main__ -   top-1 acc: 43.95
+07/27/2026 06:24:49 - INFO - __main__ -   top-5 acc: 71.22
+07/27/2026 06:24:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:24:49 - INFO - __main__ -   Mean top-1 acc: 44.54
+
+current epoch:  254
+07/27/2026 06:26:38 - INFO - __main__ -   top-1 acc: 44.05
+07/27/2026 06:26:38 - INFO - __main__ -   top-5 acc: 71.17
+07/27/2026 06:26:38 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:26:38 - INFO - __main__ -   Mean top-1 acc: 44.53
+
+current epoch:  255
+07/27/2026 06:28:33 - INFO - __main__ -   top-1 acc: 44.09
+07/27/2026 06:28:33 - INFO - __main__ -   top-5 acc: 70.80
+07/27/2026 06:28:33 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:28:33 - INFO - __main__ -   Mean top-1 acc: 44.51
+
+current epoch:  256
+07/27/2026 06:30:23 - INFO - __main__ -   top-1 acc: 44.09
+07/27/2026 06:30:23 - INFO - __main__ -   top-5 acc: 71.32
+07/27/2026 06:30:23 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:30:23 - INFO - __main__ -   Mean top-1 acc: 44.49
+
+current epoch:  257
+07/27/2026 06:32:13 - INFO - __main__ -   top-1 acc: 44.31
+07/27/2026 06:32:13 - INFO - __main__ -   top-5 acc: 71.76
+07/27/2026 06:32:13 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:32:13 - INFO - __main__ -   Mean top-1 acc: 44.48
+
+current epoch:  258
+07/27/2026 06:34:03 - INFO - __main__ -   top-1 acc: 44.29
+07/27/2026 06:34:03 - INFO - __main__ -   top-5 acc: 71.66
+07/27/2026 06:34:03 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:34:03 - INFO - __main__ -   Mean top-1 acc: 44.47
+
+current epoch:  259
+07/27/2026 06:35:51 - INFO - __main__ -   top-1 acc: 43.98
+07/27/2026 06:35:51 - INFO - __main__ -   top-5 acc: 71.58
+07/27/2026 06:35:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:35:51 - INFO - __main__ -   Mean top-1 acc: 44.43
+
+current epoch:  260
+07/27/2026 06:37:41 - INFO - __main__ -   top-1 acc: 44.03
+07/27/2026 06:37:41 - INFO - __main__ -   top-5 acc: 71.39
+07/27/2026 06:37:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:37:41 - INFO - __main__ -   Mean top-1 acc: 44.40
+
+current epoch:  261
+07/27/2026 06:39:32 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 06:39:32 - INFO - __main__ -   top-5 acc: 71.30
+07/27/2026 06:39:32 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:39:32 - INFO - __main__ -   Mean top-1 acc: 44.36
+
+current epoch:  262
+07/27/2026 06:41:22 - INFO - __main__ -   top-1 acc: 44.06
+07/27/2026 06:41:22 - INFO - __main__ -   top-5 acc: 71.58
+07/27/2026 06:41:22 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:41:22 - INFO - __main__ -   Mean top-1 acc: 44.33
+
+current epoch:  263
+07/27/2026 06:43:12 - INFO - __main__ -   top-1 acc: 44.12
+07/27/2026 06:43:12 - INFO - __main__ -   top-5 acc: 71.44
+07/27/2026 06:43:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:43:12 - INFO - __main__ -   Mean top-1 acc: 44.30
+
+current epoch:  264
+07/27/2026 06:45:04 - INFO - __main__ -   top-1 acc: 44.03
+07/27/2026 06:45:04 - INFO - __main__ -   top-5 acc: 71.44
+07/27/2026 06:45:04 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:45:04 - INFO - __main__ -   Mean top-1 acc: 44.25
+
+current epoch:  265
+07/27/2026 06:46:59 - INFO - __main__ -   top-1 acc: 44.45
+07/27/2026 06:46:59 - INFO - __main__ -   top-5 acc: 71.73
+07/27/2026 06:46:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:46:59 - INFO - __main__ -   Mean top-1 acc: 44.25
+
+current epoch:  266
+07/27/2026 06:48:48 - INFO - __main__ -   top-1 acc: 44.08
+07/27/2026 06:48:48 - INFO - __main__ -   top-5 acc: 71.67
+07/27/2026 06:48:48 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:48:48 - INFO - __main__ -   Mean top-1 acc: 44.22
+
+current epoch:  267
+07/27/2026 06:50:40 - INFO - __main__ -   top-1 acc: 44.09
+07/27/2026 06:50:40 - INFO - __main__ -   top-5 acc: 71.37
+07/27/2026 06:50:40 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:50:40 - INFO - __main__ -   Mean top-1 acc: 44.21
+
+current epoch:  268
+07/27/2026 06:52:32 - INFO - __main__ -   top-1 acc: 44.20
+07/27/2026 06:52:32 - INFO - __main__ -   top-5 acc: 71.76
+07/27/2026 06:52:32 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:52:32 - INFO - __main__ -   Mean top-1 acc: 44.19
+
+current epoch:  269
+07/27/2026 06:54:21 - INFO - __main__ -   top-1 acc: 43.97
+07/27/2026 06:54:21 - INFO - __main__ -   top-5 acc: 71.64
+07/27/2026 06:54:21 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:54:21 - INFO - __main__ -   Mean top-1 acc: 44.16
+
+current epoch:  270
+07/27/2026 06:56:15 - INFO - __main__ -   top-1 acc: 44.02
+07/27/2026 06:56:15 - INFO - __main__ -   top-5 acc: 71.30
+07/27/2026 06:56:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:56:15 - INFO - __main__ -   Mean top-1 acc: 44.12
+
+current epoch:  271
+07/27/2026 06:58:02 - INFO - __main__ -   top-1 acc: 44.08
+07/27/2026 06:58:02 - INFO - __main__ -   top-5 acc: 70.93
+07/27/2026 06:58:02 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:58:02 - INFO - __main__ -   Mean top-1 acc: 44.11
+
+current epoch:  272
+07/27/2026 06:59:52 - INFO - __main__ -   top-1 acc: 44.13
+07/27/2026 06:59:52 - INFO - __main__ -   top-5 acc: 71.31
+07/27/2026 06:59:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 06:59:52 - INFO - __main__ -   Mean top-1 acc: 44.10
+
+current epoch:  273
+07/27/2026 07:01:41 - INFO - __main__ -   top-1 acc: 43.74
+07/27/2026 07:01:41 - INFO - __main__ -   top-5 acc: 71.03
+07/27/2026 07:01:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:01:41 - INFO - __main__ -   Mean top-1 acc: 44.09
+
+current epoch:  274
+07/27/2026 07:03:30 - INFO - __main__ -   top-1 acc: 44.00
+07/27/2026 07:03:30 - INFO - __main__ -   top-5 acc: 71.00
+07/27/2026 07:03:30 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:03:30 - INFO - __main__ -   Mean top-1 acc: 44.08
+
+current epoch:  275
+07/27/2026 07:05:21 - INFO - __main__ -   top-1 acc: 43.83
+07/27/2026 07:05:21 - INFO - __main__ -   top-5 acc: 70.99
+07/27/2026 07:05:21 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:05:21 - INFO - __main__ -   Mean top-1 acc: 44.07
+
+current epoch:  276
+07/27/2026 07:07:10 - INFO - __main__ -   top-1 acc: 43.75
+07/27/2026 07:07:10 - INFO - __main__ -   top-5 acc: 71.17
+07/27/2026 07:07:10 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:07:10 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  277
+07/27/2026 07:09:02 - INFO - __main__ -   top-1 acc: 43.99
+07/27/2026 07:09:02 - INFO - __main__ -   top-5 acc: 70.91
+07/27/2026 07:09:03 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:09:03 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  278
+07/27/2026 07:10:51 - INFO - __main__ -   top-1 acc: 44.07
+07/27/2026 07:10:51 - INFO - __main__ -   top-5 acc: 71.18
+07/27/2026 07:10:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:10:51 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  279
+07/27/2026 07:12:42 - INFO - __main__ -   top-1 acc: 44.15
+07/27/2026 07:12:42 - INFO - __main__ -   top-5 acc: 71.27
+07/27/2026 07:12:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:12:42 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  280
+07/27/2026 07:14:34 - INFO - __main__ -   top-1 acc: 44.49
+07/27/2026 07:14:34 - INFO - __main__ -   top-5 acc: 71.28
+07/27/2026 07:14:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:14:35 - INFO - __main__ -   Mean top-1 acc: 44.06
+
+current epoch:  281
+07/27/2026 07:16:24 - INFO - __main__ -   top-1 acc: 43.93
+07/27/2026 07:16:24 - INFO - __main__ -   top-5 acc: 71.11
+07/27/2026 07:16:25 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:16:25 - INFO - __main__ -   Mean top-1 acc: 44.06
+
+current epoch:  282
+07/27/2026 07:18:15 - INFO - __main__ -   top-1 acc: 43.86
+07/27/2026 07:18:15 - INFO - __main__ -   top-5 acc: 71.32
+07/27/2026 07:18:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:18:15 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  283
+07/27/2026 07:20:07 - INFO - __main__ -   top-1 acc: 44.00
+07/27/2026 07:20:07 - INFO - __main__ -   top-5 acc: 71.06
+07/27/2026 07:20:07 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:20:07 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  284
+07/27/2026 07:21:59 - INFO - __main__ -   top-1 acc: 44.19
+07/27/2026 07:21:59 - INFO - __main__ -   top-5 acc: 70.92
+07/27/2026 07:21:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:21:59 - INFO - __main__ -   Mean top-1 acc: 44.05
+
+current epoch:  285
+07/27/2026 07:23:50 - INFO - __main__ -   top-1 acc: 43.96
+07/27/2026 07:23:50 - INFO - __main__ -   top-5 acc: 70.96
+07/27/2026 07:23:50 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:23:50 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  286
+07/27/2026 07:25:40 - INFO - __main__ -   top-1 acc: 43.65
+07/27/2026 07:25:40 - INFO - __main__ -   top-5 acc: 70.67
+07/27/2026 07:25:40 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:25:40 - INFO - __main__ -   Mean top-1 acc: 44.01
+
+current epoch:  287
+07/27/2026 07:27:29 - INFO - __main__ -   top-1 acc: 43.74
+07/27/2026 07:27:29 - INFO - __main__ -   top-5 acc: 70.79
+07/27/2026 07:27:29 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:27:29 - INFO - __main__ -   Mean top-1 acc: 43.99
+
+current epoch:  288
+07/27/2026 07:29:20 - INFO - __main__ -   top-1 acc: 43.57
+07/27/2026 07:29:20 - INFO - __main__ -   top-5 acc: 70.78
+07/27/2026 07:29:20 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:29:20 - INFO - __main__ -   Mean top-1 acc: 43.96
+
+current epoch:  289
+07/27/2026 07:31:09 - INFO - __main__ -   top-1 acc: 43.91
+07/27/2026 07:31:09 - INFO - __main__ -   top-5 acc: 71.08
+07/27/2026 07:31:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:31:09 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  290
+07/27/2026 07:32:59 - INFO - __main__ -   top-1 acc: 43.89
+07/27/2026 07:32:59 - INFO - __main__ -   top-5 acc: 71.28
+07/27/2026 07:32:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:32:59 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  291
+07/27/2026 07:34:52 - INFO - __main__ -   top-1 acc: 44.32
+07/27/2026 07:34:52 - INFO - __main__ -   top-5 acc: 71.44
+07/27/2026 07:34:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:34:52 - INFO - __main__ -   Mean top-1 acc: 43.96
+
+current epoch:  292
+07/27/2026 07:36:41 - INFO - __main__ -   top-1 acc: 43.86
+07/27/2026 07:36:41 - INFO - __main__ -   top-5 acc: 71.29
+07/27/2026 07:36:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:36:41 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  293
+07/27/2026 07:38:30 - INFO - __main__ -   top-1 acc: 43.74
+07/27/2026 07:38:30 - INFO - __main__ -   top-5 acc: 71.40
+07/27/2026 07:38:31 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:38:31 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  294
+07/27/2026 07:40:21 - INFO - __main__ -   top-1 acc: 43.80
+07/27/2026 07:40:21 - INFO - __main__ -   top-5 acc: 71.38
+07/27/2026 07:40:21 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:40:21 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  295
+07/27/2026 07:42:07 - INFO - __main__ -   top-1 acc: 43.87
+07/27/2026 07:42:07 - INFO - __main__ -   top-5 acc: 71.21
+07/27/2026 07:42:07 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:42:07 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  296
+07/27/2026 07:43:59 - INFO - __main__ -   top-1 acc: 43.96
+07/27/2026 07:43:59 - INFO - __main__ -   top-5 acc: 71.08
+07/27/2026 07:43:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:43:59 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  297
+07/27/2026 07:45:52 - INFO - __main__ -   top-1 acc: 43.82
+07/27/2026 07:45:52 - INFO - __main__ -   top-5 acc: 70.91
+07/27/2026 07:45:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:45:52 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  298
+07/27/2026 07:47:42 - INFO - __main__ -   top-1 acc: 43.79
+07/27/2026 07:47:42 - INFO - __main__ -   top-5 acc: 70.70
+07/27/2026 07:47:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:47:42 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  299
+07/27/2026 07:49:34 - INFO - __main__ -   top-1 acc: 43.84
+07/27/2026 07:49:34 - INFO - __main__ -   top-5 acc: 71.00
+07/27/2026 07:49:34 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:49:34 - INFO - __main__ -   Mean top-1 acc: 43.91
+
+current epoch:  300
+07/27/2026 07:51:24 - INFO - __main__ -   top-1 acc: 43.76
+07/27/2026 07:51:24 - INFO - __main__ -   top-5 acc: 71.48
+07/27/2026 07:51:24 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:51:24 - INFO - __main__ -   Mean top-1 acc: 43.87
+
+current epoch:  301
+07/27/2026 07:53:12 - INFO - __main__ -   top-1 acc: 44.02
+07/27/2026 07:53:12 - INFO - __main__ -   top-5 acc: 71.33
+07/27/2026 07:53:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:53:12 - INFO - __main__ -   Mean top-1 acc: 43.88
+
+current epoch:  302
+07/27/2026 07:55:01 - INFO - __main__ -   top-1 acc: 44.02
+07/27/2026 07:55:01 - INFO - __main__ -   top-5 acc: 71.36
+07/27/2026 07:55:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:55:01 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  303
+07/27/2026 07:56:51 - INFO - __main__ -   top-1 acc: 44.12
+07/27/2026 07:56:51 - INFO - __main__ -   top-5 acc: 71.05
+07/27/2026 07:56:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:56:51 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  304
+07/27/2026 07:58:43 - INFO - __main__ -   top-1 acc: 44.09
+07/27/2026 07:58:43 - INFO - __main__ -   top-5 acc: 71.08
+07/27/2026 07:58:43 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 07:58:43 - INFO - __main__ -   Mean top-1 acc: 43.89
+
+current epoch:  305
+07/27/2026 08:00:34 - INFO - __main__ -   top-1 acc: 43.93
+07/27/2026 08:00:34 - INFO - __main__ -   top-5 acc: 70.50
+07/27/2026 08:00:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:00:35 - INFO - __main__ -   Mean top-1 acc: 43.88
+
+current epoch:  306
+07/27/2026 08:02:29 - INFO - __main__ -   top-1 acc: 44.21
+07/27/2026 08:02:29 - INFO - __main__ -   top-5 acc: 71.13
+07/27/2026 08:02:29 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:02:29 - INFO - __main__ -   Mean top-1 acc: 43.91
+
+current epoch:  307
+07/27/2026 08:04:20 - INFO - __main__ -   top-1 acc: 44.28
+07/27/2026 08:04:20 - INFO - __main__ -   top-5 acc: 71.04
+07/27/2026 08:04:20 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:04:20 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  308
+07/27/2026 08:06:10 - INFO - __main__ -   top-1 acc: 43.85
+07/27/2026 08:06:10 - INFO - __main__ -   top-5 acc: 70.62
+07/27/2026 08:06:10 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:06:10 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  309
+07/27/2026 08:08:04 - INFO - __main__ -   top-1 acc: 43.77
+07/27/2026 08:08:04 - INFO - __main__ -   top-5 acc: 70.40
+07/27/2026 08:08:04 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:08:04 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  310
+07/27/2026 08:09:53 - INFO - __main__ -   top-1 acc: 43.83
+07/27/2026 08:09:53 - INFO - __main__ -   top-5 acc: 70.82
+07/27/2026 08:09:53 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:09:53 - INFO - __main__ -   Mean top-1 acc: 43.94
+
+current epoch:  311
+07/27/2026 08:11:44 - INFO - __main__ -   top-1 acc: 43.92
+07/27/2026 08:11:44 - INFO - __main__ -   top-5 acc: 71.11
+07/27/2026 08:11:44 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:11:44 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  312
+07/27/2026 08:13:35 - INFO - __main__ -   top-1 acc: 43.90
+07/27/2026 08:13:35 - INFO - __main__ -   top-5 acc: 71.09
+07/27/2026 08:13:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:13:35 - INFO - __main__ -   Mean top-1 acc: 43.93
+
+current epoch:  313
+07/27/2026 08:15:25 - INFO - __main__ -   top-1 acc: 43.63
+07/27/2026 08:15:25 - INFO - __main__ -   top-5 acc: 70.69
+07/27/2026 08:15:25 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:15:25 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  314
+07/27/2026 08:17:14 - INFO - __main__ -   top-1 acc: 43.87
+07/27/2026 08:17:14 - INFO - __main__ -   top-5 acc: 71.44
+07/27/2026 08:17:14 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:17:14 - INFO - __main__ -   Mean top-1 acc: 43.92
+
+current epoch:  315
+07/27/2026 08:19:01 - INFO - __main__ -   top-1 acc: 44.29
+07/27/2026 08:19:01 - INFO - __main__ -   top-5 acc: 71.29
+07/27/2026 08:19:02 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:19:02 - INFO - __main__ -   Mean top-1 acc: 43.95
+
+current epoch:  316
+07/27/2026 08:20:50 - INFO - __main__ -   top-1 acc: 44.30
+07/27/2026 08:20:50 - INFO - __main__ -   top-5 acc: 71.25
+07/27/2026 08:20:50 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:20:50 - INFO - __main__ -   Mean top-1 acc: 43.96
+
+current epoch:  317
+07/27/2026 08:22:42 - INFO - __main__ -   top-1 acc: 44.24
+07/27/2026 08:22:42 - INFO - __main__ -   top-5 acc: 71.50
+07/27/2026 08:22:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:22:42 - INFO - __main__ -   Mean top-1 acc: 43.98
+
+current epoch:  318
+07/27/2026 08:24:34 - INFO - __main__ -   top-1 acc: 44.40
+07/27/2026 08:24:34 - INFO - __main__ -   top-5 acc: 71.77
+07/27/2026 08:24:34 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:24:34 - INFO - __main__ -   Mean top-1 acc: 44.01
+
+current epoch:  319
+07/27/2026 08:26:28 - INFO - __main__ -   top-1 acc: 44.16
+07/27/2026 08:26:28 - INFO - __main__ -   top-5 acc: 71.54
+07/27/2026 08:26:28 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:26:28 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  320
+07/27/2026 08:28:17 - INFO - __main__ -   top-1 acc: 44.03
+07/27/2026 08:28:17 - INFO - __main__ -   top-5 acc: 71.59
+07/27/2026 08:28:17 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:28:17 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  321
+07/27/2026 08:30:09 - INFO - __main__ -   top-1 acc: 43.92
+07/27/2026 08:30:09 - INFO - __main__ -   top-5 acc: 71.30
+07/27/2026 08:30:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:30:09 - INFO - __main__ -   Mean top-1 acc: 44.04
+
+current epoch:  322
+07/27/2026 08:31:58 - INFO - __main__ -   top-1 acc: 43.84
+07/27/2026 08:31:58 - INFO - __main__ -   top-5 acc: 70.99
+07/27/2026 08:31:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:31:58 - INFO - __main__ -   Mean top-1 acc: 44.03
+
+current epoch:  323
+07/27/2026 08:33:51 - INFO - __main__ -   top-1 acc: 43.71
+07/27/2026 08:33:51 - INFO - __main__ -   top-5 acc: 70.91
+07/27/2026 08:33:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:33:51 - INFO - __main__ -   Mean top-1 acc: 44.01
+
+current epoch:  324
+07/27/2026 08:35:42 - INFO - __main__ -   top-1 acc: 43.72
+07/27/2026 08:35:42 - INFO - __main__ -   top-5 acc: 70.68
+07/27/2026 08:35:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:35:42 - INFO - __main__ -   Mean top-1 acc: 43.99
+
+current epoch:  325
+07/27/2026 08:37:32 - INFO - __main__ -   top-1 acc: 43.52
+07/27/2026 08:37:32 - INFO - __main__ -   top-5 acc: 70.82
+07/27/2026 08:37:32 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:37:32 - INFO - __main__ -   Mean top-1 acc: 43.97
+
+current epoch:  326
+07/27/2026 08:39:26 - INFO - __main__ -   top-1 acc: 43.45
+07/27/2026 08:39:26 - INFO - __main__ -   top-5 acc: 70.84
+07/27/2026 08:39:26 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:39:26 - INFO - __main__ -   Mean top-1 acc: 43.93
+
+current epoch:  327
+07/27/2026 08:41:16 - INFO - __main__ -   top-1 acc: 43.28
+07/27/2026 08:41:16 - INFO - __main__ -   top-5 acc: 70.76
+07/27/2026 08:41:16 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:41:16 - INFO - __main__ -   Mean top-1 acc: 43.88
+
+current epoch:  328
+07/27/2026 08:43:08 - INFO - __main__ -   top-1 acc: 43.54
+07/27/2026 08:43:08 - INFO - __main__ -   top-5 acc: 70.96
+07/27/2026 08:43:08 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:43:08 - INFO - __main__ -   Mean top-1 acc: 43.87
+
+current epoch:  329
+07/27/2026 08:44:58 - INFO - __main__ -   top-1 acc: 43.76
+07/27/2026 08:44:58 - INFO - __main__ -   top-5 acc: 71.02
+07/27/2026 08:44:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:44:59 - INFO - __main__ -   Mean top-1 acc: 43.87
+
+current epoch:  330
+07/27/2026 08:46:50 - INFO - __main__ -   top-1 acc: 43.50
+07/27/2026 08:46:50 - INFO - __main__ -   top-5 acc: 71.02
+07/27/2026 08:46:50 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:46:50 - INFO - __main__ -   Mean top-1 acc: 43.85
+
+current epoch:  331
+07/27/2026 08:48:43 - INFO - __main__ -   top-1 acc: 43.84
+07/27/2026 08:48:43 - INFO - __main__ -   top-5 acc: 71.16
+07/27/2026 08:48:43 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:48:43 - INFO - __main__ -   Mean top-1 acc: 43.84
+
+current epoch:  332
+07/27/2026 08:50:33 - INFO - __main__ -   top-1 acc: 43.84
+07/27/2026 08:50:33 - INFO - __main__ -   top-5 acc: 71.07
+07/27/2026 08:50:33 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:50:33 - INFO - __main__ -   Mean top-1 acc: 43.84
+
+current epoch:  333
+07/27/2026 08:52:25 - INFO - __main__ -   top-1 acc: 43.61
+07/27/2026 08:52:25 - INFO - __main__ -   top-5 acc: 70.89
+07/27/2026 08:52:26 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:52:26 - INFO - __main__ -   Mean top-1 acc: 43.84
+
+current epoch:  334
+07/27/2026 08:54:16 - INFO - __main__ -   top-1 acc: 43.72
+07/27/2026 08:54:16 - INFO - __main__ -   top-5 acc: 70.75
+07/27/2026 08:54:16 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:54:16 - INFO - __main__ -   Mean top-1 acc: 43.83
+
+current epoch:  335
+07/27/2026 08:56:07 - INFO - __main__ -   top-1 acc: 43.67
+07/27/2026 08:56:07 - INFO - __main__ -   top-5 acc: 70.41
+07/27/2026 08:56:07 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:56:07 - INFO - __main__ -   Mean top-1 acc: 43.80
+
+current epoch:  336
+07/27/2026 08:57:56 - INFO - __main__ -   top-1 acc: 43.74
+07/27/2026 08:57:56 - INFO - __main__ -   top-5 acc: 70.57
+07/27/2026 08:57:56 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:57:56 - INFO - __main__ -   Mean top-1 acc: 43.77
+
+current epoch:  337
+07/27/2026 08:59:47 - INFO - __main__ -   top-1 acc: 43.60
+07/27/2026 08:59:47 - INFO - __main__ -   top-5 acc: 70.73
+07/27/2026 08:59:48 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 08:59:48 - INFO - __main__ -   Mean top-1 acc: 43.74
+
+current epoch:  338
+07/27/2026 09:01:39 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 09:01:39 - INFO - __main__ -   top-5 acc: 70.63
+07/27/2026 09:01:39 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:01:39 - INFO - __main__ -   Mean top-1 acc: 43.69
+
+current epoch:  339
+07/27/2026 09:03:30 - INFO - __main__ -   top-1 acc: 43.37
+07/27/2026 09:03:30 - INFO - __main__ -   top-5 acc: 70.65
+07/27/2026 09:03:30 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:03:30 - INFO - __main__ -   Mean top-1 acc: 43.65
+
+current epoch:  340
+07/27/2026 09:05:22 - INFO - __main__ -   top-1 acc: 43.48
+07/27/2026 09:05:22 - INFO - __main__ -   top-5 acc: 70.45
+07/27/2026 09:05:22 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:05:22 - INFO - __main__ -   Mean top-1 acc: 43.62
+
+current epoch:  341
+07/27/2026 09:07:14 - INFO - __main__ -   top-1 acc: 43.25
+07/27/2026 09:07:14 - INFO - __main__ -   top-5 acc: 70.73
+07/27/2026 09:07:14 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:07:14 - INFO - __main__ -   Mean top-1 acc: 43.59
+
+current epoch:  342
+07/27/2026 09:09:09 - INFO - __main__ -   top-1 acc: 43.47
+07/27/2026 09:09:09 - INFO - __main__ -   top-5 acc: 70.85
+07/27/2026 09:09:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:09:09 - INFO - __main__ -   Mean top-1 acc: 43.57
+
+current epoch:  343
+07/27/2026 09:11:04 - INFO - __main__ -   top-1 acc: 43.71
+07/27/2026 09:11:04 - INFO - __main__ -   top-5 acc: 70.39
+07/27/2026 09:11:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:11:05 - INFO - __main__ -   Mean top-1 acc: 43.57
+
+current epoch:  344
+07/27/2026 09:13:01 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 09:13:01 - INFO - __main__ -   top-5 acc: 70.60
+07/27/2026 09:13:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:13:01 - INFO - __main__ -   Mean top-1 acc: 43.55
+
+current epoch:  345
+07/27/2026 09:15:00 - INFO - __main__ -   top-1 acc: 43.24
+07/27/2026 09:15:00 - INFO - __main__ -   top-5 acc: 70.45
+07/27/2026 09:15:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:15:00 - INFO - __main__ -   Mean top-1 acc: 43.54
+
+current epoch:  346
+07/27/2026 09:16:59 - INFO - __main__ -   top-1 acc: 43.17
+07/27/2026 09:16:59 - INFO - __main__ -   top-5 acc: 70.24
+07/27/2026 09:16:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:16:59 - INFO - __main__ -   Mean top-1 acc: 43.52
+
+current epoch:  347
+07/27/2026 09:18:54 - INFO - __main__ -   top-1 acc: 43.28
+07/27/2026 09:18:54 - INFO - __main__ -   top-5 acc: 70.52
+07/27/2026 09:18:54 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:18:54 - INFO - __main__ -   Mean top-1 acc: 43.52
+
+current epoch:  348
+07/27/2026 09:20:49 - INFO - __main__ -   top-1 acc: 43.49
+07/27/2026 09:20:49 - INFO - __main__ -   top-5 acc: 70.61
+07/27/2026 09:20:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:20:49 - INFO - __main__ -   Mean top-1 acc: 43.52
+
+current epoch:  349
+07/27/2026 09:22:44 - INFO - __main__ -   top-1 acc: 43.92
+07/27/2026 09:22:44 - INFO - __main__ -   top-5 acc: 70.58
+07/27/2026 09:22:44 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:22:44 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  350
+07/27/2026 09:24:39 - INFO - __main__ -   top-1 acc: 43.78
+07/27/2026 09:24:39 - INFO - __main__ -   top-5 acc: 70.87
+07/27/2026 09:24:40 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:24:40 - INFO - __main__ -   Mean top-1 acc: 43.54
+
+current epoch:  351
+07/27/2026 09:26:37 - INFO - __main__ -   top-1 acc: 43.61
+07/27/2026 09:26:37 - INFO - __main__ -   top-5 acc: 71.06
+07/27/2026 09:26:37 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:26:37 - INFO - __main__ -   Mean top-1 acc: 43.53
+
+current epoch:  352
+07/27/2026 09:28:44 - INFO - __main__ -   top-1 acc: 43.44
+07/27/2026 09:28:44 - INFO - __main__ -   top-5 acc: 70.63
+07/27/2026 09:28:44 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:28:44 - INFO - __main__ -   Mean top-1 acc: 43.51
+
+current epoch:  353
+07/27/2026 09:30:56 - INFO - __main__ -   top-1 acc: 43.33
+07/27/2026 09:30:56 - INFO - __main__ -   top-5 acc: 70.77
+07/27/2026 09:30:56 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:30:56 - INFO - __main__ -   Mean top-1 acc: 43.50
+
+current epoch:  354
+07/27/2026 09:33:00 - INFO - __main__ -   top-1 acc: 43.49
+07/27/2026 09:33:00 - INFO - __main__ -   top-5 acc: 70.77
+07/27/2026 09:33:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:33:00 - INFO - __main__ -   Mean top-1 acc: 43.48
+
+current epoch:  355
+07/27/2026 09:34:58 - INFO - __main__ -   top-1 acc: 43.55
+07/27/2026 09:34:58 - INFO - __main__ -   top-5 acc: 70.67
+07/27/2026 09:34:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:34:58 - INFO - __main__ -   Mean top-1 acc: 43.48
+
+current epoch:  356
+07/27/2026 09:36:52 - INFO - __main__ -   top-1 acc: 43.45
+07/27/2026 09:36:52 - INFO - __main__ -   top-5 acc: 70.54
+07/27/2026 09:36:53 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:36:53 - INFO - __main__ -   Mean top-1 acc: 43.46
+
+current epoch:  357
+07/27/2026 09:38:48 - INFO - __main__ -   top-1 acc: 43.46
+07/27/2026 09:38:48 - INFO - __main__ -   top-5 acc: 70.93
+07/27/2026 09:38:48 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:38:48 - INFO - __main__ -   Mean top-1 acc: 43.46
+
+current epoch:  358
+07/27/2026 09:40:40 - INFO - __main__ -   top-1 acc: 43.38
+07/27/2026 09:40:40 - INFO - __main__ -   top-5 acc: 70.63
+07/27/2026 09:40:40 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:40:40 - INFO - __main__ -   Mean top-1 acc: 43.46
+
+current epoch:  359
+07/27/2026 09:42:33 - INFO - __main__ -   top-1 acc: 43.50
+07/27/2026 09:42:33 - INFO - __main__ -   top-5 acc: 70.44
+07/27/2026 09:42:33 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:42:33 - INFO - __main__ -   Mean top-1 acc: 43.47
+
+current epoch:  360
+07/27/2026 09:44:25 - INFO - __main__ -   top-1 acc: 43.46
+07/27/2026 09:44:25 - INFO - __main__ -   top-5 acc: 70.07
+07/27/2026 09:44:25 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:44:25 - INFO - __main__ -   Mean top-1 acc: 43.47
+
+current epoch:  361
+07/27/2026 09:46:15 - INFO - __main__ -   top-1 acc: 43.06
+07/27/2026 09:46:15 - INFO - __main__ -   top-5 acc: 70.25
+07/27/2026 09:46:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:46:15 - INFO - __main__ -   Mean top-1 acc: 43.46
+
+current epoch:  362
+07/27/2026 09:48:06 - INFO - __main__ -   top-1 acc: 43.26
+07/27/2026 09:48:06 - INFO - __main__ -   top-5 acc: 70.36
+07/27/2026 09:48:06 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:48:06 - INFO - __main__ -   Mean top-1 acc: 43.45
+
+current epoch:  363
+07/27/2026 09:50:00 - INFO - __main__ -   top-1 acc: 43.27
+07/27/2026 09:50:00 - INFO - __main__ -   top-5 acc: 70.47
+07/27/2026 09:50:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:50:00 - INFO - __main__ -   Mean top-1 acc: 43.42
+
+current epoch:  364
+07/27/2026 09:51:54 - INFO - __main__ -   top-1 acc: 43.44
+07/27/2026 09:51:54 - INFO - __main__ -   top-5 acc: 70.34
+07/27/2026 09:51:55 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:51:55 - INFO - __main__ -   Mean top-1 acc: 43.43
+
+current epoch:  365
+07/27/2026 09:53:51 - INFO - __main__ -   top-1 acc: 43.31
+07/27/2026 09:53:51 - INFO - __main__ -   top-5 acc: 70.47
+07/27/2026 09:53:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:53:51 - INFO - __main__ -   Mean top-1 acc: 43.43
+
+current epoch:  366
+07/27/2026 09:55:45 - INFO - __main__ -   top-1 acc: 43.49
+07/27/2026 09:55:45 - INFO - __main__ -   top-5 acc: 70.36
+07/27/2026 09:55:46 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:55:46 - INFO - __main__ -   Mean top-1 acc: 43.45
+
+current epoch:  367
+07/27/2026 09:57:43 - INFO - __main__ -   top-1 acc: 43.62
+07/27/2026 09:57:43 - INFO - __main__ -   top-5 acc: 70.28
+07/27/2026 09:57:43 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:57:43 - INFO - __main__ -   Mean top-1 acc: 43.47
+
+current epoch:  368
+07/27/2026 09:59:37 - INFO - __main__ -   top-1 acc: 43.58
+07/27/2026 09:59:37 - INFO - __main__ -   top-5 acc: 70.16
+07/27/2026 09:59:37 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 09:59:37 - INFO - __main__ -   Mean top-1 acc: 43.47
+
+current epoch:  369
+07/27/2026 10:01:32 - INFO - __main__ -   top-1 acc: 43.31
+07/27/2026 10:01:32 - INFO - __main__ -   top-5 acc: 70.19
+07/27/2026 10:01:32 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:01:32 - INFO - __main__ -   Mean top-1 acc: 43.44
+
+current epoch:  370
+07/27/2026 10:03:29 - INFO - __main__ -   top-1 acc: 43.34
+07/27/2026 10:03:29 - INFO - __main__ -   top-5 acc: 70.38
+07/27/2026 10:03:29 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:03:29 - INFO - __main__ -   Mean top-1 acc: 43.42
+
+current epoch:  371
+07/27/2026 10:05:23 - INFO - __main__ -   top-1 acc: 43.18
+07/27/2026 10:05:23 - INFO - __main__ -   top-5 acc: 70.23
+07/27/2026 10:05:24 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:05:24 - INFO - __main__ -   Mean top-1 acc: 43.40
+
+current epoch:  372
+07/27/2026 10:07:19 - INFO - __main__ -   top-1 acc: 43.30
+07/27/2026 10:07:19 - INFO - __main__ -   top-5 acc: 70.00
+07/27/2026 10:07:19 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:07:19 - INFO - __main__ -   Mean top-1 acc: 43.39
+
+current epoch:  373
+07/27/2026 10:09:13 - INFO - __main__ -   top-1 acc: 43.23
+07/27/2026 10:09:13 - INFO - __main__ -   top-5 acc: 70.19
+07/27/2026 10:09:14 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:09:14 - INFO - __main__ -   Mean top-1 acc: 43.38
+
+current epoch:  374
+07/27/2026 10:11:12 - INFO - __main__ -   top-1 acc: 42.97
+07/27/2026 10:11:12 - INFO - __main__ -   top-5 acc: 70.06
+07/27/2026 10:11:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:11:12 - INFO - __main__ -   Mean top-1 acc: 43.36
+
+current epoch:  375
+07/27/2026 10:13:05 - INFO - __main__ -   top-1 acc: 42.93
+07/27/2026 10:13:05 - INFO - __main__ -   top-5 acc: 70.34
+07/27/2026 10:13:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:13:05 - INFO - __main__ -   Mean top-1 acc: 43.33
+
+current epoch:  376
+07/27/2026 10:14:55 - INFO - __main__ -   top-1 acc: 42.82
+07/27/2026 10:14:55 - INFO - __main__ -   top-5 acc: 69.98
+07/27/2026 10:14:56 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:14:56 - INFO - __main__ -   Mean top-1 acc: 43.30
+
+current epoch:  377
+07/27/2026 10:16:49 - INFO - __main__ -   top-1 acc: 42.92
+07/27/2026 10:16:49 - INFO - __main__ -   top-5 acc: 69.93
+07/27/2026 10:16:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:16:49 - INFO - __main__ -   Mean top-1 acc: 43.27
+
+current epoch:  378
+07/27/2026 10:18:40 - INFO - __main__ -   top-1 acc: 42.98
+07/27/2026 10:18:40 - INFO - __main__ -   top-5 acc: 70.00
+07/27/2026 10:18:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:18:41 - INFO - __main__ -   Mean top-1 acc: 43.25
+
+current epoch:  379
+07/27/2026 10:20:35 - INFO - __main__ -   top-1 acc: 42.92
+07/27/2026 10:20:35 - INFO - __main__ -   top-5 acc: 69.91
+07/27/2026 10:20:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:20:35 - INFO - __main__ -   Mean top-1 acc: 43.22
+
+current epoch:  380
+07/27/2026 10:22:28 - INFO - __main__ -   top-1 acc: 42.95
+07/27/2026 10:22:28 - INFO - __main__ -   top-5 acc: 69.92
+07/27/2026 10:22:28 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:22:28 - INFO - __main__ -   Mean top-1 acc: 43.19
+
+current epoch:  381
+07/27/2026 10:24:21 - INFO - __main__ -   top-1 acc: 43.11
+07/27/2026 10:24:21 - INFO - __main__ -   top-5 acc: 70.10
+07/27/2026 10:24:22 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:24:22 - INFO - __main__ -   Mean top-1 acc: 43.20
+
+current epoch:  382
+07/27/2026 10:26:15 - INFO - __main__ -   top-1 acc: 43.07
+07/27/2026 10:26:15 - INFO - __main__ -   top-5 acc: 70.38
+07/27/2026 10:26:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:26:15 - INFO - __main__ -   Mean top-1 acc: 43.19
+
+current epoch:  383
+07/27/2026 10:28:07 - INFO - __main__ -   top-1 acc: 42.92
+07/27/2026 10:28:07 - INFO - __main__ -   top-5 acc: 70.20
+07/27/2026 10:28:07 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:28:07 - INFO - __main__ -   Mean top-1 acc: 43.17
+
+current epoch:  384
+07/27/2026 10:29:59 - INFO - __main__ -   top-1 acc: 42.87
+07/27/2026 10:29:59 - INFO - __main__ -   top-5 acc: 70.12
+07/27/2026 10:29:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:29:59 - INFO - __main__ -   Mean top-1 acc: 43.14
+
+current epoch:  385
+07/27/2026 10:31:54 - INFO - __main__ -   top-1 acc: 42.88
+07/27/2026 10:31:54 - INFO - __main__ -   top-5 acc: 69.78
+07/27/2026 10:31:54 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:31:54 - INFO - __main__ -   Mean top-1 acc: 43.12
+
+current epoch:  386
+07/27/2026 10:33:47 - INFO - __main__ -   top-1 acc: 42.96
+07/27/2026 10:33:47 - INFO - __main__ -   top-5 acc: 69.91
+07/27/2026 10:33:47 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:33:47 - INFO - __main__ -   Mean top-1 acc: 43.09
+
+current epoch:  387
+07/27/2026 10:35:37 - INFO - __main__ -   top-1 acc: 43.22
+07/27/2026 10:35:37 - INFO - __main__ -   top-5 acc: 70.14
+07/27/2026 10:35:37 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:35:37 - INFO - __main__ -   Mean top-1 acc: 43.07
+
+current epoch:  388
+07/27/2026 10:37:30 - INFO - __main__ -   top-1 acc: 43.01
+07/27/2026 10:37:30 - INFO - __main__ -   top-5 acc: 70.15
+07/27/2026 10:37:30 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:37:30 - INFO - __main__ -   Mean top-1 acc: 43.04
+
+current epoch:  389
+07/27/2026 10:39:24 - INFO - __main__ -   top-1 acc: 43.00
+07/27/2026 10:39:24 - INFO - __main__ -   top-5 acc: 70.13
+07/27/2026 10:39:24 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:39:24 - INFO - __main__ -   Mean top-1 acc: 43.03
+
+current epoch:  390
+07/27/2026 10:41:18 - INFO - __main__ -   top-1 acc: 42.76
+07/27/2026 10:41:18 - INFO - __main__ -   top-5 acc: 70.13
+07/27/2026 10:41:18 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:41:18 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  391
+07/27/2026 10:43:11 - INFO - __main__ -   top-1 acc: 43.12
+07/27/2026 10:43:11 - INFO - __main__ -   top-5 acc: 70.04
+07/27/2026 10:43:11 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:43:11 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  392
+07/27/2026 10:45:10 - INFO - __main__ -   top-1 acc: 43.19
+07/27/2026 10:45:10 - INFO - __main__ -   top-5 acc: 70.30
+07/27/2026 10:45:10 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:45:10 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  393
+07/27/2026 10:47:05 - INFO - __main__ -   top-1 acc: 43.21
+07/27/2026 10:47:05 - INFO - __main__ -   top-5 acc: 70.35
+07/27/2026 10:47:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:47:05 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  394
+07/27/2026 10:48:55 - INFO - __main__ -   top-1 acc: 42.94
+07/27/2026 10:48:55 - INFO - __main__ -   top-5 acc: 70.27
+07/27/2026 10:48:56 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:48:56 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  395
+07/27/2026 10:50:41 - INFO - __main__ -   top-1 acc: 43.06
+07/27/2026 10:50:41 - INFO - __main__ -   top-5 acc: 70.12
+07/27/2026 10:50:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:50:42 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  396
+07/27/2026 10:52:31 - INFO - __main__ -   top-1 acc: 43.08
+07/27/2026 10:52:31 - INFO - __main__ -   top-5 acc: 70.41
+07/27/2026 10:52:31 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:52:31 - INFO - __main__ -   Mean top-1 acc: 43.01
+
+current epoch:  397
+07/27/2026 10:54:22 - INFO - __main__ -   top-1 acc: 43.16
+07/27/2026 10:54:22 - INFO - __main__ -   top-5 acc: 70.32
+07/27/2026 10:54:22 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:54:22 - INFO - __main__ -   Mean top-1 acc: 43.02
+
+current epoch:  398
+07/27/2026 10:56:14 - INFO - __main__ -   top-1 acc: 43.24
+07/27/2026 10:56:14 - INFO - __main__ -   top-5 acc: 70.20
+07/27/2026 10:56:14 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:56:14 - INFO - __main__ -   Mean top-1 acc: 43.03
+
+current epoch:  399
+07/27/2026 10:58:07 - INFO - __main__ -   top-1 acc: 42.74
+07/27/2026 10:58:07 - INFO - __main__ -   top-5 acc: 70.02
+07/27/2026 10:58:07 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:58:07 - INFO - __main__ -   Mean top-1 acc: 43.02
+
+current epoch:  400
+07/27/2026 10:59:58 - INFO - __main__ -   top-1 acc: 42.71
+07/27/2026 10:59:58 - INFO - __main__ -   top-5 acc: 70.03
+07/27/2026 10:59:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 10:59:58 - INFO - __main__ -   Mean top-1 acc: 43.01
+
+current epoch:  401
+07/27/2026 11:01:48 - INFO - __main__ -   top-1 acc: 42.84
+07/27/2026 11:01:48 - INFO - __main__ -   top-5 acc: 69.95
+07/27/2026 11:01:48 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:01:48 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  402
+07/27/2026 11:03:37 - INFO - __main__ -   top-1 acc: 42.89
+07/27/2026 11:03:37 - INFO - __main__ -   top-5 acc: 70.26
+07/27/2026 11:03:38 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:03:38 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  403
+07/27/2026 11:05:25 - INFO - __main__ -   top-1 acc: 42.85
+07/27/2026 11:05:25 - INFO - __main__ -   top-5 acc: 69.89
+07/27/2026 11:05:25 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:05:25 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  404
+07/27/2026 11:07:15 - INFO - __main__ -   top-1 acc: 42.97
+07/27/2026 11:07:15 - INFO - __main__ -   top-5 acc: 70.01
+07/27/2026 11:07:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:07:15 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  405
+07/27/2026 11:09:04 - INFO - __main__ -   top-1 acc: 43.07
+07/27/2026 11:09:04 - INFO - __main__ -   top-5 acc: 70.12
+07/27/2026 11:09:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:09:05 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  406
+07/27/2026 11:10:52 - INFO - __main__ -   top-1 acc: 43.20
+07/27/2026 11:10:52 - INFO - __main__ -   top-5 acc: 70.13
+07/27/2026 11:10:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:10:52 - INFO - __main__ -   Mean top-1 acc: 43.01
+
+current epoch:  407
+07/27/2026 11:12:45 - INFO - __main__ -   top-1 acc: 43.05
+07/27/2026 11:12:45 - INFO - __main__ -   top-5 acc: 69.91
+07/27/2026 11:12:45 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:12:45 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  408
+07/27/2026 11:14:36 - INFO - __main__ -   top-1 acc: 42.94
+07/27/2026 11:14:36 - INFO - __main__ -   top-5 acc: 69.81
+07/27/2026 11:14:36 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:14:36 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  409
+07/27/2026 11:16:27 - INFO - __main__ -   top-1 acc: 42.86
+07/27/2026 11:16:27 - INFO - __main__ -   top-5 acc: 69.99
+07/27/2026 11:16:27 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:16:27 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  410
+07/27/2026 11:18:12 - INFO - __main__ -   top-1 acc: 42.93
+07/27/2026 11:18:12 - INFO - __main__ -   top-5 acc: 69.88
+07/27/2026 11:18:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:18:12 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  411
+07/27/2026 11:19:59 - INFO - __main__ -   top-1 acc: 42.85
+07/27/2026 11:19:59 - INFO - __main__ -   top-5 acc: 70.06
+07/27/2026 11:19:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:19:59 - INFO - __main__ -   Mean top-1 acc: 42.99
+
+current epoch:  412
+07/27/2026 11:21:51 - INFO - __main__ -   top-1 acc: 42.67
+07/27/2026 11:21:51 - INFO - __main__ -   top-5 acc: 69.79
+07/27/2026 11:21:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:21:52 - INFO - __main__ -   Mean top-1 acc: 42.96
+
+current epoch:  413
+07/27/2026 11:23:43 - INFO - __main__ -   top-1 acc: 42.85
+07/27/2026 11:23:43 - INFO - __main__ -   top-5 acc: 69.68
+07/27/2026 11:23:43 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:23:43 - INFO - __main__ -   Mean top-1 acc: 42.95
+
+current epoch:  414
+07/27/2026 11:25:31 - INFO - __main__ -   top-1 acc: 43.47
+07/27/2026 11:25:31 - INFO - __main__ -   top-5 acc: 70.08
+07/27/2026 11:25:31 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:25:31 - INFO - __main__ -   Mean top-1 acc: 42.97
+
+current epoch:  415
+07/27/2026 11:27:22 - INFO - __main__ -   top-1 acc: 43.29
+07/27/2026 11:27:22 - INFO - __main__ -   top-5 acc: 70.11
+07/27/2026 11:27:22 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:27:22 - INFO - __main__ -   Mean top-1 acc: 42.98
+
+current epoch:  416
+07/27/2026 11:29:13 - INFO - __main__ -   top-1 acc: 43.40
+07/27/2026 11:29:13 - INFO - __main__ -   top-5 acc: 69.85
+07/27/2026 11:29:13 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:29:13 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  417
+07/27/2026 11:31:04 - INFO - __main__ -   top-1 acc: 43.18
+07/27/2026 11:31:04 - INFO - __main__ -   top-5 acc: 69.59
+07/27/2026 11:31:04 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:31:04 - INFO - __main__ -   Mean top-1 acc: 43.00
+
+current epoch:  418
+07/27/2026 11:32:57 - INFO - __main__ -   top-1 acc: 42.55
+07/27/2026 11:32:57 - INFO - __main__ -   top-5 acc: 69.76
+07/27/2026 11:32:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:32:58 - INFO - __main__ -   Mean top-1 acc: 42.97
+
+current epoch:  419
+07/27/2026 11:34:50 - INFO - __main__ -   top-1 acc: 42.51
+07/27/2026 11:34:50 - INFO - __main__ -   top-5 acc: 69.73
+07/27/2026 11:34:50 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:34:50 - INFO - __main__ -   Mean top-1 acc: 42.95
+
+current epoch:  420
+07/27/2026 11:36:46 - INFO - __main__ -   top-1 acc: 42.70
+07/27/2026 11:36:46 - INFO - __main__ -   top-5 acc: 69.96
+07/27/2026 11:36:46 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:36:46 - INFO - __main__ -   Mean top-1 acc: 42.95
+
+current epoch:  421
+07/27/2026 11:38:46 - INFO - __main__ -   top-1 acc: 42.50
+07/27/2026 11:38:46 - INFO - __main__ -   top-5 acc: 69.70
+07/27/2026 11:38:46 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:38:46 - INFO - __main__ -   Mean top-1 acc: 42.94
+
+current epoch:  422
+07/27/2026 11:40:41 - INFO - __main__ -   top-1 acc: 42.52
+07/27/2026 11:40:41 - INFO - __main__ -   top-5 acc: 69.59
+07/27/2026 11:40:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:40:41 - INFO - __main__ -   Mean top-1 acc: 42.92
+
+current epoch:  423
+07/27/2026 11:42:35 - INFO - __main__ -   top-1 acc: 42.38
+07/27/2026 11:42:35 - INFO - __main__ -   top-5 acc: 69.62
+07/27/2026 11:42:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:42:35 - INFO - __main__ -   Mean top-1 acc: 42.89
+
+current epoch:  424
+07/27/2026 11:44:26 - INFO - __main__ -   top-1 acc: 42.34
+07/27/2026 11:44:26 - INFO - __main__ -   top-5 acc: 69.69
+07/27/2026 11:44:26 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:44:26 - INFO - __main__ -   Mean top-1 acc: 42.86
+
+current epoch:  425
+07/27/2026 11:46:15 - INFO - __main__ -   top-1 acc: 42.69
+07/27/2026 11:46:15 - INFO - __main__ -   top-5 acc: 69.71
+07/27/2026 11:46:15 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:46:15 - INFO - __main__ -   Mean top-1 acc: 42.84
+
+current epoch:  426
+07/27/2026 11:48:01 - INFO - __main__ -   top-1 acc: 42.38
+07/27/2026 11:48:01 - INFO - __main__ -   top-5 acc: 69.58
+07/27/2026 11:48:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:48:01 - INFO - __main__ -   Mean top-1 acc: 42.80
+
+current epoch:  427
+07/27/2026 11:49:48 - INFO - __main__ -   top-1 acc: 42.42
+07/27/2026 11:49:48 - INFO - __main__ -   top-5 acc: 69.65
+07/27/2026 11:49:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:49:49 - INFO - __main__ -   Mean top-1 acc: 42.77
+
+current epoch:  428
+07/27/2026 11:51:35 - INFO - __main__ -   top-1 acc: 42.45
+07/27/2026 11:51:35 - INFO - __main__ -   top-5 acc: 69.25
+07/27/2026 11:51:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:51:35 - INFO - __main__ -   Mean top-1 acc: 42.75
+
+current epoch:  429
+07/27/2026 11:53:23 - INFO - __main__ -   top-1 acc: 42.26
+07/27/2026 11:53:23 - INFO - __main__ -   top-5 acc: 69.14
+07/27/2026 11:53:23 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:53:23 - INFO - __main__ -   Mean top-1 acc: 42.72
+
+current epoch:  430
+07/27/2026 11:55:13 - INFO - __main__ -   top-1 acc: 42.12
+07/27/2026 11:55:13 - INFO - __main__ -   top-5 acc: 68.89
+07/27/2026 11:55:13 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:55:13 - INFO - __main__ -   Mean top-1 acc: 42.68
+
+current epoch:  431
+07/27/2026 11:57:03 - INFO - __main__ -   top-1 acc: 41.89
+07/27/2026 11:57:03 - INFO - __main__ -   top-5 acc: 69.14
+07/27/2026 11:57:04 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:57:04 - INFO - __main__ -   Mean top-1 acc: 42.63
+
+current epoch:  432
+07/27/2026 11:58:52 - INFO - __main__ -   top-1 acc: 42.10
+07/27/2026 11:58:52 - INFO - __main__ -   top-5 acc: 69.70
+07/27/2026 11:58:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 11:58:52 - INFO - __main__ -   Mean top-1 acc: 42.60
+
+current epoch:  433
+07/27/2026 12:00:39 - INFO - __main__ -   top-1 acc: 42.55
+07/27/2026 12:00:39 - INFO - __main__ -   top-5 acc: 69.55
+07/27/2026 12:00:39 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:00:39 - INFO - __main__ -   Mean top-1 acc: 42.58
+
+current epoch:  434
+07/27/2026 12:02:29 - INFO - __main__ -   top-1 acc: 42.47
+07/27/2026 12:02:29 - INFO - __main__ -   top-5 acc: 69.48
+07/27/2026 12:02:29 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:02:29 - INFO - __main__ -   Mean top-1 acc: 42.54
+
+current epoch:  435
+07/27/2026 12:04:17 - INFO - __main__ -   top-1 acc: 42.29
+07/27/2026 12:04:17 - INFO - __main__ -   top-5 acc: 69.14
+07/27/2026 12:04:17 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:04:17 - INFO - __main__ -   Mean top-1 acc: 42.48
+
+current epoch:  436
+07/27/2026 12:06:09 - INFO - __main__ -   top-1 acc: 42.28
+07/27/2026 12:06:09 - INFO - __main__ -   top-5 acc: 69.02
+07/27/2026 12:06:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:06:09 - INFO - __main__ -   Mean top-1 acc: 42.43
+
+current epoch:  437
+07/27/2026 12:07:58 - INFO - __main__ -   top-1 acc: 42.12
+07/27/2026 12:07:58 - INFO - __main__ -   top-5 acc: 68.69
+07/27/2026 12:07:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:07:58 - INFO - __main__ -   Mean top-1 acc: 42.38
+
+current epoch:  438
+07/27/2026 12:09:46 - INFO - __main__ -   top-1 acc: 42.40
+07/27/2026 12:09:46 - INFO - __main__ -   top-5 acc: 69.01
+07/27/2026 12:09:46 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:09:46 - INFO - __main__ -   Mean top-1 acc: 42.37
+
+current epoch:  439
+07/27/2026 12:11:31 - INFO - __main__ -   top-1 acc: 42.30
+07/27/2026 12:11:31 - INFO - __main__ -   top-5 acc: 69.17
+07/27/2026 12:11:31 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:11:31 - INFO - __main__ -   Mean top-1 acc: 42.36
+
+current epoch:  440
+07/27/2026 12:13:19 - INFO - __main__ -   top-1 acc: 42.33
+07/27/2026 12:13:19 - INFO - __main__ -   top-5 acc: 69.56
+07/27/2026 12:13:19 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:13:19 - INFO - __main__ -   Mean top-1 acc: 42.34
+
+current epoch:  441
+07/27/2026 12:15:09 - INFO - __main__ -   top-1 acc: 42.39
+07/27/2026 12:15:09 - INFO - __main__ -   top-5 acc: 69.50
+07/27/2026 12:15:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:15:09 - INFO - __main__ -   Mean top-1 acc: 42.33
+
+current epoch:  442
+07/27/2026 12:16:57 - INFO - __main__ -   top-1 acc: 42.21
+07/27/2026 12:16:57 - INFO - __main__ -   top-5 acc: 69.03
+07/27/2026 12:16:57 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:16:57 - INFO - __main__ -   Mean top-1 acc: 42.32
+
+current epoch:  443
+07/27/2026 12:18:43 - INFO - __main__ -   top-1 acc: 42.62
+07/27/2026 12:18:43 - INFO - __main__ -   top-5 acc: 69.67
+07/27/2026 12:18:43 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:18:43 - INFO - __main__ -   Mean top-1 acc: 42.33
+
+current epoch:  444
+07/27/2026 12:20:31 - INFO - __main__ -   top-1 acc: 42.34
+07/27/2026 12:20:31 - INFO - __main__ -   top-5 acc: 69.58
+07/27/2026 12:20:31 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:20:31 - INFO - __main__ -   Mean top-1 acc: 42.33
+
+current epoch:  445
+07/27/2026 12:22:17 - INFO - __main__ -   top-1 acc: 42.07
+07/27/2026 12:22:17 - INFO - __main__ -   top-5 acc: 69.66
+07/27/2026 12:22:17 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:22:17 - INFO - __main__ -   Mean top-1 acc: 42.30
+
+current epoch:  446
+07/27/2026 12:24:05 - INFO - __main__ -   top-1 acc: 42.33
+07/27/2026 12:24:05 - INFO - __main__ -   top-5 acc: 69.53
+07/27/2026 12:24:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:24:05 - INFO - __main__ -   Mean top-1 acc: 42.30
+
+current epoch:  447
+07/27/2026 12:25:51 - INFO - __main__ -   top-1 acc: 42.11
+07/27/2026 12:25:51 - INFO - __main__ -   top-5 acc: 69.32
+07/27/2026 12:25:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:25:51 - INFO - __main__ -   Mean top-1 acc: 42.28
+
+current epoch:  448
+07/27/2026 12:27:37 - INFO - __main__ -   top-1 acc: 42.24
+07/27/2026 12:27:37 - INFO - __main__ -   top-5 acc: 69.35
+07/27/2026 12:27:37 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:27:37 - INFO - __main__ -   Mean top-1 acc: 42.27
+
+current epoch:  449
+07/27/2026 12:29:27 - INFO - __main__ -   top-1 acc: 42.09
+07/27/2026 12:29:27 - INFO - __main__ -   top-5 acc: 69.32
+07/27/2026 12:29:27 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:29:27 - INFO - __main__ -   Mean top-1 acc: 42.26
+
+current epoch:  450
+07/27/2026 12:31:18 - INFO - __main__ -   top-1 acc: 42.10
+07/27/2026 12:31:18 - INFO - __main__ -   top-5 acc: 69.40
+07/27/2026 12:31:18 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:31:18 - INFO - __main__ -   Mean top-1 acc: 42.26
+
+current epoch:  451
+07/27/2026 12:33:11 - INFO - __main__ -   top-1 acc: 42.13
+07/27/2026 12:33:11 - INFO - __main__ -   top-5 acc: 69.44
+07/27/2026 12:33:11 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:33:11 - INFO - __main__ -   Mean top-1 acc: 42.27
+
+current epoch:  452
+07/27/2026 12:35:00 - INFO - __main__ -   top-1 acc: 42.08
+07/27/2026 12:35:00 - INFO - __main__ -   top-5 acc: 69.15
+07/27/2026 12:35:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:35:00 - INFO - __main__ -   Mean top-1 acc: 42.27
+
+current epoch:  453
+07/27/2026 12:36:48 - INFO - __main__ -   top-1 acc: 42.19
+07/27/2026 12:36:48 - INFO - __main__ -   top-5 acc: 69.14
+07/27/2026 12:36:48 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:36:48 - INFO - __main__ -   Mean top-1 acc: 42.25
+
+current epoch:  454
+07/27/2026 12:38:36 - INFO - __main__ -   top-1 acc: 42.11
+07/27/2026 12:38:36 - INFO - __main__ -   top-5 acc: 69.13
+07/27/2026 12:38:36 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:38:36 - INFO - __main__ -   Mean top-1 acc: 42.24
+
+current epoch:  455
+07/27/2026 12:40:22 - INFO - __main__ -   top-1 acc: 42.19
+07/27/2026 12:40:22 - INFO - __main__ -   top-5 acc: 68.73
+07/27/2026 12:40:23 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:40:23 - INFO - __main__ -   Mean top-1 acc: 42.23
+
+current epoch:  456
+07/27/2026 12:42:10 - INFO - __main__ -   top-1 acc: 41.83
+07/27/2026 12:42:10 - INFO - __main__ -   top-5 acc: 68.74
+07/27/2026 12:42:11 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:42:11 - INFO - __main__ -   Mean top-1 acc: 42.21
+
+current epoch:  457
+07/27/2026 12:44:01 - INFO - __main__ -   top-1 acc: 42.10
+07/27/2026 12:44:01 - INFO - __main__ -   top-5 acc: 69.09
+07/27/2026 12:44:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:44:01 - INFO - __main__ -   Mean top-1 acc: 42.21
+
+current epoch:  458
+07/27/2026 12:45:47 - INFO - __main__ -   top-1 acc: 42.12
+07/27/2026 12:45:47 - INFO - __main__ -   top-5 acc: 68.95
+07/27/2026 12:45:47 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:45:47 - INFO - __main__ -   Mean top-1 acc: 42.19
+
+current epoch:  459
+07/27/2026 12:47:39 - INFO - __main__ -   top-1 acc: 41.94
+07/27/2026 12:47:39 - INFO - __main__ -   top-5 acc: 68.58
+07/27/2026 12:47:39 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:47:39 - INFO - __main__ -   Mean top-1 acc: 42.18
+
+current epoch:  460
+07/27/2026 12:49:27 - INFO - __main__ -   top-1 acc: 41.53
+07/27/2026 12:49:27 - INFO - __main__ -   top-5 acc: 68.52
+07/27/2026 12:49:27 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:49:27 - INFO - __main__ -   Mean top-1 acc: 42.14
+
+current epoch:  461
+07/27/2026 12:51:12 - INFO - __main__ -   top-1 acc: 41.73
+07/27/2026 12:51:12 - INFO - __main__ -   top-5 acc: 68.80
+07/27/2026 12:51:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:51:12 - INFO - __main__ -   Mean top-1 acc: 42.10
+
+current epoch:  462
+07/27/2026 12:52:59 - INFO - __main__ -   top-1 acc: 41.39
+07/27/2026 12:52:59 - INFO - __main__ -   top-5 acc: 68.46
+07/27/2026 12:52:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:52:59 - INFO - __main__ -   Mean top-1 acc: 42.06
+
+current epoch:  463
+07/27/2026 12:54:46 - INFO - __main__ -   top-1 acc: 41.94
+07/27/2026 12:54:46 - INFO - __main__ -   top-5 acc: 68.60
+07/27/2026 12:54:46 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:54:46 - INFO - __main__ -   Mean top-1 acc: 42.03
+
+current epoch:  464
+07/27/2026 12:56:35 - INFO - __main__ -   top-1 acc: 42.05
+07/27/2026 12:56:35 - INFO - __main__ -   top-5 acc: 68.73
+07/27/2026 12:56:35 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:56:35 - INFO - __main__ -   Mean top-1 acc: 42.01
+
+current epoch:  465
+07/27/2026 12:58:23 - INFO - __main__ -   top-1 acc: 41.92
+07/27/2026 12:58:23 - INFO - __main__ -   top-5 acc: 68.78
+07/27/2026 12:58:23 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 12:58:23 - INFO - __main__ -   Mean top-1 acc: 42.01
+
+current epoch:  466
+07/27/2026 13:00:11 - INFO - __main__ -   top-1 acc: 41.96
+07/27/2026 13:00:11 - INFO - __main__ -   top-5 acc: 68.97
+07/27/2026 13:00:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:00:12 - INFO - __main__ -   Mean top-1 acc: 41.99
+
+current epoch:  467
+07/27/2026 13:02:00 - INFO - __main__ -   top-1 acc: 41.89
+07/27/2026 13:02:00 - INFO - __main__ -   top-5 acc: 68.76
+07/27/2026 13:02:00 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:02:00 - INFO - __main__ -   Mean top-1 acc: 41.98
+
+current epoch:  468
+07/27/2026 13:03:48 - INFO - __main__ -   top-1 acc: 41.67
+07/27/2026 13:03:48 - INFO - __main__ -   top-5 acc: 68.85
+07/27/2026 13:03:49 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:03:49 - INFO - __main__ -   Mean top-1 acc: 41.95
+
+current epoch:  469
+07/27/2026 13:05:34 - INFO - __main__ -   top-1 acc: 41.69
+07/27/2026 13:05:34 - INFO - __main__ -   top-5 acc: 68.75
+07/27/2026 13:05:34 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:05:34 - INFO - __main__ -   Mean top-1 acc: 41.93
+
+current epoch:  470
+07/27/2026 13:07:25 - INFO - __main__ -   top-1 acc: 41.81
+07/27/2026 13:07:25 - INFO - __main__ -   top-5 acc: 68.69
+07/27/2026 13:07:25 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:07:25 - INFO - __main__ -   Mean top-1 acc: 41.91
+
+current epoch:  471
+07/27/2026 13:09:16 - INFO - __main__ -   top-1 acc: 41.84
+07/27/2026 13:09:16 - INFO - __main__ -   top-5 acc: 68.74
+07/27/2026 13:09:16 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:09:16 - INFO - __main__ -   Mean top-1 acc: 41.90
+
+current epoch:  472
+07/27/2026 13:11:06 - INFO - __main__ -   top-1 acc: 41.83
+07/27/2026 13:11:06 - INFO - __main__ -   top-5 acc: 68.92
+07/27/2026 13:11:06 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:11:06 - INFO - __main__ -   Mean top-1 acc: 41.89
+
+current epoch:  473
+07/27/2026 13:12:59 - INFO - __main__ -   top-1 acc: 41.88
+07/27/2026 13:12:59 - INFO - __main__ -   top-5 acc: 68.62
+07/27/2026 13:12:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:12:59 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  474
+07/27/2026 13:14:54 - INFO - __main__ -   top-1 acc: 42.20
+07/27/2026 13:14:54 - INFO - __main__ -   top-5 acc: 68.64
+07/27/2026 13:14:54 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:14:54 - INFO - __main__ -   Mean top-1 acc: 41.88
+
+current epoch:  475
+07/27/2026 13:16:47 - INFO - __main__ -   top-1 acc: 42.10
+07/27/2026 13:16:47 - INFO - __main__ -   top-5 acc: 68.36
+07/27/2026 13:16:47 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:16:47 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  476
+07/27/2026 13:18:24 - INFO - __main__ -   top-1 acc: 42.27
+07/27/2026 13:18:24 - INFO - __main__ -   top-5 acc: 68.46
+07/27/2026 13:18:24 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:18:24 - INFO - __main__ -   Mean top-1 acc: 41.89
+
+current epoch:  477
+07/27/2026 13:19:59 - INFO - __main__ -   top-1 acc: 41.83
+07/27/2026 13:19:59 - INFO - __main__ -   top-5 acc: 68.64
+07/27/2026 13:19:59 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:19:59 - INFO - __main__ -   Mean top-1 acc: 41.88
+
+current epoch:  478
+07/27/2026 13:21:33 - INFO - __main__ -   top-1 acc: 41.86
+07/27/2026 13:21:33 - INFO - __main__ -   top-5 acc: 68.36
+07/27/2026 13:21:33 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:21:33 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  479
+07/27/2026 13:23:20 - INFO - __main__ -   top-1 acc: 41.88
+07/27/2026 13:23:20 - INFO - __main__ -   top-5 acc: 68.33
+07/27/2026 13:23:20 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:23:20 - INFO - __main__ -   Mean top-1 acc: 41.86
+
+current epoch:  480
+07/27/2026 13:25:12 - INFO - __main__ -   top-1 acc: 41.74
+07/27/2026 13:25:12 - INFO - __main__ -   top-5 acc: 68.42
+07/27/2026 13:25:12 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:25:12 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  481
+07/27/2026 13:27:05 - INFO - __main__ -   top-1 acc: 41.61
+07/27/2026 13:27:05 - INFO - __main__ -   top-5 acc: 68.42
+07/27/2026 13:27:05 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:27:05 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  482
+07/27/2026 13:29:01 - INFO - __main__ -   top-1 acc: 41.48
+07/27/2026 13:29:01 - INFO - __main__ -   top-5 acc: 68.37
+07/27/2026 13:29:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:29:01 - INFO - __main__ -   Mean top-1 acc: 41.87
+
+current epoch:  483
+07/27/2026 13:30:51 - INFO - __main__ -   top-1 acc: 41.61
+07/27/2026 13:30:51 - INFO - __main__ -   top-5 acc: 68.39
+07/27/2026 13:30:52 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:30:52 - INFO - __main__ -   Mean top-1 acc: 41.86
+
+current epoch:  484
+07/27/2026 13:32:44 - INFO - __main__ -   top-1 acc: 41.65
+07/27/2026 13:32:44 - INFO - __main__ -   top-5 acc: 68.18
+07/27/2026 13:32:44 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:32:44 - INFO - __main__ -   Mean top-1 acc: 41.84
+
+current epoch:  485
+07/27/2026 13:34:38 - INFO - __main__ -   top-1 acc: 41.29
+07/27/2026 13:34:38 - INFO - __main__ -   top-5 acc: 68.00
+07/27/2026 13:34:38 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:34:38 - INFO - __main__ -   Mean top-1 acc: 41.80
+
+current epoch:  486
+07/27/2026 13:36:27 - INFO - __main__ -   top-1 acc: 41.08
+07/27/2026 13:36:27 - INFO - __main__ -   top-5 acc: 67.57
+07/27/2026 13:36:27 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:36:27 - INFO - __main__ -   Mean top-1 acc: 41.76
+
+current epoch:  487
+07/27/2026 13:38:17 - INFO - __main__ -   top-1 acc: 41.39
+07/27/2026 13:38:17 - INFO - __main__ -   top-5 acc: 67.89
+07/27/2026 13:38:18 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:38:18 - INFO - __main__ -   Mean top-1 acc: 41.74
+
+current epoch:  488
+07/27/2026 13:40:10 - INFO - __main__ -   top-1 acc: 41.09
+07/27/2026 13:40:10 - INFO - __main__ -   top-5 acc: 68.25
+07/27/2026 13:40:10 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:40:10 - INFO - __main__ -   Mean top-1 acc: 41.71
+
+current epoch:  489
+07/27/2026 13:42:01 - INFO - __main__ -   top-1 acc: 41.15
+07/27/2026 13:42:01 - INFO - __main__ -   top-5 acc: 67.96
+07/27/2026 13:42:01 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:42:01 - INFO - __main__ -   Mean top-1 acc: 41.68
+
+current epoch:  490
+07/27/2026 13:43:51 - INFO - __main__ -   top-1 acc: 41.30
+07/27/2026 13:43:51 - INFO - __main__ -   top-5 acc: 67.80
+07/27/2026 13:43:51 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:43:51 - INFO - __main__ -   Mean top-1 acc: 41.65
+
+current epoch:  491
+07/27/2026 13:45:42 - INFO - __main__ -   top-1 acc: 41.28
+07/27/2026 13:45:42 - INFO - __main__ -   top-5 acc: 67.83
+07/27/2026 13:45:42 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:45:42 - INFO - __main__ -   Mean top-1 acc: 41.63
+
+current epoch:  492
+07/27/2026 13:47:34 - INFO - __main__ -   top-1 acc: 41.29
+07/27/2026 13:47:34 - INFO - __main__ -   top-5 acc: 67.70
+07/27/2026 13:47:34 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:47:34 - INFO - __main__ -   Mean top-1 acc: 41.60
+
+current epoch:  493
+07/27/2026 13:49:27 - INFO - __main__ -   top-1 acc: 41.22
+07/27/2026 13:49:27 - INFO - __main__ -   top-5 acc: 67.54
+07/27/2026 13:49:27 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:49:27 - INFO - __main__ -   Mean top-1 acc: 41.57
+
+current epoch:  494
+07/27/2026 13:51:17 - INFO - __main__ -   top-1 acc: 41.35
+07/27/2026 13:51:17 - INFO - __main__ -   top-5 acc: 67.73
+07/27/2026 13:51:17 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:51:17 - INFO - __main__ -   Mean top-1 acc: 41.52
+
+current epoch:  495
+07/27/2026 13:53:09 - INFO - __main__ -   top-1 acc: 41.68
+07/27/2026 13:53:09 - INFO - __main__ -   top-5 acc: 67.92
+07/27/2026 13:53:09 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:53:09 - INFO - __main__ -   Mean top-1 acc: 41.50
+
+current epoch:  496
+07/27/2026 13:54:58 - INFO - __main__ -   top-1 acc: 41.63
+07/27/2026 13:54:58 - INFO - __main__ -   top-5 acc: 67.82
+07/27/2026 13:54:58 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:54:58 - INFO - __main__ -   Mean top-1 acc: 41.47
+
+current epoch:  497
+07/27/2026 13:56:50 - INFO - __main__ -   top-1 acc: 41.64
+07/27/2026 13:56:50 - INFO - __main__ -   top-5 acc: 67.79
+07/27/2026 13:56:50 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:56:50 - INFO - __main__ -   Mean top-1 acc: 41.46
+
+current epoch:  498
+07/27/2026 13:58:41 - INFO - __main__ -   top-1 acc: 41.40
+07/27/2026 13:58:41 - INFO - __main__ -   top-5 acc: 67.43
+07/27/2026 13:58:41 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 13:58:41 - INFO - __main__ -   Mean top-1 acc: 41.44
+
+current epoch:  499
+07/27/2026 14:00:32 - INFO - __main__ -   top-1 acc: 41.22
+07/27/2026 14:00:32 - INFO - __main__ -   top-5 acc: 67.59
+07/27/2026 14:00:33 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 14:00:33 - INFO - __main__ -   Mean top-1 acc: 41.41
+
+current epoch:  500
+07/27/2026 14:02:24 - INFO - __main__ -   top-1 acc: 41.14
+07/27/2026 14:02:24 - INFO - __main__ -   top-5 acc: 67.38
+07/27/2026 14:02:24 - INFO - __main__ -   Best top-1 acc: 44.97
+07/27/2026 14:02:24 - INFO - __main__ -   Mean top-1 acc: 41.38
+
