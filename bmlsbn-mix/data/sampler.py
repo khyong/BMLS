@@ -22,6 +22,136 @@ __all__ = [
     'DoubleBalancedMixedLabelSampler',
 ]
 
+
+class _ScalablePairSampler(object):
+    """Memory-efficient fallback over all ordered class pairs.
+
+    A cycle contains every ordered pair, including same-class pairs, exactly
+    once. It is represented as randomized permutation matchings instead of a
+    dense C-by-C matrix. Every consecutive block of C pairs contains each
+    class exactly once on the left and right. The existing dense behavior is
+    retained when an epoch is large enough to cover its complete pair space.
+    """
+
+    def _maybe_init_sparse(self, num_samples, num_classes, num_class_list, allow_same):
+        # Retain ``allow_same`` in the signature for compatibility. Circular
+        # BMLS intentionally includes diagonal pairs and treats (a, b) and
+        # (b, a) as distinct mixed classes.
+        del allow_same
+        if num_class_list is None:
+            available_classes = sorted(set(int(target) for target in self.dataset.targets))
+        else:
+            available_classes = [
+                class_index
+                for class_index, count in enumerate(num_class_list)
+                if count > 0
+            ]
+        if not available_classes:
+            raise ValueError("Pair sampling requires a non-empty class")
+
+        num_available = len(available_classes)
+        if num_samples >= num_available ** 2:
+            self.sparse_mode = False
+            return False
+
+        # Keep the old attribute name because the sampler implementations use
+        # it to select their non-dense path.
+        self.sparse_mode = True
+        self.available_classes = np.asarray(available_classes, dtype=np.int64)
+        self.palette = None
+        self.remainder = num_samples
+        first = int(self.available_classes[0])
+        self.lbl_mix2new = {(first, first): 0}
+        self._circular_epoch = 0
+        self._circular_stream = 0
+        self._circular_streams_per_epoch = 1
+        self._pair_schedule_ready = False
+        self._circular_seed = int(
+            getattr(getattr(self.dataset, 'args', None), 'seed', 0) or 0
+        )
+        self.palette_cp = 'circular ordered-pair schedule (not generated)'
+        return True
+
+    def set_epoch(self, epoch):
+        """Select a deterministic, resume-safe segment of the pair cycle."""
+        self._circular_epoch = int(epoch)
+        self._circular_stream = 0
+        self._pair_schedule_ready = False
+
+    def _cycle_permutations(self, cycle_index):
+        num_available = len(self.available_classes)
+        seed_sequence = np.random.SeedSequence(
+            [self._circular_seed, int(cycle_index)]
+        )
+        generator = np.random.default_rng(seed_sequence)
+        return (
+            generator.permutation(num_available),
+            generator.permutation(num_available),
+            generator.permutation(num_available),
+        )
+
+    def _generate_sparse_pairs(self):
+        num_available = len(self.available_classes)
+        cycle_size = num_available ** 2
+        stream = self._circular_stream
+        global_start = (
+            self._circular_epoch
+            * self._circular_streams_per_epoch
+            * self.num_samples
+            + stream * self.num_samples
+        )
+        left = np.empty(self.num_samples, dtype=np.int64)
+        right = np.empty(self.num_samples, dtype=np.int64)
+
+        written = 0
+        position = global_start
+        while written < self.num_samples:
+            cycle_index, cycle_offset = divmod(position, cycle_size)
+            take = min(self.num_samples - written, cycle_size - cycle_offset)
+            row_order, column_order, shift_order = self._cycle_permutations(
+                cycle_index
+            )
+
+            offsets = cycle_offset + np.arange(take, dtype=np.int64)
+            matching_index = offsets // num_available
+            row_position = offsets % num_available
+            shifts = shift_order[matching_index]
+
+            output_slice = slice(written, written + take)
+            left[output_slice] = self.available_classes[
+                row_order[row_position]
+            ]
+            right[output_slice] = self.available_classes[
+                column_order[(row_position + shifts) % num_available]
+            ]
+            written += take
+            position += take
+
+        self._sparse_pairs = np.column_stack((left, right))
+        self._pair_schedule_ready = True
+        self._circular_stream += 1
+        self.palette_cp = (
+            'circular ordered-pair schedule '
+            '(epoch={}, stream={}, start={}, samples={}, classes={})'
+        ).format(
+            self._circular_epoch,
+            stream,
+            global_start,
+            self.num_samples,
+            num_available,
+        )
+
+    def _generate_sparse_indices(self):
+        if not self._pair_schedule_ready:
+            self._generate_sparse_pairs()
+        indices_a = []
+        indices_b = []
+        for class_a, class_b in self._sparse_pairs:
+            indices_a.append(next(self.indices_iter[int(class_a)]))
+            indices_b.append(next(self.indices_iter[int(class_b)]))
+        self._pair_schedule_ready = False
+        return indices_a, indices_b
+
         
 class MixedLabelDataset(Dataset):
     def __init__(self, dataset):
@@ -38,7 +168,8 @@ class MixedLabelDataset(Dataset):
         return len(self.dataset)
         
 
-class BalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
+class BalancedMixedLabelSampler(
+        _ScalablePairSampler, torch.utils.data.sampler.Sampler):
 
     def __init__(self, dataset, num_classes=None, num_class_list=None, **kwargs):
         self.dataset = dataset
@@ -61,6 +192,9 @@ class BalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.num_samples
 
     def init_palette(self, num_samples, num_classes, num_class_list=None):
+        if self._maybe_init_sparse(
+                num_samples, num_classes, num_class_list, allow_same=False):
+            return
         n_cls = num_classes
         num_mixed_cls = n_cls*(n_cls-1)/2
          
@@ -81,6 +215,8 @@ class BalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.palette, self.remainder, self.lbl_mix2new
 
     def set_palette_cp(self):
+        if self.sparse_mode:
+            return
         self.palette_cp = self.palette
 
     def get_indices_iter(self, targets, num_classes):
@@ -91,6 +227,9 @@ class BalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return [RandomCycleIter(idx) for idx in indices_per_cls]
 
     def distribute_remainder(self, palette, remainder):
+        if self.sparse_mode:
+            self._generate_sparse_pairs()
+            return
         candidates = np.vstack(list(self.lbl_mix2new.keys()))
         np.random.shuffle(candidates)
         indices_cand = candidates[:remainder]
@@ -100,6 +239,8 @@ class BalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         self.palette_cp = palette_cp
 
     def generate_pairwise_data(self):
+        if self.sparse_mode:
+            return self._generate_sparse_indices()
         indices_a, indices_b = [], []
         for mixed_lbl, new_lbl_num in self.lbl_mix2new.items():
             num_samples_per_mixed_cls = self.palette_cp[mixed_lbl]
@@ -148,7 +289,8 @@ class DualMixedLabelDataset(Dataset):
         
 
 
-class DualBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
+class DualBalancedMixedLabelSampler(
+        _ScalablePairSampler, torch.utils.data.sampler.Sampler):
 
     def __init__(self, dataset, num_classes=None, num_class_list=None, **kwargs):
         self.dataset = dataset
@@ -172,6 +314,9 @@ class DualBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.num_samples
 
     def init_palette(self, num_samples, num_classes, num_class_list=None):
+        if self._maybe_init_sparse(
+                num_samples, num_classes, num_class_list, allow_same=False):
+            return
         n_cls = num_classes
         num_mixed_cls = n_cls*(n_cls-1)/2
          
@@ -192,6 +337,8 @@ class DualBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.palette, self.remainder, self.lbl_mix2new
 
     def set_palette_cp(self):
+        if self.sparse_mode:
+            return
         self.palette_cp = self.palette
 
     def get_indices_iter(self, targets, num_classes):
@@ -202,6 +349,9 @@ class DualBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return [RandomCycleIter(idx) for idx in indices_per_cls]
 
     def distribute_remainder(self, palette, remainder):
+        if self.sparse_mode:
+            self._generate_sparse_pairs()
+            return
         candidates = np.vstack(list(self.lbl_mix2new.keys()))
         np.random.shuffle(candidates)
         indices_cand = candidates[:remainder]
@@ -211,6 +361,8 @@ class DualBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         self.palette_cp = palette_cp
 
     def generate_pairwise_data(self):
+        if self.sparse_mode:
+            return self._generate_sparse_indices()
         indices_a, indices_b = [], []
         for mixed_lbl, new_lbl_num in self.lbl_mix2new.items():
             num_samples_per_mixed_cls = self.palette_cp[mixed_lbl]
@@ -238,7 +390,8 @@ class DoubleMixedLabelDataset(Dataset):
         return len(self.dataset)
 
 
-class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
+class DoubleBalancedMixedLabelSampler(
+        _ScalablePairSampler, torch.utils.data.sampler.Sampler):
 
     def __init__(self, dataset, num_classes=None, num_class_list=None, **kwargs):
         self.dataset = dataset
@@ -246,6 +399,7 @@ class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         self.num_classes = num_classes
 
         self.init_palette(self.num_samples, self.num_classes, num_class_list=num_class_list)
+        self._circular_streams_per_epoch = 2
         self.indices_iter = self.get_indices_iter(dataset.targets, self.num_classes)
         
     def _get_label(self, dataset, idx):
@@ -262,6 +416,9 @@ class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.num_samples
 
     def init_palette(self, num_samples, num_classes, num_class_list=None):
+        if self._maybe_init_sparse(
+                num_samples, num_classes, num_class_list, allow_same=True):
+            return
         n_cls = num_classes
         #num_mixed_cls = n_cls*(n_cls-1)/2
         num_mixed_cls = n_cls ** 2
@@ -284,6 +441,8 @@ class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return self.palette, self.remainder, self.lbl_mix2new
 
     def set_palette_cp(self):
+        if self.sparse_mode:
+            return
         self.palette_cp = self.palette
 
     def get_indices_iter(self, targets, num_classes):
@@ -294,6 +453,9 @@ class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         return [RandomCycleIter(idx) for idx in indices_per_cls]
 
     def distribute_remainder(self, palette, remainder):
+        if self.sparse_mode:
+            self._generate_sparse_pairs()
+            return
         candidates = np.vstack(list(self.lbl_mix2new.keys()))
         np.random.shuffle(candidates)
         indices_cand = candidates[:remainder]
@@ -303,6 +465,8 @@ class DoubleBalancedMixedLabelSampler(torch.utils.data.sampler.Sampler):
         self.palette_cp = palette_cp
 
     def generate_pairwise_data(self):
+        if self.sparse_mode:
+            return self._generate_sparse_indices()
         indices_a, indices_b = [], []
         for mixed_lbl, new_lbl_num in self.lbl_mix2new.items():
             num_samples_per_mixed_cls = self.palette_cp[mixed_lbl]

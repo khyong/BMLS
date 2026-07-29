@@ -153,7 +153,20 @@ class ResNet_s(nn.Module):
             out = out.view(out.size(0), -1)
             if isinstance(self.linear, MultiWrapper):
                 train_flag = True if "train" in kwargs else False
-                out = self.linear(out, train=train_flag)
+                out = self.linear(
+                    out,
+                    train=train_flag,
+                    targets=kwargs.get('targets'),
+                    mixed_class_pairs=kwargs.get('mixed_class_pairs'),
+                    mix_lam=kwargs.get('mix_lam'),
+                    include_unmixed_singletons=kwargs.get(
+                        'include_unmixed_singletons', False
+                    ),
+                    normalize_candidates=kwargs.get(
+                        'normalize_candidates', False
+                    ),
+                    logit_scale=kwargs.get('logit_scale', 1.0),
+                )
             else:
                 out = self.linear(out)
             return out
@@ -164,7 +177,20 @@ class ResNet_s(nn.Module):
             out = out.view(out.size(0), -1)
             if isinstance(self.linear_rb, MultiWrapper):
                 train_flag = True if "train" in kwargs else False
-                out = self.linear_rb(out, train=train_flag)
+                out = self.linear_rb(
+                    out,
+                    train=train_flag,
+                    targets=kwargs.get('targets'),
+                    mixed_class_pairs=kwargs.get('mixed_class_pairs'),
+                    mix_lam=kwargs.get('mix_lam'),
+                    include_unmixed_singletons=kwargs.get(
+                        'include_unmixed_singletons', False
+                    ),
+                    normalize_candidates=kwargs.get(
+                        'normalize_candidates', False
+                    ),
+                    logit_scale=kwargs.get('logit_scale', 1.0),
+                )
             else:
                 out = self.linear_rb(out)
             return out
@@ -261,24 +287,77 @@ class MultiWrapper(nn.Module):
                               v_lam_b * self.clf.bias[self.lbl_mix2new[:,1]]
 
     def init_mixed_weights_batch(self, lam, tgts_a, tgts_b):
-        v_lam_a, v_lam_b = lam, 1-lam
-
         pair_tgts = torch.hstack([tgts_a.reshape(-1, 1), tgts_b.reshape(-1, 1)])
         uni_pair_tgts, new_tgts = torch.unique(pair_tgts, dim=0, return_inverse=True)
-        
-        weight = self.clf.weight
 
-        self.mixed_weight = v_lam_a * weight[uni_pair_tgts[:,0]] + \
-                            v_lam_b * weight[uni_pair_tgts[:,1]]
-        chk_same_lbl = torch.where(uni_pair_tgts[:,0]==uni_pair_tgts[:,1])[0]
+        self._set_mixed_weights(lam, uni_pair_tgts)
+        return uni_pair_tgts, new_tgts
+
+    def _set_mixed_weights(
+        self,
+        lam,
+        pair_tgts,
+        include_unmixed_singletons=False,
+        normalize_candidates=False,
+    ):
+        v_lam_a, v_lam_b = lam, 1-lam
+        weight = self.clf.weight
+        pair_tgts = torch.as_tensor(
+            pair_tgts, dtype=torch.long, device=weight.device
+        )
+        self.mixed_weight = (
+            v_lam_a * weight[pair_tgts[:, 0]]
+            + v_lam_b * weight[pair_tgts[:, 1]]
+        )
+        chk_same_lbl = torch.where(
+            pair_tgts[:, 0] == pair_tgts[:, 1]
+        )[0]
         if len(chk_same_lbl) != 0:
-            self.mixed_weight[chk_same_lbl] = weight[tgts_a[chk_same_lbl]]
+            self.mixed_weight[chk_same_lbl] = weight[
+                pair_tgts[chk_same_lbl, 0]
+            ]
 
         if self.clf.bias is not None:
-            self.mixed_bias = v_lam_a * self.clf.bias[uni_pair_tgts[:,0]] + \
-                              v_lam_b * self.clf.bias[uni_pair_tgts[:,1]]
+            self.mixed_bias = (
+                v_lam_a * self.clf.bias[pair_tgts[:, 0]]
+                + v_lam_b * self.clf.bias[pair_tgts[:, 1]]
+            )
+        else:
+            self.mixed_bias = None
 
-        return uni_pair_tgts, new_tgts
+        self.num_active_mixed_classes = int(pair_tgts.shape[0])
+        self.unmixed_singleton_classes = torch.empty(
+            0, dtype=torch.long, device=weight.device
+        )
+        if include_unmixed_singletons:
+            engaged = torch.zeros(
+                weight.shape[0], dtype=torch.bool, device=weight.device
+            )
+            engaged[pair_tgts.reshape(-1)] = True
+            self.unmixed_singleton_classes = torch.where(~engaged)[0]
+            self.mixed_weight = torch.cat(
+                [
+                    self.mixed_weight,
+                    weight[self.unmixed_singleton_classes],
+                ],
+                dim=0,
+            )
+            if self.clf.bias is not None:
+                self.mixed_bias = torch.cat(
+                    [
+                        self.mixed_bias,
+                        self.clf.bias[self.unmixed_singleton_classes],
+                    ],
+                    dim=0,
+                )
+        if normalize_candidates:
+            # Normalize after appending singleton weights so mixed and
+            # singleton prototypes have exactly the same unit norm.
+            self.mixed_weight = F.normalize(
+                self.mixed_weight, p=2, dim=1
+            )
+            # A cosine classifier does not use class-specific biases.
+            self.mixed_bias = None
 
     def init_mixed_weights_batch_double(self, lam, tgts_a, tgts_b, tgts_c, tgts_d):
         v_lam_a, v_lam_b = lam, 1-lam
@@ -303,10 +382,46 @@ class MultiWrapper(nn.Module):
 
         return uni_pair_tgts, new_tgts
 
-    def forward(self, x, train=False, targets=None):
+    def forward(
+        self,
+        x,
+        train=False,
+        targets=None,
+        mixed_class_pairs=None,
+        mix_lam=None,
+        include_unmixed_singletons=False,
+        normalize_candidates=False,
+        logit_scale=1.0,
+    ):
+        if logit_scale <= 0:
+            raise ValueError('logit_scale must be positive')
         if train:
-            return masked_linear(
-                x, self.mixed_weight, self.mixed_bias, targets=targets)
+            if mixed_class_pairs is not None:
+                if mix_lam is None:
+                    raise ValueError(
+                        'mix_lam is required with mixed_class_pairs'
+                    )
+                self._set_mixed_weights(
+                    mix_lam,
+                    mixed_class_pairs,
+                    include_unmixed_singletons=include_unmixed_singletons,
+                    normalize_candidates=normalize_candidates,
+                )
+            if normalize_candidates:
+                x = F.normalize(x, p=2, dim=1)
+            logits = masked_linear(
+                x, self.mixed_weight, self.mixed_bias, targets=targets
+            )
+            if normalize_candidates:
+                logits = logits * logit_scale
+            return logits
         else:
+            if normalize_candidates:
+                normalized_x = F.normalize(x, p=2, dim=1)
+                normalized_weight = F.normalize(
+                    self.clf.weight, p=2, dim=1
+                )
+                return logit_scale * F.linear(
+                    normalized_x, normalized_weight, bias=None
+                )
             return self.clf(x)
-

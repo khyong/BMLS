@@ -20,9 +20,12 @@ import torch.nn.functional as F
 import models
 import matplotlib.pyplot as plt
 from data import load_data, get_num_classes
-from utils import experiment_names, make_dir, Logger, AverageMeter, accuracy, save_checkpoint, source_import, plot_result
+from utils import (AverageMeter, Logger, accuracy, backward_and_step,
+                   configure_model_for_gpus, create_grad_scaler,
+                   experiment_names, load_training_model_state_dict, make_dir,
+                   per_class_accuracy, plot_result, save_checkpoint, source_import,
+                   training_model_state_dict)
 from tensorboardX import SummaryWriter
-from sklearn.metrics import confusion_matrix
 from losses import LDAMLoss, FocalLoss, MixLoss, mixup, double_bmls_mixup
 from tqdm import tqdm
 from copy import deepcopy
@@ -132,15 +135,7 @@ def main_worker(gpu, ngpus_per_node, args, config):
     print("=> creating model '{}'".format(config['networks']['arch']))
     model = models.__dict__[config['networks']['arch']](**config['networks']['param'])
 
-    if args.gpu is not None:
-        if ngpus_per_node == 1:
-            torch.cuda.set_device(args.gpu)
-            model = model.cuda(args.gpu)
-        else:
-            # DataParallel will divide and allocate batch_size to all available GPUs
-            model = torch.nn.DataParallel(model).cuda()
-    else:
-        pass
+    model, args.gpu = configure_model_for_gpus(model, requested_gpu=gpu)
 
     # make results root
     make_dir(log_root)
@@ -149,6 +144,7 @@ def main_worker(gpu, ngpus_per_node, args, config):
     # set optimizer and scheduler
     optim_params['params'] = model.parameters()
     optimizer = optim.SGD([optim_params])
+    args.grad_scaler = create_grad_scaler()
     if config['optimizer']['scheduler'] == 'step':
         scheduler = warmup_step_schedule(optimizer, warmup_epoch=scheduler_params['warmup_epoch'],
                                          steps_per_epoch=math.ceil(len(data['train']) / training_opt['accumulation_steps']),
@@ -172,9 +168,11 @@ def main_worker(gpu, ngpus_per_node, args, config):
             checkpoint = torch.load(args.resume + '/ckpt.pth.tar', map_location='cuda:0')
             start_epoch = checkpoint['epoch']
             best_val_acc1 = checkpoint['best_val_acc1'].cpu()
-            model.load_state_dict(checkpoint['state_dict'])
+            load_training_model_state_dict(model, checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
             scheduler.load_state_dict(checkpoint['scheduler'])
+            if 'grad_scaler' in checkpoint:
+                args.grad_scaler.load_state_dict(checkpoint['grad_scaler'])
 
             print("=> loaded checkpoint '{}' (epoch {})" .format(args.resume, checkpoint['epoch']))
             logger = Logger(os.path.join(args.resume, 'log.txt'), title=file_name, resume=True)
@@ -247,6 +245,7 @@ def main_worker(gpu, ngpus_per_node, args, config):
         # OURS - start: remainder
         elif args.train_rule == 'DoubleBMLS':
             weights_per_cls = None
+            train_sampler.set_epoch(epoch)
             if remainder > 0:
                 train_sampler.distribute_remainder(palette, remainder)
             print(train_sampler.palette_cp)
@@ -298,10 +297,11 @@ def main_worker(gpu, ngpus_per_node, args, config):
         save_checkpoint(file_root, {
             'epoch': epoch + 1,
             'arch': config['networks']['arch'],
-            'state_dict': model.state_dict(),
+            'state_dict': training_model_state_dict(model),
             'best_val_acc1': best_val_acc1,
             'scheduler': scheduler.state_dict(),
-            'optimizer' : optimizer.state_dict()
+            'optimizer' : optimizer.state_dict(),
+            'grad_scaler': args.grad_scaler.state_dict(),
         }, is_best)
         is_best = False
 
@@ -375,11 +375,13 @@ def train(train_loader, model, criterion_ce, criterion_m, optimizer, scheduler, 
         top5.update(acc5[0], input_a.size(0))
 
         # compute gradient and do SGD step
-        loss.backward()
-        if (i+1) % training_opt['accumulation_steps'] == 0 or (i+1) == len(train_loader):
-            optimizer.step()
-            optimizer.zero_grad()
-            scheduler.step()
+        should_step = (
+            (i + 1) % training_opt['accumulation_steps'] == 0
+            or (i + 1) == len(train_loader)
+        )
+        backward_and_step(
+            loss, optimizer, scheduler, args.grad_scaler, should_step
+        )
 
         # measure elapsed time
         batch_time.update(time.time() - end)
@@ -483,11 +485,12 @@ def validate(val_loader, model, criterion, epoch, file_root, flag='val', trainin
                     top1=top1, top5=top5))
                 print(output)
 
-        cf = confusion_matrix(all_targets, all_preds).astype(float)
-        cls_cnt = cf.sum(axis=1)
-        cls_hit = np.diag(cf)
-        cls_acc = cls_hit / cls_cnt
-        out_cls_acc = '%s Class Accuracy: %s'%(flag,(np.array2string(cls_acc, separator=',', formatter={'float_kind':lambda x: "%.3f" % x})))
+        cls_cnt, cls_hit, cls_acc = per_class_accuracy(
+            all_targets, all_preds, training_opt['num_classes']
+        )
+        out_cls_acc = None
+        if args.num_classes <= 1000 or epoch == training_opt['num_epochs'] - 1:
+            out_cls_acc = '%s Class Accuracy: %s'%(flag,(np.array2string(cls_acc, separator=',', formatter={'float_kind':lambda x: "%.3f" % x})))
 
         if type(args.cls_num_list) == type(torch.tensor([])):
             cls_num_list = args.cls_num_list.clone().cpu()
@@ -510,7 +513,8 @@ def validate(val_loader, model, criterion, epoch, file_root, flag='val', trainin
         middle.update(middle_acc, input.size(0))
         minor.update(minor_acc, input.size(0))
         print('H:{:.3f} M:{:.3f} T: {:.3f}'.format(major_acc, middle_acc, minor_acc))
-        print(out_cls_acc)
+        if out_cls_acc is not None:
+            print(out_cls_acc)
         GM = 1
         for i in range(args.num_classes):
             if cls_acc[i] == 0:

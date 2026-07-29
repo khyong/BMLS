@@ -16,14 +16,17 @@ import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.multiprocessing as mp
 import torch.utils.data
-import torch.nn.functional as F
 import models
 import matplotlib.pyplot as plt
 from data import load_data, get_num_classes
-from utils import experiment_names, make_dir, Logger, AverageMeter, accuracy, save_checkpoint, source_import, plot_result
+from utils import (AverageMeter, Logger, accuracy, configure_model_for_gpus,
+                   create_grad_scaler,
+                   experiment_names, load_training_model_state_dict, make_dir,
+                   per_class_accuracy, plot_result, save_checkpoint, source_import,
+                   training_model_state_dict, unwrap_model)
 from tensorboardX import SummaryWriter
-from sklearn.metrics import confusion_matrix
-from losses import LDAMLoss, FocalLoss, MixLoss, mixup, bmls_mixup, dual_bmls_mixup
+from losses import (LDAMLoss, FocalLoss, MixLoss, bmls_mixup,
+                    dual_bmls_mixup, mixup, simple_mixup)
 from tqdm import tqdm
 from copy import deepcopy
 
@@ -51,6 +54,15 @@ parser.add_argument('--focal-gamma', default='1.0', type=float, help='hyperparam
 parser.add_argument('--cb-beta', default='0.9999', type=float, help='hyperparameter for class balance loss (default: 0.9999)')
 # for mixup
 parser.add_argument('--mixup-beta', default='1.0', type=float, help='hyperparameter for mixup')
+parser.add_argument(
+    '--mixup-lambda-sampling',
+    default='epoch',
+    choices=['epoch', 'batch', 'epoch_antithetic'],
+    help=(
+        'epoch reuses one lambda (legacy); batch samples independently; '
+        'epoch_antithetic precomputes paired lambda and 1-lambda values'
+    ),
+)
 # for mixup_LDAM
 parser.add_argument('--mixup-LDAM-s', default=30.0, type=float, help='hyperparameter for mixup_LDAM')
 # for LOCEloss
@@ -69,6 +81,49 @@ parser.add_argument('--weight-type', default='freq', choices=['freq', 'cb'])
 parser.add_argument('--augmentation', default='default', type=str, choices=['default', 'randaugment', 'autoaugment'])
 parser.add_argument('--use-experts', action='store_true')
 parser.add_argument('--use-experts-verbose', action='store_true')
+parser.add_argument(
+    '--ms-include-unmixed-singletons',
+    action='store_true',
+    help='append uninvolved base-class weights as negatives to batch MS logits',
+)
+parser.add_argument(
+    '--ms-loss-max-weight',
+    default=0.1,
+    type=float,
+    help='final MS loss weight; the CB loss uses 1 minus this value',
+)
+parser.add_argument(
+    '--ms-loss-warmup-epochs',
+    default=0,
+    type=int,
+    help='number of initial CB-only epochs',
+)
+parser.add_argument(
+    '--ms-loss-ramp-epochs',
+    default=0,
+    type=int,
+    help='number of epochs used to linearly ramp the MS loss to its final weight',
+)
+parser.add_argument(
+    '--ms-normalize-prototypes',
+    action='store_true',
+    help='use a cosine MS classifier for mixed and singleton prototypes',
+)
+parser.add_argument(
+    '--ms-logit-scale',
+    default=30.0,
+    type=float,
+    help='positive logit scale for the normalized MS classifier',
+)
+parser.add_argument(
+    '--rb-classifier',
+    default='ms',
+    choices=['ms', 'linear'],
+    help=(
+        'ms constructs a dynamic mixed-class classifier; linear uses the '
+        'ordinary singleton classifier with a soft BMLS target'
+    ),
+)
 parser.add_argument('--loss-lambda', default=0.5, type=float, help='hyperparameter for multi-experts')
 parser.add_argument('--warmup-epoch', default=5, type=float, help='warmup_epoch')
 
@@ -78,8 +133,47 @@ parser.add_argument('--temp-eta', default=7, type=float, help='base temperature 
 parser.add_argument('--temp-epsilon', default=0.05, type=float, help='base temperature for temperature annealing, 0.3 for RIDE and CDT')
 
 best_val_acc1 = 0
+
+
+def build_epoch_mixup_lambdas(num_batches, alpha, seed, epoch):
+    """Build a deterministic antithetic Beta schedule with mean exactly 0.5."""
+    if num_batches < 1:
+        raise ValueError('num_batches must be positive')
+    if alpha <= 0:
+        raise ValueError('mixup alpha must be positive')
+
+    generator = np.random.default_rng(
+        np.random.SeedSequence([int(seed or 0), int(epoch), 0xB415])
+    )
+    num_pairs = num_batches // 2
+    sampled = generator.beta(alpha, alpha, size=num_pairs)
+    lambdas = np.concatenate((sampled, 1.0 - sampled))
+    if num_batches % 2:
+        lambdas = np.concatenate((lambdas, np.asarray([0.5])))
+    generator.shuffle(lambdas)
+    return lambdas
+
+
+def get_ms_loss_weight(epoch, max_weight, warmup_epochs, ramp_epochs):
+    """Return the MS coefficient for a CB-only warm-up and linear ramp."""
+    if not 0.0 <= max_weight <= 1.0:
+        raise ValueError('ms_loss_max_weight must be in [0, 1]')
+    if warmup_epochs < 0:
+        raise ValueError('ms_loss_warmup_epochs must be non-negative')
+    if ramp_epochs < 0:
+        raise ValueError('ms_loss_ramp_epochs must be non-negative')
+    if epoch < warmup_epochs:
+        return 0.0
+    if ramp_epochs == 0:
+        return float(max_weight)
+    ramp_progress = (epoch - warmup_epochs + 1) / float(ramp_epochs)
+    return float(max_weight) * min(1.0, ramp_progress)
+
+
 def main():
     args = parser.parse_args()
+    if args.ms_logit_scale <= 0:
+        parser.error('--ms-logit-scale must be positive')
     config = source_import(args.config).config
 
     if args.seed is not None:
@@ -132,15 +226,7 @@ def main_worker(gpu, ngpus_per_node, args, config):
     print("=> creating model '{}'".format(config['networks']['arch']))
     model = models.__dict__[config['networks']['arch']](**config['networks']['param'])
 
-    if args.gpu is not None:
-        if ngpus_per_node == 1:
-            torch.cuda.set_device(args.gpu)
-            model = model.cuda(args.gpu)
-        else:
-            # DataParallel will divide and allocate batch_size to all available GPUs
-            model = torch.nn.DataParallel(model).cuda()
-    else:
-        pass
+    model, args.gpu = configure_model_for_gpus(model, requested_gpu=gpu)
 
     # make results root
     make_dir(log_root)
@@ -149,6 +235,7 @@ def main_worker(gpu, ngpus_per_node, args, config):
     # set optimizer and scheduler
     optim_params['params'] = model.parameters()
     optimizer = optim.SGD([optim_params])
+    args.grad_scaler = create_grad_scaler()
     if config['optimizer']['scheduler'] == 'step':
         scheduler = warmup_step_schedule(optimizer, warmup_epoch=scheduler_params['warmup_epoch'],
                                          steps_per_epoch=math.ceil(len(data['train']) / training_opt['accumulation_steps']),
@@ -172,9 +259,11 @@ def main_worker(gpu, ngpus_per_node, args, config):
             checkpoint = torch.load(args.resume + '/ckpt.pth.tar', map_location='cuda:0')
             start_epoch = checkpoint['epoch']
             best_val_acc1 = checkpoint['best_val_acc1'].cpu()
-            model.load_state_dict(checkpoint['state_dict'])
+            load_training_model_state_dict(model, checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
             scheduler.load_state_dict(checkpoint['scheduler'])
+            if 'grad_scaler' in checkpoint:
+                args.grad_scaler.load_state_dict(checkpoint['grad_scaler'])
 
             print("=> loaded checkpoint '{}' (epoch {})" .format(args.resume, checkpoint['epoch']))
             logger = Logger(os.path.join(args.resume, 'log.txt'), title=file_name, resume=True)
@@ -210,7 +299,19 @@ def main_worker(gpu, ngpus_per_node, args, config):
         if remainder == 0:
             train_sampler.set_palette_cp()
         args.lbl_mix2new = lbl_mix2new
-        model.linear_rb.init_lbl_mix2new(lbl_mix2new)
+        linear_rb = unwrap_model(model).linear_rb
+        if args.rb_classifier == 'ms':
+            if not hasattr(linear_rb, 'init_lbl_mix2new'):
+                raise TypeError(
+                    '--rb-classifier ms requires an MS/MultiWrapper RB '
+                    'classifier in the selected config'
+                )
+            linear_rb.init_lbl_mix2new(lbl_mix2new)
+        elif hasattr(linear_rb, 'init_lbl_mix2new'):
+            raise TypeError(
+                '--rb-classifier linear requires an ordinary nn.Linear RB '
+                'classifier in the selected config'
+            )
     # OURS - end: init variables
 
     logger.info("***** Running training *****")
@@ -247,11 +348,33 @@ def main_worker(gpu, ngpus_per_node, args, config):
         # OURS - start: remainder
         elif args.train_rule == 'DualBMLS':
             weights_per_cls = None
+            train_sampler.set_epoch(epoch)
             if remainder > 0:
                 train_sampler.distribute_remainder(palette, remainder)
             print(train_sampler.palette_cp)
-            args.mixup_lam = np.random.beta(args.mixup_beta, args.mixup_beta)
-            #args.mixup_lam = None
+            args.epoch_mixup_lams = None
+            if args.mixup_lambda_sampling == 'epoch':
+                args.mixup_lam = np.random.beta(
+                    args.mixup_beta, args.mixup_beta
+                )
+            elif args.mixup_lambda_sampling == 'batch':
+                args.mixup_lam = None
+            else:
+                args.mixup_lam = None
+                args.epoch_mixup_lams = build_epoch_mixup_lambdas(
+                    len(data['train']),
+                    args.mixup_beta,
+                    args.seed,
+                    epoch,
+                )
+                print(
+                    'Mixup: alpha={:.4f}, {} antithetic batch lambdas, '
+                    'mean={:.6f}'.format(
+                        args.mixup_beta,
+                        len(args.epoch_mixup_lams),
+                        float(args.epoch_mixup_lams.mean()),
+                    )
+                )
         # OURS - end: remainder
         else:
             warnings.warn('Sample rule is not listed')
@@ -295,10 +418,11 @@ def main_worker(gpu, ngpus_per_node, args, config):
         save_checkpoint(file_root, {
             'epoch': epoch + 1,
             'arch': config['networks']['arch'],
-            'state_dict': model.state_dict(),
+            'state_dict': training_model_state_dict(model),
             'best_val_acc1': best_val_acc1,
             'scheduler': scheduler.state_dict(),
-            'optimizer' : optimizer.state_dict()
+            'optimizer' : optimizer.state_dict(),
+            'grad_scaler': args.grad_scaler.state_dict(),
         }, is_best)
         is_best = False
 
@@ -314,10 +438,30 @@ def train(train_loader, model, criterion_ce, criterion_m, optimizer, scheduler, 
     top5 = AverageMeter('Acc@5', ':6.2f')
     model.train()
     end = time.time()
+    ms_loss_weight = get_ms_loss_weight(
+        epoch,
+        args.ms_loss_max_weight,
+        args.ms_loss_warmup_epochs,
+        args.ms_loss_ramp_epochs,
+    )
+    cb_loss_weight = 1.0 - ms_loss_weight
+    rb_loss_name = 'MS' if args.rb_classifier == 'ms' else 'RB-linear'
+    print(
+        'Epoch {} loss weights: CB={:.4f}, {}={:.4f}'.format(
+            epoch, cb_loss_weight, rb_loss_name, ms_loss_weight
+        )
+    )
+    print('Epoch {}: waiting for the first training batch...'.format(epoch))
 
     for i, (input, input_a, input_b, target, target_a, target_b) in enumerate(train_loader):
         # measure data loading time
         data_time.update(time.time() - end)
+        if i == 0:
+            print(
+                'Epoch {}: first batch loaded in {:.1f}s; starting GPU step.'.format(
+                    epoch, data_time.val
+                )
+            )
         # for conventional branch
         if args.gpu is not None:
             input = input.cuda(args.gpu, non_blocking=True)
@@ -333,21 +477,62 @@ def train(train_loader, model, criterion_ce, criterion_m, optimizer, scheduler, 
         input_a_ori, target_a_ori = input_a.detach(), target_b.detach()
         input_b_ori, target_b_ori = input_b.detach(), target_b.detach()
     
+        mixup_lam = args.mixup_lam
+        if args.epoch_mixup_lams is not None:
+            mixup_lam = float(args.epoch_mixup_lams[i])
         mixed_input, mixed_target, mixed_input_b, lam = dual_bmls_mixup(
-            input, target, input_a, target_a, input_b, args, lam=args.mixup_lam)
+            input, target, input_a, target_a, input_b, args, lam=mixup_lam)
 
-        uni_pair_tgts, pred_tgts = model.linear_rb.init_mixed_weights_batch(
-            lam, target_a, target_b)
-        
+        # Backpropagate each branch before running the next one. Gradients still
+        # accumulate into one optimizer update, while the first branch's
+        # activation graph can be released before the second forward pass.
+        accumulation_steps = training_opt['accumulation_steps']
         output_cb = model(mixed_input, classifier_cb=True)
-        output_rb = model(mixed_input_b, classifier_rb=True, train=True)
+        loss_cb = cb_loss_weight * criterion_m(output_cb, mixed_target)
+        loss_cb = loss_cb / accumulation_steps
+        args.grad_scaler.scale(loss_cb).backward()
 
-        loss_cb = criterion_m(output_cb, mixed_target)
-        loss_rb = criterion_ce(output_rb, pred_tgts)
-        #loss =  args.loss_lambda * (loss_cb + loss_rb)
-        loss = 0.9 * loss_cb + 0.1 * loss_rb
-
-        loss /= training_opt['accumulation_steps']
+        loss_rb = torch.zeros((), device=loss_cb.device)
+        if ms_loss_weight > 0.0:
+            if args.rb_classifier == 'ms':
+                pair_tgts = torch.hstack([
+                    target_a.reshape(-1, 1), target_b.reshape(-1, 1)
+                ])
+                uni_pair_tgts, pred_tgts = torch.unique(
+                    pair_tgts, dim=0, return_inverse=True
+                )
+                if i == 0 and args.ms_include_unmixed_singletons:
+                    num_engaged = int(torch.unique(uni_pair_tgts).numel())
+                    print(
+                        'MS candidates: {} mixed + {} uninvolved singletons'.format(
+                            len(uni_pair_tgts),
+                            args.num_classes - num_engaged,
+                        )
+                    )
+                output_rb = model(
+                    mixed_input_b,
+                    classifier_rb=True,
+                    train=True,
+                    mixed_class_pairs=uni_pair_tgts.detach().cpu().tolist(),
+                    mix_lam=lam,
+                    include_unmixed_singletons=args.ms_include_unmixed_singletons,
+                    normalize_candidates=args.ms_normalize_prototypes,
+                    logit_scale=args.ms_logit_scale,
+                )
+                rb_objective = criterion_ce(output_rb, pred_tgts)
+            else:
+                output_rb = model(mixed_input_b, classifier_rb=True)
+                rb_objective = simple_mixup(
+                    criterion_ce,
+                    output_rb,
+                    target_a,
+                    target_b,
+                    lam,
+                )
+            loss_rb = ms_loss_weight * rb_objective
+            loss_rb = loss_rb / accumulation_steps
+            args.grad_scaler.scale(loss_rb).backward()
+        loss = loss_cb.detach() + loss_rb.detach()
 
         # measure accuracy and record loss for debugging
         #acc1, acc5 = accuracy((output_rb.cpu() + output_cb.cpu()) / 2, pred_tgts.cpu(), topk=(1, 5))
@@ -358,9 +543,13 @@ def train(train_loader, model, criterion_ce, criterion_m, optimizer, scheduler, 
         top5.update(acc5[0], input.size(0))
 
         # compute gradient and do SGD step
-        loss.backward()
-        if (i+1) % training_opt['accumulation_steps'] == 0 or (i+1) == len(train_loader):
-            optimizer.step()
+        should_step = (
+            (i + 1) % training_opt['accumulation_steps'] == 0
+            or (i + 1) == len(train_loader)
+        )
+        if should_step:
+            args.grad_scaler.step(optimizer)
+            args.grad_scaler.update()
             optimizer.zero_grad()
             scheduler.step()
 
@@ -413,7 +602,12 @@ def validate(val_loader, model, criterion, epoch, file_root, flag='val', trainin
 
             # compute output
             if args.use_experts:
-                output_cb, output_rb = model(input, use_experts=args.use_experts)
+                output_cb, output_rb = model(
+                    input,
+                    use_experts=args.use_experts,
+                    normalize_candidates=args.ms_normalize_prototypes,
+                    logit_scale=args.ms_logit_scale,
+                )
                 output = (output_cb + output_rb) / 2
             else:
                 output = model(input)
@@ -466,11 +660,12 @@ def validate(val_loader, model, criterion, epoch, file_root, flag='val', trainin
                     top1=top1, top5=top5))
                 print(output)
 
-        cf = confusion_matrix(all_targets, all_preds).astype(float)
-        cls_cnt = cf.sum(axis=1)
-        cls_hit = np.diag(cf)
-        cls_acc = cls_hit / cls_cnt
-        out_cls_acc = '%s Class Accuracy: %s'%(flag,(np.array2string(cls_acc, separator=',', formatter={'float_kind':lambda x: "%.3f" % x})))
+        cls_cnt, cls_hit, cls_acc = per_class_accuracy(
+            all_targets, all_preds, training_opt['num_classes']
+        )
+        out_cls_acc = None
+        if args.num_classes <= 1000 or epoch == training_opt['num_epochs'] - 1:
+            out_cls_acc = '%s Class Accuracy: %s'%(flag,(np.array2string(cls_acc, separator=',', formatter={'float_kind':lambda x: "%.3f" % x})))
 
         if type(args.cls_num_list) == type(torch.tensor([])):
             cls_num_list = args.cls_num_list.clone().cpu()
@@ -493,7 +688,8 @@ def validate(val_loader, model, criterion, epoch, file_root, flag='val', trainin
         middle.update(middle_acc, input.size(0))
         minor.update(minor_acc, input.size(0))
         print('H:{:.3f} M:{:.3f} T: {:.3f}'.format(major_acc, middle_acc, minor_acc))
-        print(out_cls_acc)
+        if out_cls_acc is not None:
+            print(out_cls_acc)
         GM = 1
         for i in range(args.num_classes):
             if cls_acc[i] == 0:

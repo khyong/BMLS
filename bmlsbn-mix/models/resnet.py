@@ -14,6 +14,7 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from models.resnet_cifar import MultiWrapper
 from utils import autocast
 
 model_urls = {
@@ -167,13 +168,34 @@ class ResNet(nn.Module):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
 
-        if self.use_norm:
+        classifier_mode = self.use_norm
+        if classifier_mode in (True, 'true', 'norm'):
             self.linear = NormedLinear(layer4_output_dim * block.expansion, num_classes)
             self.linear_rb = NormedLinear(layer4_output_dim * block.expansion, num_classes)
-        else:
+        elif classifier_mode == 'ms':
+            s = 1
+            self.linear = MultiWrapper(
+                nn.Linear(layer4_output_dim * block.expansion, num_classes)
+            )
+            self.linear_rb = MultiWrapper(
+                nn.Linear(layer4_output_dim * block.expansion, num_classes)
+            )
+        elif classifier_mode == 'dual_ms':
+            s = 1
+            self.linear = nn.Linear(
+                layer4_output_dim * block.expansion, num_classes
+            )
+            self.linear_rb = MultiWrapper(
+                nn.Linear(layer4_output_dim * block.expansion, num_classes)
+            )
+        elif classifier_mode in (False, None, 'false', 'fc'):
             s = 1
             self.linear = nn.Linear(layer4_output_dim * block.expansion, num_classes)
             self.linear_rb = nn.Linear(layer4_output_dim * block.expansion, num_classes)
+        else:
+            raise ValueError(
+                "Unsupported classifier mode: {!r}".format(classifier_mode)
+            )
 
         self.returns_feat = returns_feat
         self.s = s
@@ -245,6 +267,25 @@ class ResNet(nn.Module):
 
         return nn.Sequential(*layers)
 
+    @staticmethod
+    def _classify(classifier, features, kwargs):
+        if isinstance(classifier, MultiWrapper):
+            return classifier(
+                features,
+                train=bool(kwargs.get('train', False)),
+                targets=kwargs.get('targets'),
+                mixed_class_pairs=kwargs.get('mixed_class_pairs'),
+                mix_lam=kwargs.get('mix_lam'),
+                include_unmixed_singletons=kwargs.get(
+                    'include_unmixed_singletons', False
+                ),
+                normalize_candidates=kwargs.get(
+                    'normalize_candidates', False
+                ),
+                logit_scale=kwargs.get('logit_scale', 1.0),
+            )
+        return classifier(features)
+
     def forward(self, x, **kwargs):
         with autocast():
             x = self.conv1(x)
@@ -270,7 +311,7 @@ class ResNet(nn.Module):
                 x = x.view(x.size(0), -1)
                 if self.use_dropout:
                     x = self.dropout(x)
-                x = self.linear(x)
+                x = self._classify(self.linear, x, kwargs)
                 return x * self.s
 
             elif "classifier_rb" in kwargs:
@@ -280,7 +321,7 @@ class ResNet(nn.Module):
                 x = x.view(x.size(0), -1)
                 if self.use_dropout:
                     x = self.dropout(x)
-                x = self.linear_rb(x)
+                x = self._classify(self.linear_rb, x, kwargs)
                 return x * self.s
 
             if self.layer4:
@@ -291,7 +332,7 @@ class ResNet(nn.Module):
             x_1 = x_1.view(x_1.size(0), -1)
             if self.use_dropout:
                 x_1 = self.dropout(x_1)
-            x_1 = self.linear(x_1)
+            x_1 = self._classify(self.linear, x_1, kwargs)
             if "use_experts" in kwargs:
                 if self.rb_block:
                     x_2 = self.rb_block(x)
@@ -301,7 +342,7 @@ class ResNet(nn.Module):
                 x_2 = x_2.view(x_2.size(0), -1)
                 if self.use_dropout:
                     x_2 = self.dropout(x_2)
-                x_2 = self.linear_rb(x_2)
+                x_2 = self._classify(self.linear_rb, x_2, kwargs)
                 return x_1, x_2
             else:
                 return x_1

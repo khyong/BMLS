@@ -9,12 +9,18 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 
-# WARNING:
-# There is no guarantee that it will work or be used on a model. Please do use it with caution unless you make sure everything is working.
-use_fp16 = False
+# AMP is enabled by default for large ResNet training. Set BMLSBN_AMP=0 to
+# disable it for debugging or numerical comparisons.
+use_fp16 = os.environ.get('BMLSBN_AMP', '1').lower() not in (
+    '0', 'false', 'no', 'off'
+)
 
 if use_fp16:
-    from torch.cuda.amp import autocast
+    if hasattr(torch, 'amp') and hasattr(torch.amp, 'autocast'):
+        def autocast():
+            return torch.amp.autocast('cuda', enabled=True)
+    else:
+        from torch.cuda.amp import autocast
 else:
     class Autocast(): # This is a dummy autocast class
         def __init__(self):
@@ -29,6 +35,86 @@ else:
             pass
 
     autocast = Autocast()
+
+
+def create_grad_scaler():
+    if hasattr(torch, 'amp') and hasattr(torch.amp, 'GradScaler'):
+        return torch.amp.GradScaler('cuda', enabled=use_fp16)
+    return torch.cuda.amp.GradScaler(enabled=use_fp16)
+
+
+def backward_and_step(
+    loss, optimizer, scheduler, scaler, should_step
+):
+    scaler.scale(loss).backward()
+    if should_step:
+        scaler.step(optimizer)
+        scaler.update()
+        optimizer.zero_grad()
+        scheduler.step()
+
+
+def per_class_accuracy(targets, predictions, num_classes):
+    """Compute per-class accuracy without allocating a dense confusion matrix."""
+    targets = np.asarray(targets, dtype=np.int64)
+    predictions = np.asarray(predictions, dtype=np.int64)
+    class_count = np.bincount(targets, minlength=num_classes).astype(float)
+    class_hit = np.bincount(
+        targets[targets == predictions], minlength=num_classes
+    ).astype(float)
+    class_accuracy = np.full(num_classes, np.nan, dtype=float)
+    np.divide(
+        class_hit,
+        class_count,
+        out=class_accuracy,
+        where=class_count > 0,
+    )
+    return class_count, class_hit, class_accuracy
+
+
+def configure_model_for_gpus(model, requested_gpu=None):
+    """Move a model to CUDA and optionally wrap it across all visible GPUs."""
+    if not torch.cuda.is_available():
+        raise RuntimeError('CUDA is required for training')
+
+    if requested_gpu is not None:
+        torch.cuda.set_device(requested_gpu)
+        print('Using a single GPU: {}'.format(requested_gpu))
+        return model.cuda(requested_gpu), requested_gpu
+
+    device_count = torch.cuda.device_count()
+    if device_count < 1:
+        raise RuntimeError('No visible CUDA devices were found')
+
+    torch.cuda.set_device(0)
+    model = model.cuda(0)
+    if device_count > 1:
+        device_ids = list(range(device_count))
+        print('Using DataParallel on GPUs: {}'.format(device_ids))
+        model = torch.nn.DataParallel(model, device_ids=device_ids)
+    else:
+        print('Using the only visible GPU: 0')
+    return model, 0
+
+
+def unwrap_model(model):
+    if isinstance(model, torch.nn.DataParallel):
+        return model.module
+    return model
+
+
+def training_model_state_dict(model):
+    """Return a checkpoint state independent of DataParallel wrapping."""
+    return unwrap_model(model).state_dict()
+
+
+def load_training_model_state_dict(model, state_dict):
+    """Load checkpoints saved with or without a DataParallel ``module.`` prefix."""
+    if state_dict and all(key.startswith('module.') for key in state_dict):
+        state_dict = {
+            key[len('module.'):]: value for key, value in state_dict.items()
+        }
+    unwrap_model(model).load_state_dict(state_dict)
 
 def experiment_names(args, log_root, dataset, arch):
     sampler_list = ['default', 'balance', 'reverse', 'bmls']

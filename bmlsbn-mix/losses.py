@@ -32,6 +32,9 @@ class MixLoss(nn.Module):
         self.args.cls_num_list = torch.tensor(self.args.cls_num_list, requires_grad=False).to(args.gpu)
 
     def forward(self, logit, target):
+        # Keep probability/log operations in FP32 when model AMP is enabled.
+        logit = logit.float()
+        target = target.float()
         n_max = max(self.args.cls_num_list)
         phi = self.args.temp_epsilon * len(self.args.cls_num_list) * (self.args.cls_num_list / n_max) + (1 - self.args.temp_epsilon)
         phi = max(phi)/phi
